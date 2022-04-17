@@ -10,6 +10,7 @@ import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
+import PrivateRoute from "./PrivateRoute";
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +19,7 @@ export default function Router() {
     {
       path: '/dashboard',
       element: <DashboardLayout />,
+     // element: <PrivateRoute component ={<DashboardApp/>}/>,
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },

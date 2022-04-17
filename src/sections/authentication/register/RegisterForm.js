@@ -7,7 +7,10 @@ import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // component
 import Iconify from '../../../components/Iconify';
-
+//functions
+import {registerUser} from "../../../FireBase/actions";
+import Notiflix from "notiflix";
+import {printErrorMessage} from "../../../apiCalls/apiMessage";
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -21,7 +24,7 @@ export default function RegisterForm() {
       .required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+    password: Yup.string().required('Password is required').min(6,'Parola trebuie sa fie de minim 6 caracatere.')
   });
 
   const formik = useFormik({
@@ -32,13 +35,19 @@ export default function RegisterForm() {
       password: ''
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit:   (data) =>
+    {
+      registerUser(data.email, data.password).then((data)=>{
+      }).catch((error) =>{
+        printErrorMessage(error);
+      });
     }
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit,  getFieldProps } = formik;
 
+
+  
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
@@ -95,7 +104,6 @@ export default function RegisterForm() {
             size="large"
             type="submit"
             variant="contained"
-            loading={isSubmitting}
           >
             Register
           </LoadingButton>
