@@ -41,9 +41,7 @@ export default function RegisterForm() {
     {
       registerUser(data.email, data.password).then((data)=>{
         dispatch(setUser(data.user));
-        console.log(data);
-        debugger;
-
+        navigate('/')
       }).catch((error) =>{
         printErrorMessage(error);
       });
