@@ -11,12 +11,14 @@ import Iconify from '../../../components/Iconify';
 import {registerUser} from "../../../FireBase/actions";
 import Notiflix from "notiflix";
 import {printErrorMessage} from "../../../apiCalls/apiMessage";
+import {useDispatch, useSelector} from "react-redux";
+import {setUser} from "../../../store/auth/authAction";
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
+  const dispatch = useDispatch();
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(2, 'Too Short!')
@@ -26,7 +28,7 @@ export default function RegisterForm() {
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required').min(6,'Parola trebuie sa fie de minim 6 caracatere.')
   });
-
+  const user = useSelector(state => state.user);
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -38,6 +40,10 @@ export default function RegisterForm() {
     onSubmit:   (data) =>
     {
       registerUser(data.email, data.password).then((data)=>{
+        dispatch(setUser(data.user));
+        console.log(data);
+        debugger;
+
       }).catch((error) =>{
         printErrorMessage(error);
       });

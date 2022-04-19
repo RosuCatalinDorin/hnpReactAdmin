@@ -32,7 +32,7 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function DashboardLayout() {
+export default function DashboardLayout(props) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -40,7 +40,7 @@ export default function DashboardLayout() {
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
       <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
       <MainStyle>
-        <Outlet />
+        {props.children}
       </MainStyle>
     </RootStyle>
   );

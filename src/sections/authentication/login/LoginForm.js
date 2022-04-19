@@ -15,18 +15,24 @@ import {
 import { LoadingButton } from '@mui/lab';
 // component
 import Iconify from '../../../components/Iconify';
+// firebase
+import {setUser} from "../../../store/auth/authAction";
+import {printErrorMessage} from "../../../apiCalls/apiMessage";
+import {useDispatch} from "react-redux";
+import {useAuth} from "../../../Auth";
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
+  const dispatch = useDispatch();
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required')
   });
-
+  const {login,currentUser} = useAuth()
+  console.log(currentUser);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -34,8 +40,14 @@ export default function LoginForm() {
       remember: true
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (data) => {
+      login(data.email,data.password).then((data)=>{
+        dispatch(setUser(data.user));
+        navigate('/')
+      }).catch((error) =>{
+
+        printErrorMessage(error);
+      });
     }
   });
 
@@ -58,7 +70,6 @@ export default function LoginForm() {
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
           />
-
           <TextField
             fullWidth
             autoComplete="current-password"
@@ -95,7 +106,6 @@ export default function LoginForm() {
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}
         >
           Login
         </LoadingButton>

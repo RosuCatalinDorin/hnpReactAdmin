@@ -19,7 +19,6 @@ export default function Router() {
     {
       path: '/dashboard',
       element: <DashboardLayout />,
-     // element: <PrivateRoute component ={<DashboardApp/>}/>,
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },

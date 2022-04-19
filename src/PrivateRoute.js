@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
-import {Navigate, Routes} from "react-router-dom";
-import { AuthContext } from "./Auth";
+import React from "react";
+import { Navigate, Outlet} from "react-router-dom";
+import {useAuth} from "./Auth";
 
-const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
+export const ProtectedRoute = ({
+                            redirectPath = '/login',
+                            children,
+                        }) => {
+    const {currentUser} = useAuth();
     debugger;
-    const {currentUser} = useContext(AuthContext);
 
-    return (
-        !!currentUser ? (
-            {RouteComponent}
-        ) : (<Navigate to={"/login"}/>)
-    );
+    if (!currentUser) {
+        return <Navigate to={redirectPath} replace />;
+    }
+
+    return children ? children : <Outlet />;
 };
-
-
-export default PrivateRoute
