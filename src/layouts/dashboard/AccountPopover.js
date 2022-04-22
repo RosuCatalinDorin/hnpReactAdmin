@@ -36,6 +36,8 @@ export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const {logout,currentUser} = useAuth()
+  const displayName = currentUser.userDetails.lastName+" "+ currentUser.userDetails.firstName;
+  debugger;
   const handleOpen = () => {
     setOpen(true);
   };
@@ -76,11 +78,12 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {displayName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {currentUser.email}
           </Typography>
+
         </Box>
 
         <Divider sx={{ my: 1 }} />

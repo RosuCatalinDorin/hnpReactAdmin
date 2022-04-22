@@ -9,8 +9,8 @@ import DashboardApp from './pages/DashboardApp';
 import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
+import Company from './pages/Company';
 import NotFound from './pages/Page404';
-import PrivateRoute from "./PrivateRoute";
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +22,7 @@ export default function Router() {
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
+        { path: 'company', element: <Company /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> }
       ]

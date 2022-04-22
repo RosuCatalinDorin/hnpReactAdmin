@@ -7,11 +7,8 @@ export const ProtectedRoute = ({
                             children,
                         }) => {
     const {currentUser} = useAuth();
-    debugger;
-
-    if (!currentUser) {
+    if (currentUser === null) {
         return <Navigate to={redirectPath} replace />;
     }
-
     return children ? children : <Outlet />;
 };
