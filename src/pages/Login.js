@@ -75,7 +75,7 @@ export default function Login() {
             }}
           >
             Nu ai un cont HNP?&nbsp;
-            <Link variant="subtitle2" component={RouterLink} to="register" underline="hover">
+            <Link variant="subtitle2" component={RouterLink} to="/register" underline="hover">
               Creaza unul
             </Link>
           </Typography>
