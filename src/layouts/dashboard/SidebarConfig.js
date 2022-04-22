@@ -14,7 +14,14 @@ const sidebarConfig = [
   {
     title: 'user',
     path: '/dashboard/user',
-    icon: getIcon('eva:people-fill')
+    icon: getIcon('eva:people-fill'),
+    admin:true
+  },
+  {
+    title: 'parteneri',
+    path: '/dashboard/company',
+    icon: getIcon('eva:people-fill'),
+    admin:true
   },
   {
     title: 'product',
@@ -24,7 +31,8 @@ const sidebarConfig = [
   {
     title: 'blog',
     path: '/dashboard/blog',
-    icon: getIcon('eva:file-text-fill')
+    icon: getIcon('eva:file-text-fill'),
+    admin:true
   },
   {
     title: 'login',

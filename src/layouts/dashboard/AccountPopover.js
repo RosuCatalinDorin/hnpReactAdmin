@@ -8,6 +8,7 @@ import Iconify from '../../components/Iconify';
 import MenuPopover from '../../components/MenuPopover';
 //
 import account from '../../_mocks_/account';
+import {useAuth} from "../../Auth";
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +35,9 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-
+  const {logout,currentUser} = useAuth()
+  const displayName = currentUser.userDetails.lastName+" "+ currentUser.userDetails.firstName;
+  debugger;
   const handleOpen = () => {
     setOpen(true);
   };
@@ -75,11 +78,12 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {displayName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {currentUser.email}
           </Typography>
+
         </Box>
 
         <Divider sx={{ my: 1 }} />
@@ -106,7 +110,7 @@ export default function AccountPopover() {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
+          <Button onClick={logout} fullWidth color="inherit" variant="outlined">
             Logout
           </Button>
         </Box>

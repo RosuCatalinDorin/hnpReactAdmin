@@ -16,15 +16,17 @@ import {
   AppCurrentSubject,
   AppConversionRates
 } from '../sections/@dashboard/app';
+import {useAuth} from "../Auth";
 
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
+  const {currentUser} =useAuth()
   return (
-    <Page title="Dashboard | Minimal-UI">
+    <Page title="Dashboard | HNP ">
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Hi, Welcome back</Typography>
+          <Typography variant="h4">Salut,{currentUser.userDetails.lastName} !</Typography>
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>

@@ -20,13 +20,13 @@ const HeaderStyle = styled('header')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function LogoOnlyLayout() {
+export default function LogoOnlyLayout(props) {
   return (
     <>
       <HeaderStyle>
         <Logo />
       </HeaderStyle>
-      <Outlet />
+      {props.children}
     </>
   );
 }
