@@ -22,7 +22,7 @@ import Company from './pages/Company';
 import NotFound from './pages/Page404';
 import DashboardLayout from "./layouts/dashboard";
 import {ProtectedRoute} from "./PrivateRoute";
-
+import UserNotActive from './pages/UserNotActive';
 export default function App()
 {
 
@@ -36,13 +36,18 @@ export default function App()
                     <Routes>
                         <Route element={<ProtectedRoute/>}>
                             <Route index element={<DashboardLayout><DashboardApp/></DashboardLayout>}/>
-                            <Route path="dashboard/app" element={<DashboardLayout><DashboardApp/></DashboardLayout>}/>
-                            <Route path="dashboard/user" element={<DashboardLayout><User/></DashboardLayout>}/>
-                            <Route path="dashboard/Company" element={<DashboardLayout><Company/></DashboardLayout>}/>
-                            <Route path="dashboard/products" element={<DashboardLayout><Products/></DashboardLayout>}/>
-                            <Route path="dashboard/blog" element={<DashboardLayout><Blog/></DashboardLayout>}/>
+                            <Route path="dashboard/app"
+                                   element={<DashboardLayout><DashboardApp/></DashboardLayout>}/>
+                            <Route path="dashboard/user"
+                                   element={<DashboardLayout admin={true}><User/></DashboardLayout>}/>
+                            <Route path="dashboard/Company"
+                                   element={<DashboardLayout admin={true}><Company/></DashboardLayout>}/>
+                            <Route path="dashboard/products"
+                                   element={<DashboardLayout admin={true}><Products/></DashboardLayout>}/>
+                            <Route path="dashboard/blog"
+                                   element={<DashboardLayout admin={true}><Blog/></DashboardLayout>}/>
                         </Route>
-                            <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
+                        <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                             <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>
                             <Route path="404" element={<LogoOnlyLayout><NotFound/></LogoOnlyLayout>}/>
                     </Routes>

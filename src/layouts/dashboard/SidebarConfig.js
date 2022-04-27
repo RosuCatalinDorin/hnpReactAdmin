@@ -9,7 +9,8 @@ const sidebarConfig = [
   {
     title: 'dashboard',
     path: '/dashboard/app',
-    icon: getIcon('eva:pie-chart-2-fill')
+    icon: getIcon('eva:pie-chart-2-fill'),
+    admin:false
   },
   {
     title: 'user',
@@ -26,7 +27,8 @@ const sidebarConfig = [
   {
     title: 'product',
     path: '/dashboard/products',
-    icon: getIcon('eva:shopping-bag-fill')
+    icon: getIcon('eva:shopping-bag-fill'),
+    admin:true
   },
   {
     title: 'blog',
@@ -34,7 +36,7 @@ const sidebarConfig = [
     icon: getIcon('eva:file-text-fill'),
     admin:true
   },
-  {
+/*  {
     title: 'login',
     path: '/login',
     icon: getIcon('eva:lock-fill')
@@ -48,7 +50,7 @@ const sidebarConfig = [
     title: 'Not found',
     path: '/404',
     icon: getIcon('eva:alert-triangle-fill')
-  }
+  }*/
 ];
 
 export default sidebarConfig;

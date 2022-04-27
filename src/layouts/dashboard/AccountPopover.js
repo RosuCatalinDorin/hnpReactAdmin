@@ -37,7 +37,7 @@ export default function AccountPopover() {
   const [open, setOpen] = useState(false);
   const {logout,currentUser} = useAuth()
   const displayName = currentUser.userDetails.lastName+" "+ currentUser.userDetails.firstName;
-  debugger;
+
   const handleOpen = () => {
     setOpen(true);
   };

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Outlet} from 'react-router-dom';
+import {Navigate, Outlet, useNavigate} from 'react-router-dom';
 // material
 import {styled} from '@mui/material/styles';
 //
@@ -9,6 +9,8 @@ import DashboardSidebar from './DashboardSidebar';
 // ----------------------------------------------------------------------
 import {useAuth} from "../../Auth";
 import useUserDetails from "../../hooks/useUserDetails";
+
+import UserNotActive from "../../pages/UserNotActive";
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -39,6 +41,8 @@ export default function DashboardLayout(props)
     const [open, setOpen] = useState(false);
     const {currentUser, setCurrentUser} = useAuth();
     const [userDetails, setUserDetails] = useUserDetails();
+    const navigate = useNavigate();
+
     useEffect(() =>
     {
         if(userDetails !== null) {
@@ -61,13 +65,17 @@ export default function DashboardLayout(props)
     if(currentUser && !currentUser.hasOwnProperty('userDetails')) {
         return (<></>);
     }
-
+    debugger;
     return (
         <RootStyle>
             <DashboardNavbar onOpenSidebar={() => setOpen(true)}/>
             <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)}/>
             <MainStyle>
-                {props.children}
+                {props.admin === true && currentUser.userDetails.role !== "ADMIN" ? navigate('/404') : "" }
+
+                {currentUser.userDetails.status === true ? props.children : <UserNotActive
+                    currentUser = {currentUser}
+                />}
             </MainStyle>
         </RootStyle>
     );

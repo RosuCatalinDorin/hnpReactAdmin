@@ -34,7 +34,6 @@ export default function RegisterForm()
         position: Yup.string().required('Functia este obligatorie').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
         password: Yup.string().required('Password este obligatorie').min(6, 'Parola trebuie sa fie de minim 6 caracatere.'),
     });
-    const user = useSelector(state => state.user);
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -50,7 +49,7 @@ export default function RegisterForm()
         {
             registerUser(formData.email, formData.password).then((data) =>
             {
-                debugger;
+
                 dispatch(setUser(data.user));
                 const userDetails = {
                     firstName: formData.firstName,
@@ -59,12 +58,13 @@ export default function RegisterForm()
                     department: formData.department,
                     phone: formData.phone,
                     position: formData.position,
-                    role:null,
-                    companyId:null,
-                    dateCreate:new Date(),
-                    companyName:"",
-                    isVerified:false,
-                    status:false
+                    role: "CUSTOMER",
+                    companyId: null,
+                    dateCreate: new Date(),
+                    companyName: "",
+                    displayName: formData.lastName + " " + formData.firstName,
+                    isVerified: false,
+                    status: false,
                 };
                 saveUserDetails(data.user.uid, userDetails).then(r => navigate('/'));
             }).catch((error) =>

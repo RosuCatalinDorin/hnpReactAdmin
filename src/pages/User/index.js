@@ -75,7 +75,7 @@ function applySortFilter(array, comparator, query)
         return a[1] - b[1];
     });
     if(query) {
-        return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+        return filter(array, (_user) => _user.displayName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
     }
     return stabilizedThis.map((el) => el[0]);
 }
@@ -101,7 +101,6 @@ export default function User()
     {
         getCollection("users").then((data) =>
         {
-            console.log(data);
             setUsers(data);
         });
     };
@@ -231,9 +230,8 @@ export default function User()
                                             const {
                                                 id,
                                                 name,
-                                                firstName,
+                                                displayName,
                                                 status,
-                                                lastName,
                                                 companyName,
                                                 isVerified,
                                                 position,
@@ -258,9 +256,9 @@ export default function User()
                                                     </TableCell>
                                                     <TableCell component="th" scope="row" padding="none">
                                                         <Stack direction="row" alignItems="center" spacing={2}>
-                                                            <Avatar alt={firstName + " " + lastName} src={''}/>
+                                                            <Avatar alt={displayName} src={''}/>
                                                             <Typography variant="subtitle2" noWrap>
-                                                                {firstName + " " + lastName}
+                                                                {displayName}
                                                             </Typography>
                                                         </Stack>
                                                     </TableCell>
