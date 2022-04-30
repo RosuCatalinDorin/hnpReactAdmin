@@ -230,7 +230,6 @@ export default function User()
                                         {
                                             const {
                                                 id,
-                                                name,
                                                 firstName,
                                                 status,
                                                 lastName,
@@ -239,6 +238,7 @@ export default function User()
                                                 position,
                                                 role,
                                             } = row;
+                                            const name  = firstName + " " + lastName
                                             const isItemSelected = selected.indexOf(name) !== -1;
 
                                             return (
@@ -258,9 +258,9 @@ export default function User()
                                                     </TableCell>
                                                     <TableCell component="th" scope="row" padding="none">
                                                         <Stack direction="row" alignItems="center" spacing={2}>
-                                                            <Avatar alt={firstName + " " + lastName} src={''}/>
+                                                            <Avatar alt={name} src={''}/>
                                                             <Typography variant="subtitle2" noWrap>
-                                                                {firstName + " " + lastName}
+                                                                {name}
                                                             </Typography>
                                                         </Stack>
                                                     </TableCell>
