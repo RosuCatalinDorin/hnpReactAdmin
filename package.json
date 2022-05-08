@@ -64,6 +64,7 @@
     "simplebar": "^5.3.6",
     "simplebar-react": "^2.3.6",
     "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {

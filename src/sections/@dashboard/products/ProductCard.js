@@ -12,11 +12,11 @@ import ColorPreview from '../../../components/ColorPreview';
 // ----------------------------------------------------------------------
 
 const ProductImgStyle = styled('img')({
-  top: 0,
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  position: 'absolute'
+    top: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    position: 'relative'
 });
 
 // ----------------------------------------------------------------------
@@ -26,11 +26,12 @@ ShopProductCard.propTypes = {
 };
 
 export default function ShopProductCard({ product }) {
-  const { name, cover, price, colors, status, priceSale } = product;
-
+  const { DESCRIPTION_SHORT = "",  MIMESOURCEDETAILFILE ="" } = product;
+  const status ='sale'
+  const priceSale =22;
   return (
     <Card>
-      <Box sx={{ pt: '100%', position: 'relative' }}>
+      <Box sx={{ height:'auto',position: 'relative' }}>
         {status && (
           <Label
             variant="filled"
@@ -46,18 +47,17 @@ export default function ShopProductCard({ product }) {
             {status}
           </Label>
         )}
-        <ProductImgStyle alt={name} src={cover} />
+        <ProductImgStyle alt={DESCRIPTION_SHORT} src={"https://cdn.walter-tools.com/files/sitecollectionimages/wic/product"+MIMESOURCEDETAILFILE.toLowerCase()} />
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle2" noWrap>
-            {name}
+            {DESCRIPTION_SHORT}
           </Typography>
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <ColorPreview colors={colors} />
           <Typography variant="subtitle1">
             <Typography
               component="span"
@@ -70,7 +70,7 @@ export default function ShopProductCard({ product }) {
               {priceSale && fCurrency(priceSale)}
             </Typography>
             &nbsp;
-            {fCurrency(price)}
+            {fCurrency(22)}
           </Typography>
         </Stack>
       </Stack>

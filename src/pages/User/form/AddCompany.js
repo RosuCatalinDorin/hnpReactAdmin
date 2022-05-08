@@ -23,7 +23,7 @@ export default function RegisterForm(props)
         partners: Yup.object().required('Te rog selecteaza o potiune'),
     });
     const {currentUser} = useAuth();
-    debugger;
+
     const formik = useFormik({
         initialValues: {
             partners: '',

@@ -30,6 +30,26 @@ export const SORT_BY_OPTIONS = [
   { value: 'priceAsc', label: 'Price: Low-High' }
 ];
 export const FILTER_GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
+export const UDX_APPAREA = [
+   'Holding',
+  'Parting/Grooving',
+  'Threading',
+  'Drilling',
+  'Not applicable',
+  'Boring',
+  'Reaming',
+  'Turning',
+];
+export const UDX_ITEMTYPE = [
+  'Accessory Item',
+  'Adaptive Item',
+  'Assembly Item',
+  'Blank',
+  'Brazed Cutting Tool',
+  'Insert',
+  'Solid Cutting Tool',
+  'Tool Item',
+];
 export const FILTER_CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
 export const FILTER_RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
 export const FILTER_PRICE_OPTIONS = [
@@ -63,6 +83,7 @@ export default function ShopFilterSidebar({
   onResetFilter,
   onOpenFilter,
   onCloseFilter,
+  setFilters,
   formik
 }) {
   const { values, getFieldProps, handleChange } = formik;
@@ -111,7 +132,7 @@ export default function ShopFilterSidebar({
                     Gender
                   </Typography>
                   <FormGroup>
-                    {FILTER_GENDER_OPTIONS.map((item) => (
+                    {UDX_APPAREA.map((item) => (
                       <FormControlLabel
                         key={item}
                         control={
@@ -119,6 +140,7 @@ export default function ShopFilterSidebar({
                             {...getFieldProps('gender')}
                             value={item}
                             checked={values.gender.includes(item)}
+                            onClick={(item) =>{setFilters(item,'UDX_APPAREA')}}
                           />
                         }
                         label={item}
@@ -132,7 +154,7 @@ export default function ShopFilterSidebar({
                     Category
                   </Typography>
                   <RadioGroup {...getFieldProps('category')}>
-                    {FILTER_CATEGORY_OPTIONS.map((item) => (
+                    {UDX_ITEMTYPE.map((item) => (
                       <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
                     ))}
                   </RadioGroup>

@@ -6,6 +6,7 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
 //
 import Iconify from './Iconify';
+import {useAuth} from "../Auth";
 
 // ----------------------------------------------------------------------
 
@@ -151,17 +152,31 @@ NavSection.propTypes = {
   navConfig: PropTypes.array
 };
 
-export default function NavSection({ navConfig, ...other }) {
-  const { pathname } = useLocation();
-  const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
+export default function NavSection({ navConfig, ...other })
+{
+    const {pathname} = useLocation();
+    const {currentUser} = useAuth();
+    const match = (path) => (path ? !!matchPath({path, end: false}, pathname) : false);
 
-  return (
-    <Box {...other}>
-      <List disablePadding>
-        {navConfig.map((item) => (
-          <NavItem key={item.title} item={item} active={match} />
-        ))}
-      </List>
-    </Box>
-  );
+    const setUserNavItemByRole = () =>
+    {
+        if(currentUser.userDetails.role === "ADMIN") {
+            return navConfig;
+        }
+        if(currentUser.userDetails.role === "CUSTOMER") {
+          return navConfig.filter(item =>item.admin === false)
+        }
+    };
+
+    const navLink = setUserNavItemByRole();
+
+    return (
+        <Box {...other}>
+            <List disablePadding>
+                {navLink.map((item) => (
+                    <NavItem key={item.title} item={item} active={match}/>
+                ))}
+            </List>
+        </Box>
+    );
 }
