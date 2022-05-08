@@ -19,7 +19,7 @@ const request = function(options)
     {
         Notiflix.Loading.remove();
         console.debug('Request Successful!', response);
-        return response.data.data;
+        return response;
     };
 
     const onError = function(error)

@@ -22,7 +22,7 @@ import Company from './pages/Company';
 import NotFound from './pages/Page404';
 import DashboardLayout from "./layouts/dashboard";
 import {ProtectedRoute} from "./PrivateRoute";
-import UserNotActive from './pages/UserNotActive';
+import UploadFile from './pages/UploadFile';
 export default function App()
 {
 
@@ -46,6 +46,8 @@ export default function App()
                                    element={<DashboardLayout admin={true}><Products/></DashboardLayout>}/>
                             <Route path="dashboard/blog"
                                    element={<DashboardLayout admin={true}><Blog/></DashboardLayout>}/>
+                            <Route path="dashboard/uploadFile"
+                                   element={<DashboardLayout admin={true}><UploadFile/></DashboardLayout>}/>
                         </Route>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                             <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>

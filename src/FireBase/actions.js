@@ -1,6 +1,16 @@
 import {auth, db} from './base';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification} from "firebase/auth";
-import {collection, addDoc, query, where, getDocs, writeBatch,doc} from "firebase/firestore";
+import {
+    collection,
+    addDoc,
+    query,
+    where,
+    getDocs,
+    writeBatch,
+    doc,
+    orderBy,
+    limit,
+} from "firebase/firestore";
 
 export const registerUser = async(email, password) =>
 {
@@ -88,7 +98,40 @@ export const saveUserCompany = async(data) =>
         companyName: data.company.name,
     });
 
-
     await batch.commit();
 
+};
+export const saveProducts = async(prodact) =>
+{
+    const products = 'products';
+    const docRef = await addDoc(collection(db, products), prodact);
+    return docRef.id;
+};
+
+
+export const getTopProducts = async () =>{
+
+    const citiesRef = collection(db, "products");
+    const q = query(citiesRef, limit(200));
+    const querySnapshot = await getDocs(q);
+    let result = [];
+    querySnapshot.forEach((doc) =>
+    {
+        result.push(doc.data());
+    });
+    return result;
+}
+
+export const getProducts = async(fiters = null) =>
+{
+    const citiesRef = collection(db, "products");
+    const q = query(citiesRef,where("UDX.APPAREA", "in", fiters.APPAREA), limit(200));
+    const querySnapshot = await getDocs(q);
+    let result = [];
+    querySnapshot.forEach((doc) =>
+    {
+        result.push(doc.data());
+    });
+    console.log(result);
+    return result;
 };

@@ -65,7 +65,6 @@ export default function DashboardLayout(props)
     if(currentUser && !currentUser.hasOwnProperty('userDetails')) {
         return (<></>);
     }
-    debugger;
     return (
         <RootStyle>
             <DashboardNavbar onOpenSidebar={() => setOpen(true)}/>
