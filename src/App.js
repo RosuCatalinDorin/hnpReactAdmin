@@ -23,6 +23,7 @@ import NotFound from './pages/Page404';
 import DashboardLayout from "./layouts/dashboard";
 import {ProtectedRoute} from "./PrivateRoute";
 import UploadFile from './pages/UploadFile';
+import ProductDetails from './pages/ProductDetails';
 export default function App()
 {
 
@@ -51,6 +52,7 @@ export default function App()
                         </Route>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                             <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>
+                            <Route path="detaliiProdus/:id" element={<DashboardLayout admin={false}><ProductDetails/></DashboardLayout>}/>
                             <Route path="404" element={<LogoOnlyLayout><NotFound/></LogoOnlyLayout>}/>
                     </Routes>
                 </AuthProvider>

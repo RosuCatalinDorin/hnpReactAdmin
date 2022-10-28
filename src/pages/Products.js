@@ -55,8 +55,10 @@ export default function EcommerceShop()
 
     useEffect(async() =>
     {
-        const data = await getHnpElkProducts();
-        setProducts(data.data.hits.hits);
+        const data = await getTopProducts();
+        debugger;
+       // setProducts(data.data.hits.hits);
+       setProducts(data);
 
     }, []);
 

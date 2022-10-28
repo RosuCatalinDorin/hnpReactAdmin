@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Box, Card, Link, Typography, Stack } from '@mui/material';
+import { Box, Card, Link, Typography, Stack,Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 // utils
 import { fCurrency } from '../../../utils/formatNumber';
@@ -25,7 +25,7 @@ ShopProductCard.propTypes = {
   product: PropTypes.object
 };
 
-export default function ShopProductCard({ product }) {
+export default function ShopProductCard({ product,id }) {
   const { DESCRIPTION_SHORT = "",  MIMESOURCEDETAILFILE ="" } = product;
   const status ='sale'
   const priceSale =22;
@@ -73,7 +73,9 @@ export default function ShopProductCard({ product }) {
             {fCurrency(22)}
           </Typography>
         </Stack>
+          <Button href={'/detaliiProdus/' +DESCRIPTION_SHORT+'param'+id}>Vezi detalii</Button>
       </Stack>
+
     </Card>
   );
 }
