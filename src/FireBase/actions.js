@@ -125,7 +125,6 @@ export const getTopProducts = async () =>{
 
 export const getProducts = async(fiters = null) =>
 {
-    debugger;
     const citiesRef = collection(db, "products");
     const q = query(citiesRef,where("UDX.APPAREA", "in", fiters.UDX_APPAREA), limit(10));
     const querySnapshot = await getDocs(q);
@@ -138,19 +137,38 @@ export const getProducts = async(fiters = null) =>
     return result;
 };
 export const getProductsPagionation =  async  () =>{
-    const first = query(collection(db, "products"), orderBy("APPAREA"), limit(25));
 
-    const documentSnapshots = await getDocs(first);
-    debugger
-    console.log("test", documentSnapshots.docs.length-1);
-    // Get the last visible document
-    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
-    console.log("last", lastVisible);
+   const first  = query(collection(db, "products"), orderBy("UDX.APPAREA"), limit(10));
+   const documentSnapshots = await getDocs(first)
+   const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
 
-    // Construct a new query starting at this document,
-    // get the next 25 cities.
     const next = query(collection(db, "products"),
-        orderBy("APPAREA"),
+        orderBy("UDX.APPAREA"),
         startAfter(lastVisible),
-        limit(25));
+        limit(10));
+    const querySnapshot = await getDocs(next);
+    let result = [];
+    querySnapshot.forEach((doc) =>
+    {
+        result.push(doc.data());
+    });
+    return result
+
+}
+export const fetchMore = async (lastDoc) => {
+    const first  = query(collection(db, "products"), orderBy("UDX.APPAREA"), startAfter(lastDoc), limit(10));
+    const documentSnapshots = await getDocs(first)
+    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
+    debugger;
+    const next = query(collection(db, "products"),
+        orderBy("UDX.APPAREA"),
+        startAfter(lastVisible),
+        limit(10));
+    const querySnapshot = await getDocs(next);
+    let result = [];
+    querySnapshot.forEach((doc) =>
+    {
+        result.push(doc.data());
+    });
+    return {rows :result , lastDoc : lastVisible};
 }

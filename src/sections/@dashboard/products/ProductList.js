@@ -17,6 +17,7 @@ export default function ProductList({ products, ...other }) {
           <ShopProductCard product={product} id ={product.id} />
         </Grid>
       ))}
+
     </Grid>
   );
 }
