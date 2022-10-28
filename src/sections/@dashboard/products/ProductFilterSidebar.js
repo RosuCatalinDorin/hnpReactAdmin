@@ -21,15 +21,6 @@ import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import ColorManyPicker from '../../../components/ColorManyPicker';
 
-// ----------------------------------------------------------------------
-
-export const SORT_BY_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'newest', label: 'Newest' },
-  { value: 'priceDesc', label: 'Price: High-Low' },
-  { value: 'priceAsc', label: 'Price: Low-High' }
-];
-export const FILTER_GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
 export const UDX_APPAREA = [
    'Holding',
   'Parting/Grooving',
@@ -50,7 +41,6 @@ export const UDX_ITEMTYPE = [
   'Solid Cutting Tool',
   'Tool Item',
 ];
-export const FILTER_CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
 export const FILTER_RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
 export const FILTER_PRICE_OPTIONS = [
   { value: 'below', label: 'Below $25' },

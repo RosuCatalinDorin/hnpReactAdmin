@@ -9,6 +9,7 @@ import {
     writeBatch,
     doc,
     orderBy,
+    startAfter,
     limit,
 } from "firebase/firestore";
 
@@ -112,7 +113,7 @@ export const saveProducts = async(prodact) =>
 export const getTopProducts = async () =>{
 
     const citiesRef = collection(db, "products");
-    const q = query(citiesRef, limit(200));
+    const q = query(citiesRef, limit(10));
     const querySnapshot = await getDocs(q);
     let result = [];
     querySnapshot.forEach((doc) =>
@@ -124,8 +125,9 @@ export const getTopProducts = async () =>{
 
 export const getProducts = async(fiters = null) =>
 {
+    debugger;
     const citiesRef = collection(db, "products");
-    const q = query(citiesRef,where("UDX.APPAREA", "in", fiters.APPAREA), limit(200));
+    const q = query(citiesRef,where("UDX.APPAREA", "in", fiters.UDX_APPAREA), limit(10));
     const querySnapshot = await getDocs(q);
     let result = [];
     querySnapshot.forEach((doc) =>
@@ -135,3 +137,20 @@ export const getProducts = async(fiters = null) =>
     console.log(result);
     return result;
 };
+export const getProductsPagionation =  async  () =>{
+    const first = query(collection(db, "products"), orderBy("APPAREA"), limit(25));
+
+    const documentSnapshots = await getDocs(first);
+    debugger
+    console.log("test", documentSnapshots.docs.length-1);
+    // Get the last visible document
+    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
+    console.log("last", lastVisible);
+
+    // Construct a new query starting at this document,
+    // get the next 25 cities.
+    const next = query(collection(db, "products"),
+        orderBy("APPAREA"),
+        startAfter(lastVisible),
+        limit(25));
+}

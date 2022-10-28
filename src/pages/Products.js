@@ -11,7 +11,7 @@ import {
     ProductFilterSidebar,
 } from '../sections/@dashboard/products';
 // firebaseActions
-import {getProducts, getTopProducts} from "../FireBase/actions";
+import {getProducts, getTopProducts,getProductsPagionation} from "../FireBase/actions";
 
 import {getHnpElkProducts} from "../apiCalls/api/Products"
 // ----------------------------------------------------------------------
@@ -55,19 +55,16 @@ export default function EcommerceShop()
 
     useEffect(async() =>
     {
-        const data = await getTopProducts();
-        debugger;
-       // setProducts(data.data.hits.hits);
+       const data = await getTopProducts();
        setProducts(data);
 
     }, []);
 
     useEffect(async() =>
     {
-        debugger;
         if(filters.UDX_APPAREA.length > 0 || !filters.FISRT_RELEAD) {
-            const data = await getHnpElkProducts(filters);
-            setProducts(data.data.hits.hits);
+            const data = await getProducts(filters);
+            setProducts(data);
         }
 
     }, [filters]);
