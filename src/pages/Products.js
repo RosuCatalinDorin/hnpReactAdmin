@@ -1,7 +1,7 @@
 import {useFormik} from 'formik';
 import {useEffect, useState} from 'react';
 // material
-import {Container, Stack, Typography} from '@mui/material';
+import {Button, Container, Stack, Typography} from '@mui/material';
 // components
 import Page from '../components/Page';
 import {
@@ -11,9 +11,10 @@ import {
     ProductFilterSidebar,
 } from '../sections/@dashboard/products';
 // firebaseActions
-import {getProducts, getTopProducts} from "../FireBase/actions";
+import {getProducts, getTopProducts,getProductsPagionation} from "../FireBase/actions";
 
 import {getHnpElkProducts} from "../apiCalls/api/Products"
+
 // ----------------------------------------------------------------------
 
 export default function EcommerceShop()
@@ -53,21 +54,23 @@ export default function EcommerceShop()
         resetForm();
     };
 
+
+    const getProductsUsingPagination =async (lastDoc)=>{
+        debugger;
+        const data = await getProductsPagionation(lastDoc);
+        setProducts(data);
+    }
     useEffect(async() =>
     {
-        const data = await getTopProducts();
-        debugger;
-       // setProducts(data.data.hits.hits);
-       setProducts(data);
+        await getProductsUsingPagination(null)
 
     }, []);
 
     useEffect(async() =>
     {
-        debugger;
         if(filters.UDX_APPAREA.length > 0 || !filters.FISRT_RELEAD) {
-            const data = await getHnpElkProducts(filters);
-            setProducts(data.data.hits.hits);
+            const data = await getProducts(filters);
+            setProducts(data);
         }
 
     }, [filters]);
@@ -84,7 +87,7 @@ export default function EcommerceShop()
         setFilters(currentFilters);
     };
     return (
-        <Page title="Dashboard: Products | Minimal-UI">
+        <Page title="HNP: Products">
             <Container>
                 <Typography variant="h4" sx={{mb: 5}}>
                     Products
@@ -112,6 +115,8 @@ export default function EcommerceShop()
 
                 <ProductList products={products}/>
                 <ProductCartWidget/>
+                <Button
+                    onClick={()=>getProductsUsingPagination(products[products.length-1])}> Mai multe</Button>
             </Container>
         </Page>
     );

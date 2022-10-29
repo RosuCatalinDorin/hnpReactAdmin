@@ -9,6 +9,7 @@ import {
     writeBatch,
     doc,
     orderBy,
+    startAfter,
     limit,
 } from "firebase/firestore";
 
@@ -112,7 +113,7 @@ export const saveProducts = async(prodact) =>
 export const getTopProducts = async () =>{
 
     const citiesRef = collection(db, "products");
-    const q = query(citiesRef, limit(200));
+    const q = query(citiesRef, limit(10));
     const querySnapshot = await getDocs(q);
     let result = [];
     querySnapshot.forEach((doc) =>
@@ -125,7 +126,7 @@ export const getTopProducts = async () =>{
 export const getProducts = async(fiters = null) =>
 {
     const citiesRef = collection(db, "products");
-    const q = query(citiesRef,where("UDX.APPAREA", "in", fiters.APPAREA), limit(200));
+    const q = query(citiesRef,where("UDX.APPAREA", "in", fiters.UDX_APPAREA), limit(10));
     const querySnapshot = await getDocs(q);
     let result = [];
     querySnapshot.forEach((doc) =>
@@ -135,3 +136,39 @@ export const getProducts = async(fiters = null) =>
     console.log(result);
     return result;
 };
+export const getProductsPagionation =  async  () =>{
+
+   const first  = query(collection(db, "products"), orderBy("UDX.APPAREA"), limit(10));
+   const documentSnapshots = await getDocs(first)
+   const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
+
+    const next = query(collection(db, "products"),
+        orderBy("UDX.APPAREA"),
+        startAfter(lastVisible),
+        limit(10));
+    const querySnapshot = await getDocs(next);
+    let result = [];
+    querySnapshot.forEach((doc) =>
+    {
+        result.push(doc.data());
+    });
+    return result
+
+}
+export const fetchMore = async (lastDoc) => {
+    const first  = query(collection(db, "products"), orderBy("UDX.APPAREA"), startAfter(lastDoc), limit(10));
+    const documentSnapshots = await getDocs(first)
+    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
+    debugger;
+    const next = query(collection(db, "products"),
+        orderBy("UDX.APPAREA"),
+        startAfter(lastVisible),
+        limit(10));
+    const querySnapshot = await getDocs(next);
+    let result = [];
+    querySnapshot.forEach((doc) =>
+    {
+        result.push(doc.data());
+    });
+    return {rows :result , lastDoc : lastVisible};
+}
