@@ -11,7 +11,7 @@ export const createElkFilters = (data) =>
             },
         },
         "from": 0,
-        "size": 16,
+        "size": 100,
     };
     if(data !== null) {
         const query = {
