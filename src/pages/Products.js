@@ -11,7 +11,7 @@ import {
     ProductFilterSidebar,
 } from '../sections/@dashboard/products';
 // firebaseActions
-import {getProducts, getTopProducts,getProductsPagionation} from "../FireBase/actions";
+import {getProducts, getTopProducts,getProductsPagionation,fetchMore} from "../FireBase/actions";
 
 import {getHnpElkProducts} from "../apiCalls/api/Products"
 
@@ -56,8 +56,14 @@ export default function EcommerceShop()
 
 
     const getProductsUsingPagination =async (lastDoc)=>{
-        debugger;
-        const data = await getProductsPagionation(lastDoc);
+        let data
+        debugger
+        if(lastDoc === null){
+             data = await getProductsPagionation();
+        } else {
+             data = await fetchMore(lastDoc)
+        }
+
         setProducts(data);
     }
     useEffect(async() =>
