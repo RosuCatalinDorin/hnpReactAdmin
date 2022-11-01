@@ -6,6 +6,7 @@ import {
     query,
     where,
     getDocs,
+    getDoc,
     writeBatch,
     doc,
     orderBy,
@@ -138,10 +139,13 @@ export const getProducts = async(fiters = null) =>
 };
 export const getProductsPagionation =  async  () =>{
 
-   const first  = query(collection(db, "products"), orderBy("UDX.APPAREA"), limit(10));
+   const first  = query(
+       collection(db, "products"),
+       orderBy("UDX.APPAREA"),
+       limit(10));
    const documentSnapshots = await getDocs(first)
    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
-
+console.log(lastVisible);
     const next = query(collection(db, "products"),
         orderBy("UDX.APPAREA"),
         startAfter(lastVisible),
@@ -150,25 +154,30 @@ export const getProductsPagionation =  async  () =>{
     let result = [];
     querySnapshot.forEach((doc) =>
     {
-        result.push(doc.data());
+        debugger;
+        let row = doc.data()
+        row.id = doc.id;
+        result.push(row);
     });
     return result
 
 }
 export const fetchMore = async (lastDoc) => {
-    const first  = query(collection(db, "products"), orderBy("UDX.APPAREA"), startAfter(lastDoc), limit(10));
-    const documentSnapshots = await getDocs(first)
-    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
     debugger;
-    const next = query(collection(db, "products"),
+    const docRef = doc(db, "products", lastDoc.id);
+    const lastDocRef  = await getDoc(docRef)
+
+    const next = query(
+        collection(db, "products"),
         orderBy("UDX.APPAREA"),
-        startAfter(lastVisible),
+        startAfter(lastDocRef),
         limit(10));
     const querySnapshot = await getDocs(next);
     let result = [];
     querySnapshot.forEach((doc) =>
-    {
-        result.push(doc.data());
+    {    let row = doc.data()
+        row.id = doc.id;
+        result.push(row);
     });
-    return {rows :result , lastDoc : lastVisible};
+    return result;
 }
