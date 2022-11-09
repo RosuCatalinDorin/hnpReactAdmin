@@ -23,6 +23,7 @@ import NotFound from './pages/Page404';
 import DashboardLayout from "./layouts/dashboard";
 import {ProtectedRoute} from "./PrivateRoute";
 import UploadFile from './pages/UploadFile';
+import NewPost from './pages/NewPost';
 import ProductDetails from './pages/ProductDetails';
 export default function App()
 {
@@ -49,6 +50,8 @@ export default function App()
                                    element={<DashboardLayout admin={true}><Blog/></DashboardLayout>}/>
                             <Route path="dashboard/uploadFile"
                                    element={<DashboardLayout admin={true}><UploadFile/></DashboardLayout>}/>
+                            <Route path="dashboard/addNews"
+                                   element={<DashboardLayout admin={true}><NewPost/></DashboardLayout>}/>
                         </Route>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                             <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>

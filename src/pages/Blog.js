@@ -1,4 +1,4 @@
-import { Link as RouterLink } from 'react-router-dom';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
 // material
 import { Grid, Button, Container, Stack, Typography } from '@mui/material';
 // components
@@ -19,17 +19,19 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function Blog() {
+  const navigate = useNavigate();
   return (
     <Page title="Dashboard: Blog | Minimal-UI">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Blog
+            Noutati HNP
           </Typography>
           <Button
             variant="contained"
-            component={RouterLink}
-            to="#"
+            onClick={()=>{
+              navigate('/dashboard/addNews')
+              }}
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
             New Post
