@@ -1,52 +1,67 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
+import {
+  NavLink as RouterLink,
+  matchPath,
+  useLocation,
+} from 'react-router-dom';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
+import {
+  Box,
+  AppBar,
+  List,
+  Toolbar,
+  Typography,
+  Button,
+  Collapse,
+  ListItemText,
+  ListItemIcon,
+  ListItemButton,
+} from '@mui/material';
 //
 import Iconify from './Iconify';
-import {useAuth} from "../Auth";
+import { useAuth } from '../Auth';
 
 // ----------------------------------------------------------------------
 
-const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
-  ({ theme }) => ({
-    ...theme.typography.body2,
-    height: 48,
-    position: 'relative',
-    textTransform: 'capitalize',
-    paddingLeft: theme.spacing(5),
-    paddingRight: theme.spacing(2.5),
-    color: theme.palette.text.secondary,
-    '&:before': {
-      top: 0,
-      right: 0,
-      width: 3,
-      bottom: 0,
-      content: "''",
-      display: 'none',
-      position: 'absolute',
-      borderTopLeftRadius: 4,
-      borderBottomLeftRadius: 4,
-      backgroundColor: theme.palette.primary.main
-    }
-  })
-);
+const ListItemStyle = styled((props) => (
+  <ListItemButton disableGutters {...props} />
+))(({ theme }) => ({
+  ...theme.typography.body2,
+  height: 48,
+  position: 'relative',
+  textTransform: 'capitalize',
+  paddingLeft: theme.spacing(5),
+  paddingRight: theme.spacing(2.5),
+  color: theme.palette.text.secondary,
+  '&:before': {
+    top: 0,
+    right: 0,
+    width: 3,
+    bottom: 0,
+    content: "''",
+    display: 'none',
+    position: 'absolute',
+    borderTopLeftRadius: 4,
+    borderBottomLeftRadius: 4,
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
 
 const ListItemIconStyle = styled(ListItemIcon)({
   width: 22,
   height: 22,
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 });
 
 // ----------------------------------------------------------------------
 
 NavItem.propTypes = {
   item: PropTypes.object,
-  active: PropTypes.func
+  active: PropTypes.func,
 };
 
 function NavItem({ item, active }) {
@@ -59,38 +74,45 @@ function NavItem({ item, active }) {
     setOpen((prev) => !prev);
   };
 
-  const activeRootStyle = {
-    color: 'primary.main',
-    fontWeight: 'fontWeightMedium',
-    bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-    '&:before': { display: 'block' }
-  };
-
-  const activeSubStyle = {
-    color: 'text.primary',
-    fontWeight: 'fontWeightMedium'
-  };
+  // const activeRootStyle = {
+  //   color: 'primary.main',
+  //   fontWeight: 'fontWeightMedium',
+  //   backgroundColor: alpha(
+  //     theme.palette.primary.main,
+  //     theme.palette.action.selectedOpacity
+  //   ),
+  //   '&:before': { display: 'block' },
+  // };
+  //
+  // const activeSubStyle = {
+  //   color: 'text.primary',
+  //   fontWeight: 'fontWeightMedium',
+  // };
 
   if (children) {
     return (
       <>
         <ListItemStyle
           onClick={handleOpen}
-          sx={{
-            ...(isActiveRoot && activeRootStyle)
-          }}
+          // sx={{
+          //   ...(isActiveRoot && activeRootStyle),
+          // }}
         >
           <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
           <ListItemText disableTypography primary={title} />
           {info && info}
           <Iconify
-            icon={open ? 'eva:arrow-ios-downward-fill' : 'eva:arrow-ios-forward-fill'}
-            sx={{ width: 16, height: 16, ml: 1 }}
+            icon={
+              open
+                ? 'eva:arrow-ios-downward-fill'
+                : 'eva:arrow-ios-forward-fill'
+            }
+            sx={{ width: 12, height: 16, ml: 1 }}
           />
         </ListItemStyle>
 
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
+        <Collapse in={open} timeout='auto' unmountOnExit>
+          <List component='div' disablePadding>
             {children.map((item) => {
               const { title, path } = item;
               const isActiveSub = active(path);
@@ -100,13 +122,13 @@ function NavItem({ item, active }) {
                   key={title}
                   component={RouterLink}
                   to={path}
-                  sx={{
-                    ...(isActiveSub && activeSubStyle)
-                  }}
+                  // sx={{
+                  //   ...(isActiveSub && activeSubStyle),
+                  // }}
                 >
                   <ListItemIconStyle>
                     <Box
-                      component="span"
+                      component='span'
                       sx={{
                         width: 4,
                         height: 4,
@@ -114,12 +136,13 @@ function NavItem({ item, active }) {
                         borderRadius: '50%',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        bgcolor: 'text.disabled',
-                        transition: (theme) => theme.transitions.create('transform'),
-                        ...(isActiveSub && {
-                          transform: 'scale(2)',
-                          bgcolor: 'primary.main'
-                        })
+                        backgroundColor: 'text.disabled',
+                        // transition: (theme) =>
+                        //   theme.transitions.create('transform'),
+                        // ...(isActiveSub && {
+                        //   transform: 'scale(2)',
+                        //   backgroundColor: 'primary.main',
+                        // }),
                       }}
                     />
                   </ListItemIconStyle>
@@ -137,9 +160,9 @@ function NavItem({ item, active }) {
     <ListItemStyle
       component={RouterLink}
       to={path}
-      sx={{
-        ...(isActiveRoot && activeRootStyle)
-      }}
+      // sx={{
+      //   ...(isActiveRoot && activeRootStyle),
+      // }}
     >
       <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
       <ListItemText disableTypography primary={title} />
@@ -149,34 +172,38 @@ function NavItem({ item, active }) {
 }
 
 NavSection.propTypes = {
-  navConfig: PropTypes.array
+  navConfig: PropTypes.array,
 };
 
-export default function NavSection({ navConfig, ...other })
-{
-    const {pathname} = useLocation();
-    const {currentUser} = useAuth();
-    const match = (path) => (path ? !!matchPath({path, end: false}, pathname) : false);
+export default function NavSection({ navConfig, ...other }) {
+  const { pathname } = useLocation();
+  const { currentUser } = useAuth();
+  const match = (path) =>
+    path ? !!matchPath({ path, end: false }, pathname) : false;
 
-    const setUserNavItemByRole = () =>
-    {
-        if(currentUser.userDetails.role === "ADMIN") {
-            return navConfig;
-        }
-        if(currentUser.userDetails.role === "CUSTOMER") {
-          return navConfig.filter(item =>item.admin === false)
-        }
-    };
+  const setUserNavItemByRole = () => {
+    if (currentUser.userDetails.role === 'ADMIN') {
+      return navConfig;
+    }
+    if (currentUser.userDetails.role === 'CUSTOMER') {
+      return navConfig.filter((item) => item.admin === false);
+    }
+  };
 
-    const navLink = setUserNavItemByRole();
+  const navLink = setUserNavItemByRole();
 
-    return (
-        <Box {...other}>
-            <List disablePadding>
-                {navLink.map((item) => (
-                    <NavItem key={item.title} item={item} active={match}/>
-                ))}
-            </List>
-        </Box>
-    );
+  return (
+          <Box sx={{display: 'flex'}}>
+            {navLink.map((item) => (
+              <NavItem
+                key={item.title}
+                item={item}
+                active={match}
+              >
+                {item.title}
+              </NavItem>
+            ))}
+          </Box>
+
+  );
 }

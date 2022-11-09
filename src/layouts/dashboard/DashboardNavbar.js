@@ -9,6 +9,8 @@ import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
+import NavSection from "../../components/NavSection";
+import sidebarConfig from "./SidebarConfig";
 
 // ----------------------------------------------------------------------
 
@@ -44,21 +46,22 @@ export default function DashboardNavbar({ onOpenSidebar }) {
   return (
     <RootStyle>
       <ToolbarStyle>
-        <IconButton
-          onClick={onOpenSidebar}
-          sx={{ mr: 1, color: 'text.primary', display: { lg: 'none' } }}
-        >
-          <Iconify icon="eva:menu-2-fill" />
-        </IconButton>
+        {/*<IconButton*/}
+        {/*  onClick={onOpenSidebar}*/}
+        {/*  sx={{ mr: 1, color: 'text.primary', display: { lg: 'none' } }}>*/}
+        {/*  <Iconify icon="eva:menu-2-fill" />*/}
+        {/*</IconButton>*/}
+        {/*<Searchbar />*/}
+        {/*<Box sx={{ flexGrow: 1 }} />*/}
 
-        <Searchbar />
-        <Box sx={{ flexGrow: 1 }} />
+        {/*<Stack direction="row" alignItems="center"  spacing={{ xs: 0.5, sm: 1.5 }}>*/}
 
-        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+          <NavSection navConfig={sidebarConfig} />
           <LanguagePopover />
           <NotificationsPopover />
           <AccountPopover />
-        </Stack>
+
+        {/*</Stack>*/}
       </ToolbarStyle>
     </RootStyle>
   );

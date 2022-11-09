@@ -68,7 +68,7 @@ export default function DashboardLayout(props)
     return (
         <RootStyle>
             <DashboardNavbar onOpenSidebar={() => setOpen(true)}/>
-            <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)}/>
+            {/*<DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)}/>*/}
             <MainStyle>
                 {props.admin === true && currentUser.userDetails.role !== "ADMIN" ? navigate('/404') : "" }
 
