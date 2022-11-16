@@ -52,7 +52,6 @@ export const getCollection = async(collectionName) =>
             });
         }
     });
-    console.log(documents);
     return documents;
 };
 
@@ -111,6 +110,7 @@ export const saveProducts = async(prodact) =>
 };
 
 
+
 export const getTopProducts = async () =>{
 
     const citiesRef = collection(db, "products");
@@ -145,7 +145,7 @@ export const getProductsPagionation =  async  () =>{
        limit(10));
    const documentSnapshots = await getDocs(first)
    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
-console.log(lastVisible);
+
     const next = query(collection(db, "products"),
         orderBy("UDX.APPAREA"),
         startAfter(lastVisible),
@@ -154,7 +154,6 @@ console.log(lastVisible);
     let result = [];
     querySnapshot.forEach((doc) =>
     {
-        debugger;
         let row = doc.data()
         row.id = doc.id;
         result.push(row);
@@ -163,7 +162,6 @@ console.log(lastVisible);
 
 }
 export const fetchMore = async (lastDoc) => {
-    debugger;
     const docRef = doc(db, "products", lastDoc.id);
     const lastDocRef  = await getDoc(docRef)
 

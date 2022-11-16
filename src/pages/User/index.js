@@ -188,6 +188,7 @@ export default function User()
                         New User
                     </Button>
                 </Stack>
+
                 <Modal
                     isOpen={openModal}
                     setOpenModal={setOpenModal}

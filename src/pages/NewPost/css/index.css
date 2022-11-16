@@ -1,0 +1,10 @@
+.ql-toolbar.ql-snow {
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    padding: 8px;
+}
+
+.ql-container.ql-snow {
+    border: none;
+}

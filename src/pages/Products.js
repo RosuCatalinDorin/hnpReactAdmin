@@ -57,7 +57,6 @@ export default function EcommerceShop()
 
     const getProductsUsingPagination =async (lastDoc)=>{
         let data
-        debugger
         if(lastDoc === null){
              data = await getProductsPagionation();
         } else {

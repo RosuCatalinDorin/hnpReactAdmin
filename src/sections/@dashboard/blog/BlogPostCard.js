@@ -136,7 +136,7 @@ export default function BlogPostCard({ post, index }) {
             variant="caption"
             sx={{ color: 'text.disabled', display: 'block' }}
           >
-            {fDate(createdAt)}
+            {'de vazut'}
           </Typography>
 
           <TitleStyle
