@@ -23,16 +23,18 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
   backdropFilter: 'blur(6px)',
   WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
   backgroundColor: alpha(theme.palette.background.default, 0.72),
-  [theme.breakpoints.up('lg')]: {
-    width: `calc(100% - ${DRAWER_WIDTH + 1}px)`
-  }
+  // [theme.breakpoints.up('lg')]: {
+  //   width: `calc(100% - ${DRAWER_WIDTH + 1}px)`
+  // }
 }));
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'space-around',
   minHeight: APPBAR_MOBILE,
   [theme.breakpoints.up('lg')]: {
     minHeight: APPBAR_DESKTOP,
-    padding: theme.spacing(0, 5)
+    // padding: theme.spacing(0, 5)
   }
 }));
 
@@ -57,9 +59,11 @@ export default function DashboardNavbar({ onOpenSidebar }) {
         {/*<Stack direction="row" alignItems="center"  spacing={{ xs: 0.5, sm: 1.5 }}>*/}
 
           <NavSection navConfig={sidebarConfig} />
+          <Box>
           <LanguagePopover />
           <NotificationsPopover />
           <AccountPopover />
+          </Box>
 
         {/*</Stack>*/}
       </ToolbarStyle>

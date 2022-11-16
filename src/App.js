@@ -24,6 +24,7 @@ import DashboardLayout from "./layouts/dashboard";
 import {ProtectedRoute} from "./PrivateRoute";
 import UploadFile from './pages/UploadFile';
 import ProductDetails from './pages/ProductDetails';
+import Acasa from "./pages/Home";
 export default function App()
 {
 
@@ -49,6 +50,8 @@ export default function App()
                                    element={<DashboardLayout admin={true}><Blog/></DashboardLayout>}/>
                             <Route path="dashboard/uploadFile"
                                    element={<DashboardLayout admin={true}><UploadFile/></DashboardLayout>}/>
+                            <Route path="dashboard/home"
+                                   element={<DashboardLayout admin={true}><Acasa/></DashboardLayout>}/>
                         </Route>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                             <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>

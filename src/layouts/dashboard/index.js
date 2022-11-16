@@ -76,6 +76,7 @@ export default function DashboardLayout(props)
                     currentUser = {currentUser}
                 />}
             </MainStyle>
+
         </RootStyle>
     );
 }
