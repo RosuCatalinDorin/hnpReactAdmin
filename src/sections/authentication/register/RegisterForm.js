@@ -29,7 +29,7 @@ export default function RegisterForm()
             .required('Numele este obligatoriu'),
         lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Prenumele este obligatoriu'),
         email: Yup.string().email('Email must be a valid email address').required('Email este obligatoiru'),
-        department: Yup.string().required('Departament-ul este obligatoiru').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
+        department: Yp.string().required('Departament-ul este obligatoiru').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
         phone: Yup.string().required('Telefonul este obligatoiru').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
         position: Yup.string().required('Functia este obligatorie').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
         password: Yup.string().required('Password este obligatorie').min(6, 'Parola trebuie sa fie de minim 6 caracatere.'),
