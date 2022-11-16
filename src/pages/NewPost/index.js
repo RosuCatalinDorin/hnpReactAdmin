@@ -4,7 +4,7 @@ import {Card, Container, Grid, Stack, Typography} from "@mui/material";
 import Form from './form';
 import "./css/index.css";
 import {saveBlog} from "../../FireBase/BlogAction";
-import Notiflix from "notiflix";
+import Notiflix, {Confirm} from "notiflix";
 import {useNavigate} from "react-router-dom";
 import {faker} from "@faker-js/faker";
 import {useAuth} from "../../Auth";
@@ -30,13 +30,32 @@ export default function NewPost() {
         }
     }
 
-    const onSubmit = async (data) => {
+    async function saveData(data) {
         const blogDocument = createData(data);
+
         Notiflix.Loading.init();
+
         await saveBlog(blogDocument);
+
         Notiflix.Notify.success("Postarea a fost aduagata cu succes")
         Notiflix.Loading.remove()
         navigate('/dashboard/blog')
+    }
+
+    const onSubmit = async (data) => {
+        Confirm.show(
+            'Confirmati',
+            'Sunteti de acrod sa savati postarea?',
+            'Da',
+            'Nu',
+            () => {
+                saveData(data);
+            },
+            () => {
+                return false
+            },
+        );
+
     }
 
     return (

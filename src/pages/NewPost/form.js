@@ -34,7 +34,7 @@ export default function  NewPost(props) {
     return (
         <FormikProvider value={formik}>
             <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                <Grid spacing={3} style={{marginTop:10}}>
+                <Grid  style={{marginTop:10}}>
                     <TextField
                         fullWidth
                         label="Titlu noutate"

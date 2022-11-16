@@ -6,12 +6,13 @@ import { MenuItem, TextField } from '@mui/material';
 
 BlogPostsSort.propTypes = {
   options: PropTypes.array,
-  onSort: PropTypes.func
+  onSort: PropTypes.func,
+  value:PropTypes.string
 };
 
-export default function BlogPostsSort({ options, onSort }) {
+export default function BlogPostsSort({ options, onSort,value }) {
   return (
-    <TextField select size="small" value="latest" onChange={onSort}>
+    <TextField select size="small" value={value} onChange={onSort}>
       {options.map((option) => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}
