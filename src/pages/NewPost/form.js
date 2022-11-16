@@ -6,7 +6,7 @@ import React from "react";
 import Iconify from "../../components/Iconify";
 import MyUpload from "../../components/Upload/Upload";
 
-export default function NewPost(props) {
+export default function  NewPost(props) {
 
     const {onSubmit} =props
     const validation = Yup.object().shape({
@@ -34,7 +34,7 @@ export default function NewPost(props) {
     return (
         <FormikProvider value={formik}>
             <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                <Grid  style={{marginTop:10}}>
+                <Grid spacing={3} style={{marginTop:10}}>
                     <TextField
                         fullWidth
                         label="Titlu noutate"
@@ -43,14 +43,15 @@ export default function NewPost(props) {
                         helperText={touched.title && errors.title}
                     />
                     <MyUpload
+                        label='Poza prezentare'
                         error={Boolean(touched.cardImage && errors.cardImage)}
                         errorMessage = {touched.cardImage && errors.cardImage}
                         onChange = {(data)=>{
                             formik.setFieldValue("cardImage",data);
                         }}
                     />
-                    <Stack spacing={3}>
-                        <Stack direction={{xs: 'column', sm: 'row'}} spacing={2}>
+                    <Stack >
+                        <Stack direction={{xs: 'column', sm: 'row'}}>
                             <RichText
                                 name={"content"}
                                 style={{border: "none"}}
