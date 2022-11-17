@@ -9,6 +9,7 @@ import { fShortenNumber } from '../../../utils/formatNumber';
 //
 import SvgIconStyle from '../../../components/SvgIconStyle';
 import Iconify from '../../../components/Iconify';
+import {parseDate} from "../../../utils/utils";
 
 // ----------------------------------------------------------------------
 
@@ -136,7 +137,7 @@ export default function BlogPostCard({ post, index }) {
             variant="caption"
             sx={{ color: 'text.disabled', display: 'block' }}
           >
-            {fDate(createdAt)}
+            {parseDate(createdAt)}
           </Typography>
 
           <TitleStyle
