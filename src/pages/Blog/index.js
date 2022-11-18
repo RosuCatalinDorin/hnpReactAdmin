@@ -1,13 +1,13 @@
 import {useNavigate} from 'react-router-dom';
 // material
-import {Grid, Button, Container, Stack, Typography} from '@mui/material';
+import {Button, Container, Grid, Stack, Typography} from '@mui/material';
 // components
-import Page from '../components/Page';
-import Iconify from '../components/Iconify';
-import {BlogPostCard, BlogPostsSort, BlogPostsSearch} from '../sections/@dashboard/blog';
+import Page from '../../components/Page';
+import Iconify from '../../components/Iconify';
+import {BlogPostCard, BlogPostsSearch, BlogPostsSort} from '../../sections/@dashboard/blog';
 //
 import {useEffect, useState} from "react";
-import {getBlogs} from "../FireBase/BlogAction";
+import {getBlogs} from "../../FireBase/BlogAction";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ const SORT_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function Blog() {
+export default function Index() {
     const [POSTS, setPosts] = useState([]);
     const [order, setOrder] = useState('desc')
     const navigate = useNavigate();
@@ -26,17 +26,19 @@ export default function Blog() {
     useEffect(async () => {
         await getBlogData();
     }, [])
+
     async function getBlogData() {
         const data = await getBlogs(order);
         setPosts(data);
 
     }
+
     useEffect(async () => {
         await getBlogData();
     }, [order])
 
     return (
-        <Page title="Dashboard: Blog | Minimal-UI">
+        <Page title="Noutati | HNP">
             <Container>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>
@@ -54,8 +56,8 @@ export default function Blog() {
                 </Stack>
 
                 <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-                    <BlogPostsSearch posts={POSTS} />
-                    <BlogPostsSort options={SORT_OPTIONS} value={order} onSort={(newSort)=>{
+                    <BlogPostsSearch posts={POSTS}/>
+                    <BlogPostsSort options={SORT_OPTIONS} value={order} onSort={(newSort) => {
                         setOrder(newSort.target.value)
                     }}/>
                 </Stack>

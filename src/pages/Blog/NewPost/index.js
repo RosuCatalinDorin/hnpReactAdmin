@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import Page from '../../components/Page';
+import React from "react";
+import Page from '../../../components/Page';
 import {Card, Container, Grid, Stack, Typography} from "@mui/material";
 import Form from './form';
 import "./css/index.css";
-import {saveBlog} from "../../FireBase/BlogAction";
+import {saveBlog} from "../../../FireBase/BlogAction";
 import Notiflix, {Confirm} from "notiflix";
 import {useNavigate} from "react-router-dom";
 import {faker} from "@faker-js/faker";
-import {useAuth} from "../../Auth";
+import {useAuth} from "../../../Auth";
 
 export default function NewPost() {
 
@@ -15,9 +15,11 @@ export default function NewPost() {
     const {currentUser} = useAuth();
 
     function createData(data) {
+        debugger
         return {
             cover: data.cardImage,
             title: data.title,
+            content: data.content,
             createdAt: new Date(),
             view: 0,
             comment: 0,
