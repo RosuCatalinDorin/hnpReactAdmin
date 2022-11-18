@@ -110,7 +110,6 @@ export const saveProducts = async(prodact) =>
 };
 
 
-
 export const getTopProducts = async () =>{
 
     const citiesRef = collection(db, "products");

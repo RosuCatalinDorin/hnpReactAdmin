@@ -47,7 +47,7 @@ export default function ShopProductCard({ product,id }) {
             {status}
           </Label>
         )}
-        <ProductImgStyle alt={DESCRIPTION_SHORT} src={"https://cdn.walter-tools.com/files/sitecollectionimages/wic/product"+MIMESOURCEDETAILFILE.toLowerCase()} />
+        <ProductImgStyle sx={{height:'200px'}} alt={DESCRIPTION_SHORT} src={"https://cdn.walter-tools.com/files/sitecollectionimages/wic/product"+MIMESOURCEDETAILFILE.toLowerCase()} />
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>

@@ -1,4 +1,4 @@
-import {Link as RouterLink, useNavigate} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Grid, Button, Container, Stack, Typography } from '@mui/material';
 // components
@@ -6,9 +6,7 @@ import Page from '../components/Page';
 import Iconify from '../components/Iconify';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
 //
-import POST from '../_mocks_/blog';
-import {useEffect, useState} from "react";
-import {getCollection} from "../FireBase/actions";
+import POSTS from '../_mocks_/blog';
 
 // ----------------------------------------------------------------------
 
@@ -21,24 +19,17 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function Blog() {
-  const [POSTS,setPosts] = useState([]);
-  useEffect(async ()=>{
-   const data = await getCollection('blog');
-   setPosts(data);
-  },[])
-  const navigate = useNavigate();
   return (
     <Page title="Dashboard: Blog | Minimal-UI">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Noutati HNP
+            Blog
           </Typography>
           <Button
             variant="contained"
-            onClick={()=>{
-              navigate('/dashboard/addNews')
-              }}
+            component={RouterLink}
+            to="#"
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
             New Post
