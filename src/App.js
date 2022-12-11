@@ -26,6 +26,7 @@ import UploadFile from './pages/UploadFile';
 import NewPost from './pages/Blog/NewPost';
 import ProductDetails from './pages/ProductDetails';
 import BlogDetails from './pages/Blog/BlogDetails'
+import Homepage from "./pages/Homepage";
 
 export default function App() {
 
@@ -55,6 +56,8 @@ export default function App() {
                                    element={<DashboardLayout admin={true}><NewPost/></DashboardLayout>}/>
                             <Route path="dashboard/blog/item/:id"
                                    element={<DashboardLayout admin={false}><BlogDetails/> </DashboardLayout>}/>
+                            <Route path="dashboard/homepage"
+                                   element={<DashboardLayout admin={true}><Homepage/></DashboardLayout>}/>
                         </Route>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                         <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>
