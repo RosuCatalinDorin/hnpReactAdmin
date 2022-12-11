@@ -1,14 +1,13 @@
-import {getProductsDetails} from "../../../apiCalls/api/Products";
 import {useState} from "react";
+import {getDocumentById} from "../../../FireBase/actions";
 
-export default function useUserDetails()
-{
+export default function useUserDetails() {
     const [product, setDetails] = useState();
 
-    const setProductDetails =  async (id) =>
-    {
-        const details = await getProductsDetails(id)
-        setDetails(details.data._source);
+    const setProductDetails = async (id) => {
+        const details = await getDocumentById('products', id)
+        debugger
+        setDetails(details);
     };
 
     return [product, setProductDetails];

@@ -20,12 +20,13 @@ import Index from './pages/Blog';
 import User from './pages/User';
 import Company from './pages/Company';
 import NotFound from './pages/Page404';
-import DashboardLayout from "./layouts/dashboard";
+import DashboardLayoutAuth from "./layouts/dashboard/DashboardAuth";
 import {ProtectedRoute} from "./PrivateRoute";
 import UploadFile from './pages/UploadFile';
 import NewPost from './pages/Blog/NewPost';
 import ProductDetails from './pages/ProductDetails';
 import BlogDetails from './pages/Blog/BlogDetails'
+import DashboardLayoutFree from "./layouts/dashboard/DashboardFree";
 import Homepage from "./pages/Homepage";
 
 export default function App() {
@@ -39,30 +40,32 @@ export default function App() {
                     <BaseOptionChartStyle/>
                     <Routes>
                         <Route element={<ProtectedRoute/>}>
-                            <Route index element={<DashboardLayout><DashboardApp/></DashboardLayout>}/>
+                            <Route index element={<DashboardLayoutAuth><DashboardApp/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/app"
-                                   element={<DashboardLayout><DashboardApp/></DashboardLayout>}/>
+                                   element={<DashboardLayoutAuth><DashboardApp/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/user"
-                                   element={<DashboardLayout admin={true}><User/></DashboardLayout>}/>
+                                   element={<DashboardLayoutAuth admin={true}><User/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/Company"
-                                   element={<DashboardLayout admin={true}><Company/></DashboardLayout>}/>
-                            <Route path="dashboard/products"
-                                   element={<DashboardLayout admin={true}><Products/></DashboardLayout>}/>
-                            <Route path="dashboard/blog"
-                                   element={<DashboardLayout admin={false}><Index/></DashboardLayout>}/>
+                                   element={<DashboardLayoutAuth admin={true}><Company/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/uploadFile"
-                                   element={<DashboardLayout admin={true}><UploadFile/></DashboardLayout>}/>
+                                   element={<DashboardLayoutAuth admin={true}><UploadFile/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/addNews"
-                                   element={<DashboardLayout admin={true}><NewPost/></DashboardLayout>}/>
-                            <Route path="dashboard/blog/item/:id"
-                                   element={<DashboardLayout admin={false}><BlogDetails/> </DashboardLayout>}/>
-                            <Route path="dashboard/homepage"
-                                   element={<DashboardLayout admin={true}><Homepage/></DashboardLayout>}/>
+                                   element={<DashboardLayoutAuth admin={true}><NewPost/></DashboardLayoutAuth>}/>
                         </Route>
+                        <Route path="dashboard/products"
+                               element={<DashboardLayoutFree admin={true}><Products/></DashboardLayoutFree>}/>
+                        <Route path="dashboard/homepage"
+                               element={<DashboardLayoutFree admin={false}><Homepage/> </DashboardLayoutFree>}/>
+                        <Route path="dashboard/blog"
+                               element={<DashboardLayoutFree admin={false}><Index/></DashboardLayoutFree>}/>
+                        <Route path="dashboard/blog/item/:id"
+                               element={<DashboardLayoutFree admin={false}><BlogDetails/> </DashboardLayoutFree>}/>
+                        <Route path="detaliiProdus/:id"
+                               element={<DashboardLayoutFree admin={false}>
+                                   <ProductDetails/>
+                               </DashboardLayoutFree>}/>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                         <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>
-                        <Route path="detaliiProdus/:id"
-                               element={<DashboardLayout admin={false}><ProductDetails/></DashboardLayout>}/>
                         <Route path="404" element={<LogoOnlyLayout><NotFound/></LogoOnlyLayout>}/>
                     </Routes>
                 </AuthProvider>

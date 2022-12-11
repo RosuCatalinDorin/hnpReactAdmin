@@ -1,24 +1,21 @@
 import * as Yup from 'yup';
 import {useState} from 'react';
-import {useFormik, Form, FormikProvider} from 'formik';
+import {Form, FormikProvider, useFormik} from 'formik';
 import {useNavigate} from 'react-router-dom';
 // material
-import {Stack, TextField, IconButton, InputAdornment} from '@mui/material';
+import {IconButton, InputAdornment, Stack, TextField} from '@mui/material';
 import {LoadingButton} from '@mui/lab';
 // component
 import Iconify from '../../../components/Iconify';
 //functions
-import {registerUser} from "../../../FireBase/actions";
-import Notiflix from "notiflix";
+import {registerUser, saveUserDetails} from "../../../FireBase/actions";
 import {printErrorMessage} from "../../../apiCalls/apiMessage";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setUser} from "../../../store/auth/authAction";
-import {saveUserDetails} from "../../../FireBase/actions";
-import {sysDate} from "../../../utils/utils";
+
 // ----------------------------------------------------------------------
 
-export default function RegisterForm()
-{
+export default function RegisterForm() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
@@ -29,7 +26,7 @@ export default function RegisterForm()
             .required('Numele este obligatoriu'),
         lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Prenumele este obligatoriu'),
         email: Yup.string().email('Email must be a valid email address').required('Email este obligatoiru'),
-        department: Yp.string().required('Departament-ul este obligatoiru').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
+        department: Yup.string().required('Departament-ul este obligatoiru').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
         phone: Yup.string().required('Telefonul este obligatoiru').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
         position: Yup.string().required('Functia este obligatorie').min(6, 'Trebuie sa fie de minim 6 caracatere.'),
         password: Yup.string().required('Password este obligatorie').min(6, 'Parola trebuie sa fie de minim 6 caracatere.'),
@@ -45,10 +42,8 @@ export default function RegisterForm()
             password: '',
         },
         validationSchema: RegisterSchema,
-        onSubmit: (formData) =>
-        {
-            registerUser(formData.email, formData.password).then((data) =>
-            {
+        onSubmit: (formData) => {
+            registerUser(formData.email, formData.password).then((data) => {
 
                 dispatch(setUser(data.user));
                 const userDetails = {
@@ -67,8 +62,7 @@ export default function RegisterForm()
                     status: false,
                 };
                 saveUserDetails(data.user.uid, userDetails).then(r => navigate('/'));
-            }).catch((error) =>
-            {
+            }).catch((error) => {
                 printErrorMessage(error);
             });
         },

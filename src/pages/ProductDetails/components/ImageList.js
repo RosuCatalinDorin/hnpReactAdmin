@@ -2,71 +2,71 @@ import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
-export default function StandardImageList(props)
-{
+export default function StandardImageList(props) {
 
     const itemData = [
         {
             img: props.data.MIMESOURCEAPPLICATIONICON1,
-            title: 'Coffee',
+            title: props.data.MIMESOURCEAPPLICATIONICON1,
         },
         {
             img: props.data.MIMESOURCEDETAILFILE,
-            title: 'Hats',
+            title: props.data.MIMESOURCEDETAILFILE,
         },
         {
             img: props.data.MIME_SOURCE_GROUP_1,
-            title: 'Honey',
+            title: props.data.MIME_SOURCE_GROUP_1,
         },
         {
             img: props.data.MIME_SOURCE_GROUP_4,
-            title: 'Basketball',
+            title: props.data.MIME_SOURCE_GROUP_4,
         },
         {
             img: props.data.MIME_SOURCE_GROUP_3,
-            title: 'Fern',
+            title: props.data.MIME_SOURCE_GROUP_3,
         },
         {
             img: props.data.MIME_SOURCE_GROUP_2,
-            title: 'Mushrooms',
+            title: props.data.MIME_SOURCE_GROUP_2,
         },
         {
             img: props.data.MIME_SOURCE_GROUP_5,
-            title: 'Tomato basil',
+            title: props.data.MIME_SOURCE_GROUP_5,
         },
         {
             img: props.data.MIME_SOURCE_GROUP_6,
-            title: 'Sea star',
+            title: props.data.MIME_SOURCE_GROUP_6,
         },
         {
             img: props.data.MIME_SOURCE_GROUP_7,
-            title: 'Bike',
+            title: props.data.MIME_SOURCE_GROUP_7,
         },
         {
             img: props.data.MIMESOURCEPROPERTYICON2,
-            title: 'Bike',
+            title: props.data.MIMESOURCEPROPERTYICON2,
         },
         {
             img: props.data.MIMESOURCEPROPERTYICON1,
-            title: 'Bike',
+            title: props.data.MIMESOURCEPROPERTYICON1,
         },
         {
             img: props.data.MIMESOURCEPROPERTYICON3,
-            title: 'Bike',
+            title: props.data.MIMESOURCEPROPERTYICON3,
         },
     ];
 
-    const createImage = (item,key) =>
-    {
-        if(item.img) {
+    const createImage = (item, key) => {
+        if (item.img) {
             return (
                 <ImageListItem key={key}>
                     <img
-                        src={`/static/wallterCatalog${item.img}`}
-                        srcSet={`/static/wallterCatalog${item.img}`}
+                        src={`https://www.industrialexim.ro/image/cache/catalog/import2/images/${item.img}`}
+                        srcSet={`https://www.industrialexim.ro/image/cache/catalog/import2/images/${item.img}`}
                         alt={item.title}
                         loading="lazy"
-                        onClick={()=>{console.log(`/static/wallterCatalog${item.img}`)}}
+                        onClick={() => {
+                            console.log(`https://www.industrialexim.ro/image/cache/catalog/import2/images/${item.img}`)
+                        }}
                     />
                 </ImageListItem>
             );
@@ -77,9 +77,9 @@ export default function StandardImageList(props)
     return (
         <>
             <ImageList sx={{width: 500, height: 450}} cols={3} rowHeight={164}>
-                {itemData.map((item,key) =>
+                {itemData.map((item, key) =>
                     (<>
-                        {createImage(item,key)}
+                        {createImage(item, key)}
                     </>),
                 )}
             </ImageList>
