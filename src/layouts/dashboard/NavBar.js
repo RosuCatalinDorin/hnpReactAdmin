@@ -78,7 +78,7 @@ export default function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="absolute">
+        <AppBar position="fixed" color='transparent' sx={{boxShadow: 'none', backdropFilter:"blur(20px)"}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                         <Box>
@@ -137,8 +137,8 @@ export default function ResponsiveAppBar() {
                             ))}
                         </Box>
                         <Box>
-                            <LanguagePopover/>
-                            <NotificationsPopover/>
+                            {/*<LanguagePopover/>*/}
+                            {/*<NotificationsPopover/>*/}
                             <AccountPopover/>
                         </Box>
                 </Toolbar>
