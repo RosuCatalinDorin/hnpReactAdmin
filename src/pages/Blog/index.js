@@ -2,13 +2,12 @@ import {useNavigate} from 'react-router-dom';
 // material
 import {Grid, Button, Container, Stack, Typography} from '@mui/material';
 // components
-import Page from '../components/Page';
-import Iconify from '../components/Iconify';
-import {BlogPostCard, BlogPostsSort, BlogPostsSearch} from '../sections/@dashboard/blog';
+import Page from "../../components/Page";
+import Iconify from '../../components/Iconify';
+import {BlogPostCard, BlogPostsSort, BlogPostsSearch} from '../../sections/@dashboard/blog';
 //
 import {useEffect, useState} from "react";
-import {getBlogs} from "../FireBase/BlogAction";
-
+import {getBlogs} from "../../FireBase/BlogAction";
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
