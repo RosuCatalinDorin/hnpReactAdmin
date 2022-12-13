@@ -1,6 +1,4 @@
-export const createElkFilters = (data) =>
-{
-    debugger;
+export const createElkFilters = (data) => {
     let body = {
         "index": "hnp-shop",
         "body": {
@@ -13,7 +11,7 @@ export const createElkFilters = (data) =>
         "from": 0,
         "size": 100,
     };
-    if(data !== null) {
+    if (data !== null) {
         const query = {
             "query": {
                 "bool": {

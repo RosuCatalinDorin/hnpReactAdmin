@@ -1,7 +1,8 @@
 // material
 import {styled} from '@mui/material/styles';
 // ----------------------------------------------------------------------
-import NavBar from "./NavBar";
+import NavBar from "./NavBar"
+
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;

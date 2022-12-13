@@ -10,8 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {NavLink as RouterLink} from "react-router-dom";
-import LanguagePopover from "./LanguagePopover";
-import NotificationsPopover from "./NotificationsPopover";
+import AccountPopover from "./AccountPopover";
 import Logo from "../../components/Logo";
 
 
@@ -46,6 +45,21 @@ const routes = [
         path: '/dashboard/blog',
         admin: true
     },
+    /*  {
+        title: 'login',
+        path: '/login',
+        icon: getIcon('eva:lock-fill')
+      },
+      {
+        title: 'register',
+        path: '/register',
+        icon: getIcon('eva:person-add-fill')
+      },
+      {
+        title: 'Not found',
+        path: '/404',
+        icon: getIcon('eva:alert-triangle-fill')
+      }*/
 ];
 
 
@@ -62,7 +76,7 @@ export default function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="absolute">
+        <AppBar position="fixed" color='transparent' sx={{boxShadow: 'none', backdropFilter: "blur(20px)"}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box>
@@ -121,13 +135,12 @@ export default function ResponsiveAppBar() {
                         ))}
                     </Box>
                     <Box>
-                        <LanguagePopover/>
-                        <NotificationsPopover/>
-                        {/* <AccountPopover/>*/}
+                        {/*<LanguagePopover/>*/}
+                        {/*<NotificationsPopover/>*/}
+                        <AccountPopover/>
                     </Box>
                 </Toolbar>
             </Container>
         </AppBar>
     );
 }
-
