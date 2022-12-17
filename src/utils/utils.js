@@ -1,10 +1,10 @@
-export const sysDate =  () => {
+export const sysDate = () => {
     let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    return  date+' '+time;
+    return date + ' ' + time;
 }
-export const parseDate = (value) =>{
+export const parseDate = (value) => {
     const fireBaseTime = new Date(
         value.seconds * 1000 + value.nanoseconds / 1000000,
     );
@@ -12,3 +12,5 @@ export const parseDate = (value) =>{
     const atTime = fireBaseTime.toLocaleTimeString();
     return date + " " + atTime
 }
+
+export const BASE_URL_IMAGES = 'https://dev.hnp.ro:8080/images/'

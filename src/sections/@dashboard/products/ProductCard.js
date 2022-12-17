@@ -7,6 +7,7 @@ import {styled} from '@mui/material/styles';
 import {fCurrency} from '../../../utils/formatNumber';
 //
 import Label from '../../../components/Label';
+import {BASE_URL_IMAGES} from "../../../utils/utils";
 
 // ----------------------------------------------------------------------
 
@@ -24,8 +25,14 @@ ShopProductCard.propTypes = {
     product: PropTypes.object
 };
 
+function getCardImage(product) {
+    let imagePath = product._source.MIME_INFO.MIME[0].MIME_SOURCE.split('/')
+    return imagePath[imagePath.length - 1];
+}
+
 export default function ShopProductCard({product, id}) {
-    const {DESCRIPTION_SHORT = "", MIMESOURCEDETAILFILE = ""} = product;
+    const DESCRIPTION_SHORT = product._source.ARTICLE_DETAILS.DESCRIPTION_SHORT;
+    const imagePath = getCardImage(product);
     const status = 'sale'
     const priceSale = 22;
     return (
@@ -46,8 +53,13 @@ export default function ShopProductCard({product, id}) {
                         {status}
                     </Label>
                 )}
-                <ProductImgStyle sx={{height: '200px'}} alt={DESCRIPTION_SHORT}
-                                 src={"https://cdn.walter-tools.com/files/sitecollectionimages/wic/product" + MIMESOURCEDETAILFILE.toLowerCase()}/>
+                <ProductImgStyle style={{
+                    width: '100%',
+                    aspectRatio: '3/2',
+                    objectFit: 'contain',
+                }} alt={DESCRIPTION_SHORT}
+                                 src={BASE_URL_IMAGES + imagePath}/>
+                {/*//  src={process.env.PUBLIC_URL + "/static/hnp-catalog" + imagePath}/>*/}
             </Box>
 
             <Stack spacing={2} sx={{p: 3}}>

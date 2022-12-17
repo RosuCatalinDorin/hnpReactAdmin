@@ -3,14 +3,15 @@ import {createElkFilters} from './filters';
 import Notiflix from 'notiflix';
 
 const PATH = {
-    GET_ELK_PRODUCTS: 'hnp/elk/products',
+    GET_ELK_PRODUCTS: 'hnp/elk/data',
     SAVE_PRODUCT: 'save/telegram/channels',
     GET_ELK_PRODUCT_DETAILS: 'hnp/elk/getDocumentById/',
 };
 
-export const getHnpElkProducts = async (query = null) => {
+export const getHnpElkProducts = async (query = null, index = 'hnp-store-article', from, size) => {
     Notiflix.Loading.init();
-    const data = createElkFilters(query);
+    const data = createElkFilters(query, index, from, size);
+    console.log(data);
     return request({
         method: "POST",
         url: PATH.GET_ELK_PRODUCTS,

@@ -10,7 +10,7 @@
 .idea
 # production
 /build
-
+/public/static/hnp-catalog
 # misc
 .DS_Store
 /.env
