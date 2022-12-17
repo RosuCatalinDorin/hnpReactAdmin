@@ -1,13 +1,14 @@
 import {useFormik} from 'formik';
 import {useEffect, useState} from 'react';
 // material
-import {Container, Stack, Typography} from '@mui/material';
+import {Container, Stack} from '@mui/material';
 // components
 import Page from '../components/Page';
-import {ProductCartWidget, ProductFilterSidebar, ProductList, ProductSort,} from '../sections/@dashboard/products';
+import {ProductCartWidget, ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
 // firebaseActions
 import {getHnpElkProducts} from "../apiCalls/api/Products"
 import Pagination from "../components/Pagination";
+import SearchInput from "../components/SearchInput";
 
 const INDEX_PRODUCTS = 'hnp-store-article';
 const ROWS_PER_PAGE = 12;
@@ -34,6 +35,7 @@ export default function EcommerceShop() {
     const [page, setPage] = useState(1);
     const [from, setFromProduct] = useState(0);
     const [totalRows, setTotalRows] = useState(0);
+    const [searchText, setSearchText] = useState(null);
     // and page state
 
     useEffect(async () => {
@@ -43,12 +45,12 @@ export default function EcommerceShop() {
 
     useEffect(async () => {
         if (filters.UDX_APPAREA.length > 0 || !filters.FISRT_RELEAD) {
-            await getProducts(filters, INDEX_PRODUCTS, from)
+            await getProducts(filters, INDEX_PRODUCTS, from, searchText)
         } else {
-            await getProducts(null, INDEX_PRODUCTS, from)
+            await getProducts(null, INDEX_PRODUCTS, from, searchText)
         }
 
-    }, [filters, page]);
+    }, [filters, page, searchText]);
     const handleOpenFilter = () => {
 
         setOpenFilter(true);
@@ -59,12 +61,10 @@ export default function EcommerceShop() {
     };
     const handleResetFilter = () => {
         handleSubmit();
-
-
         resetForm();
     };
-    const getProducts = async (query, index, fromTo) => {
-        const data = await getHnpElkProducts(query, index, fromTo, ROWS_PER_PAGE);
+    const getProducts = async (query, index, fromTo, search) => {
+        const data = await getHnpElkProducts(query, index, fromTo, ROWS_PER_PAGE, search);
         setProducts(data.data.hits.hits);
         setTotalRows(data.data.hits.total.value);
 
@@ -80,21 +80,22 @@ export default function EcommerceShop() {
         }
         setFilters(currentFilters);
     };
+
     return (
         <Page title="HNP: Products">
             <Container>
-                <Typography variant="h4" sx={{mb: 5}}>
-                    Products
-                </Typography>
-
                 <Stack
-                    direction="row"
-                    flexWrap="wrap-reverse"
-                    alignItems="center"
-                    justifyContent="flex-end"
-                    sx={{mb: 5}}
+                    display='flex'
+                    direction='row'
+                    width={'100%'}
                 >
-                    <Stack direction="row" spacing={1} flexShrink={0} sx={{my: 1}}>
+                    <Stack direction="row" spacing={1} flexShrink={0} sx={{my: 2}}>
+                        <SearchInput
+                            onSearch={(value) => {
+                                setSearchText(value)
+                                setPage(1);
+                            }}
+                        />
                         <ProductFilterSidebar
                             formik={formik}
                             isOpenFilter={openFilter}
@@ -103,10 +104,9 @@ export default function EcommerceShop() {
                             onCloseFilter={handleCloseFilter}
                             setFilters={setAllFilters}
                         />
-                        <ProductSort/>
                     </Stack>
-                </Stack>
 
+                </Stack>
                 <ProductList products={products}/>
                 <ProductCartWidget/>
                 <Pagination

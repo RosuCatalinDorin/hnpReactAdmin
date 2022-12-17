@@ -5,12 +5,12 @@ import Notiflix from 'notiflix';
 const PATH = {
     GET_ELK_PRODUCTS: 'hnp/elk/data',
     SAVE_PRODUCT: 'save/telegram/channels',
-    GET_ELK_PRODUCT_DETAILS: 'hnp/elk/getDocumentById/',
+    GET_ELK_PRODUCT_DETAILS: 'hnp/elk/getProductByID/',
 };
 
-export const getHnpElkProducts = async (query = null, index = 'hnp-store-article', from, size) => {
+export const getHnpElkProducts = async (query = null, index = 'hnp-store-article', from, size, searchText) => {
     Notiflix.Loading.init();
-    const data = createElkFilters(query, index, from, size);
+    const data = createElkFilters(query, index, from, size, searchText);
     console.log(data);
     return request({
         method: "POST",

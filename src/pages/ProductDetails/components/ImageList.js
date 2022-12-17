@@ -2,71 +2,24 @@ import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
+
+function getCardImage(fullImgPath) {
+    let imagePath = fullImgPath.split('/')
+    return imagePath[imagePath.length - 1];
+}
+
 export default function StandardImageList(props) {
-
-    const itemData = [
-        {
-            img: props.data.MIMESOURCEAPPLICATIONICON1,
-            title: props.data.MIMESOURCEAPPLICATIONICON1,
-        },
-        {
-            img: props.data.MIMESOURCEDETAILFILE,
-            title: props.data.MIMESOURCEDETAILFILE,
-        },
-        {
-            img: props.data.MIME_SOURCE_GROUP_1,
-            title: props.data.MIME_SOURCE_GROUP_1,
-        },
-        {
-            img: props.data.MIME_SOURCE_GROUP_4,
-            title: props.data.MIME_SOURCE_GROUP_4,
-        },
-        {
-            img: props.data.MIME_SOURCE_GROUP_3,
-            title: props.data.MIME_SOURCE_GROUP_3,
-        },
-        {
-            img: props.data.MIME_SOURCE_GROUP_2,
-            title: props.data.MIME_SOURCE_GROUP_2,
-        },
-        {
-            img: props.data.MIME_SOURCE_GROUP_5,
-            title: props.data.MIME_SOURCE_GROUP_5,
-        },
-        {
-            img: props.data.MIME_SOURCE_GROUP_6,
-            title: props.data.MIME_SOURCE_GROUP_6,
-        },
-        {
-            img: props.data.MIME_SOURCE_GROUP_7,
-            title: props.data.MIME_SOURCE_GROUP_7,
-        },
-        {
-            img: props.data.MIMESOURCEPROPERTYICON2,
-            title: props.data.MIMESOURCEPROPERTYICON2,
-        },
-        {
-            img: props.data.MIMESOURCEPROPERTYICON1,
-            title: props.data.MIMESOURCEPROPERTYICON1,
-        },
-        {
-            img: props.data.MIMESOURCEPROPERTYICON3,
-            title: props.data.MIMESOURCEPROPERTYICON3,
-        },
-    ];
-
+    const {data} = props;
+    //todo: nu sunt toate pozele inecarcate pe hnp
     const createImage = (item, key) => {
-        if (item.img) {
+        if (item.MIME_TYPE === 'image/jpeg' || item.MIME_TYPE === 'image/png') {
             return (
                 <ImageListItem key={key}>
                     <img
-                        src={`https://www.industrialexim.ro/image/cache/catalog/import2/images/${item.img}`}
-                        srcSet={`https://www.industrialexim.ro/image/cache/catalog/import2/images/${item.img}`}
+                        src={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
+                        srcSet={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
                         alt={item.title}
                         loading="lazy"
-                        onClick={() => {
-                            console.log(`https://www.industrialexim.ro/image/cache/catalog/import2/images/${item.img}`)
-                        }}
                     />
                 </ImageListItem>
             );
@@ -76,8 +29,8 @@ export default function StandardImageList(props) {
     };
     return (
         <>
-            <ImageList sx={{width: 500, height: 450}} cols={3} rowHeight={164}>
-                {itemData.map((item, key) =>
+            <ImageList sx={{width: 500, height: 500}} cols={3} rowHeight={164}>
+                {data.map((item, key) =>
                     (<>
                         {createImage(item, key)}
                     </>),

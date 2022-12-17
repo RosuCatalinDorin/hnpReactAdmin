@@ -4,7 +4,6 @@ import {Link as RouterLink} from 'react-router-dom';
 import {Box, Button, Card, Link, Stack, Typography} from '@mui/material';
 import {styled} from '@mui/material/styles';
 // utils
-import {fCurrency} from '../../../utils/formatNumber';
 //
 import Label from '../../../components/Label';
 import {BASE_URL_IMAGES} from "../../../utils/utils";
@@ -69,7 +68,9 @@ export default function ShopProductCard({product, id}) {
                     </Typography>
                 </Link>
 
-                <Stack direction="row" alignItems="center" justifyContent="space-between">
+                {/*
+                 //todo pretul este comentat pentru ca nu exista pret pe prduse in catalogul hnp
+                   <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Typography variant="subtitle1">
                         <Typography
                             component="span"
@@ -84,7 +85,7 @@ export default function ShopProductCard({product, id}) {
                         &nbsp;
                         {fCurrency(22)}
                     </Typography>
-                </Stack>
+                </Stack>*/}
                 <Button href={'/detaliiProdus/' + DESCRIPTION_SHORT + 'param' + id}>Vezi detalii</Button>
             </Stack>
 
