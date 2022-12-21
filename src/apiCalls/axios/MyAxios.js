@@ -12,21 +12,18 @@ const client = axios.create({
 /**
  * Request Wrapper with default success/error actions
  */
-const request = function(options)
-{
+const request = function (options) {
 
-    const onSuccess = function(response)
-    {
+    const onSuccess = function (response) {
         Notiflix.Loading.remove();
         console.debug('Request Successful!', response);
         return response;
     };
 
-    const onError = function(error)
-    {
+    const onError = function (error) {
 
-        if(error.response) {
-            switch(error.response.status) {
+        if (error.response) {
+            switch (error.response.status) {
                 case 401:
                     Notiflix.Report.failure(
                         'Drepturi insuficiente',
