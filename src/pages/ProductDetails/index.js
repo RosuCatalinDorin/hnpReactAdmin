@@ -8,6 +8,7 @@ import ImageList from './components/ImageList';
 //
 import useProductDetails from '../ProductDetails/hooks/useProductDetails';
 import {useEffect} from "react";
+import EcommerceProductDetails from "./components/EcommerceProductDetails";
 
 export default function Blog() {
     let {id} = useParams();
@@ -42,7 +43,8 @@ export default function Blog() {
                             <ImageList data={product._source.MIME_INFO.MIME}/>
                         </Grid>
                         <Grid container spacing={3}>
-                            {/*          <ProductDetails
+                            <EcommerceProductDetails/>
+                            {/*     <ProductDetails
                                 data={product}
                             />*/}
                         </Grid>
