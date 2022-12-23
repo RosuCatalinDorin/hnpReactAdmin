@@ -1,7 +1,7 @@
 import {useFormik} from 'formik';
 import {useEffect, useState} from 'react';
 // material
-import {Container, Grid, Stack, Typography} from '@mui/material';
+import {Container, Grid, Stack} from '@mui/material';
 // components
 import Page from '../components/Page';
 import {ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
@@ -84,8 +84,7 @@ export default function EcommerceShop() {
     return (
         <Page title="HNP: Products" sx={{mt: -10}}>
             <Grid container justifyContent="center">
-                <img height={100} src="/static/5695859.png"/>
-                <Typography color="#FFC107" variant="h4" sx={{ml: 1, mt: 4}}><b>MAGAZIN ONLINE HNP</b></Typography>
+                <img height={200} src="/static/EmilSefuLaPoze.png"/>
             </Grid>
 
             <Container>
