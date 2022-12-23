@@ -1,10 +1,10 @@
 import {useFormik} from 'formik';
 import {useEffect, useState} from 'react';
 // material
-import {Container, Stack} from '@mui/material';
+import {Container, Grid, Stack, Typography} from '@mui/material';
 // components
 import Page from '../components/Page';
-import {ProductCartWidget, ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
+import {ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
 // firebaseActions
 import {getHnpElkProducts} from "../apiCalls/api/Products"
 import Pagination from "../components/Pagination";
@@ -82,14 +82,19 @@ export default function EcommerceShop() {
     };
 
     return (
-        <Page title="HNP: Products">
+        <Page title="HNP: Products" sx={{mt: -10}}>
+            <Grid container justifyContent="center">
+                <img height={100} src="/static/5695859.png"/>
+                <Typography color="#FFC107" variant="h4" sx={{ml: 1, mt: 4}}><b>MAGAZIN ONLINE HNP</b></Typography>
+            </Grid>
+
             <Container>
                 <Stack
                     display='flex'
                     direction='row'
                     width={'100%'}
                 >
-                    <Stack direction="row" spacing={1} flexShrink={0} sx={{my: 2}}>
+                    <Stack direction="row" spacing={1} flexShrink={0} sx={{my: 1}}>
                         <SearchInput
                             onSearch={(value) => {
                                 setSearchText(value)
@@ -108,7 +113,7 @@ export default function EcommerceShop() {
 
                 </Stack>
                 <ProductList products={products}/>
-                <ProductCartWidget/>
+                {/*          <ProductCartWidget/>*/}
                 <Pagination
                     totalRows={totalRows}
                     page={page}

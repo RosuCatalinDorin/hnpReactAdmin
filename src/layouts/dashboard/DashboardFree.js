@@ -1,7 +1,6 @@
 // material
 import {styled} from '@mui/material/styles';
 // ----------------------------------------------------------------------
-import NavBar from "./NavBar"
 
 
 const APP_BAR_MOBILE = 64;
@@ -31,7 +30,7 @@ const MainStyle = styled('div')(({theme}) => ({
 export default function DashboardLayoutFree(props) {
     return (
         <RootStyle>
-            <NavBar/>
+            {/*    <NavBar/>*/}
             <MainStyle>
                 {props.children}
             </MainStyle>
