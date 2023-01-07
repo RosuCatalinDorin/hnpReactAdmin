@@ -16,7 +16,6 @@ export default function AccountPopover() {
     const [open, setOpen] = useState(false);
     const {currentUser} = useAuth()
 
-    debugger;
     const handleOpen = () => {
         setOpen(true);
     };
@@ -49,7 +48,7 @@ export default function AccountPopover() {
                 }}
             >
                 <Avatar src={account.photoURL} alt="photoURL"/>
-                
+
             </IconButton>
 
             {currentUser.login === true ?
