@@ -3,64 +3,13 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import {NavLink as RouterLink} from "react-router-dom";
-import AccountPopover from "./AccountPopover";
-import Logo from "../../components/Logo";
-
-
-const routes = [
-    {
-        title: 'Homepage',
-        path: '/dashboard/homepage',
-        admin: true
-    },
-    {
-        title: 'Dashboard',
-        path: '/dashboard/app',
-        admin: false
-    },
-    {
-        title: 'Users',
-        path: '/dashboard/user',
-        admin: true
-    },
-    {
-        title: 'Partners',
-        path: '/dashboard/company',
-        admin: true
-    },
-    {
-        title: 'Products',
-        path: '/dashboard/Products',
-        admin: true
-    },
-    {
-        title: 'Blog',
-        path: '/dashboard/blog',
-        admin: true
-    },
-    /*  {
-        title: 'login',
-        path: '/login',
-        icon: getIcon('eva:lock-fill')
-      },
-      {
-        title: 'register',
-        path: '/register',
-        icon: getIcon('eva:person-add-fill')
-      },
-      {
-        title: 'Not found',
-        path: '/404',
-        icon: getIcon('eva:alert-triangle-fill')
-      }*/
-];
+import AccountPopover from "./../AccountPopover/AccountPopover";
+import Logo from "./../../../components/Logo";
+import {NavBarButtons} from "./compoents/NavBarButtons";
+import {BUTTONS} from "./utils/constants"
 
 
 export default function ResponsiveAppBar() {
@@ -93,6 +42,7 @@ export default function ResponsiveAppBar() {
                         >
                             <MenuIcon/>
                         </IconButton>
+
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
@@ -111,28 +61,17 @@ export default function ResponsiveAppBar() {
                                 display: {xs: 'block', md: 'none'},
                             }}
                         >
-                            {routes.map((item) => (
-                                <MenuItem
-                                    component={RouterLink}
-                                    to={item.path}
-                                    key={item.title} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center" sx={{color: 'black'}}>{item.title}</Typography>
-                                </MenuItem>
-                            ))}
+                            <NavBarButtons
+                                button={BUTTONS}
+                                handleCloseNavMenu={handleCloseNavMenu}
+                            />
                         </Menu>
                     </Box>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-                        {routes.map((item) => (
-                            <Button
-                                component={RouterLink}
-                                to={item.path}
-                                key={item.title}
-                                onClick={handleCloseNavMenu}
-                                sx={{my: 2, color: 'black', display: 'block'}}
-                            >
-                                {item.title}
-                            </Button>
-                        ))}
+                        <NavBarButtons
+                            button={BUTTONS}
+                            handleCloseNavMenu={handleCloseNavMenu}
+                        />
                     </Box>
                     <Box>
                         {/*<LanguagePopover/>*/}

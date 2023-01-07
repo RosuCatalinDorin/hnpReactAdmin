@@ -40,9 +40,7 @@ export default function App() {
                     <BaseOptionChartStyle/>
                     <Routes>
                         <Route element={<ProtectedRoute/>}>
-                            <Route index element={<DashboardLayoutAuth><DashboardApp/></DashboardLayoutAuth>}/>
-                            <Route path="dashboard/app"
-                                   element={<DashboardLayoutAuth><DashboardApp/></DashboardLayoutAuth>}/>
+
                             <Route path="dashboard/user"
                                    element={<DashboardLayoutAuth admin={true}><User/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/Company"
@@ -52,10 +50,14 @@ export default function App() {
                             <Route path="dashboard/addNews"
                                    element={<DashboardLayoutAuth admin={true}><NewPost/></DashboardLayoutAuth>}/>
                         </Route>
-                        <Route path="dashboard/products"
-                               element={<DashboardLayoutFree admin={true}><Products/></DashboardLayoutFree>}/>
+                        <Route index element={<DashboardLayoutFree><Homepage/></DashboardLayoutFree>}/>
                         <Route path="dashboard/homepage"
                                element={<DashboardLayoutFree admin={false}><Homepage/> </DashboardLayoutFree>}/>
+                        <Route path="dashboard/app"
+                               element={<DashboardLayoutFree><DashboardApp/></DashboardLayoutFree>}/>
+                        <Route path="dashboard/products"
+                               element={<DashboardLayoutFree admin={true}><Products/></DashboardLayoutFree>}/>
+
                         <Route path="dashboard/blog"
                                element={<DashboardLayoutFree admin={false}><Index/></DashboardLayoutFree>}/>
                         <Route path="dashboard/blog/item/:id"
