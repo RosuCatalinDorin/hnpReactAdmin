@@ -11,7 +11,6 @@ export default function UploadFile() {
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = e => {
             JSON.parse(e.target.result).forEach(async (row) => {
-                debugger;
                 const saveData = saveProduct(row);
                 //todo de implementat aplearea api-ului si salvarea in elk
                 console.log(saveData);

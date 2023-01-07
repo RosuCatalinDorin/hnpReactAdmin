@@ -1,12 +1,10 @@
-import {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
 // material
 import {styled} from '@mui/material/styles';
 // ----------------------------------------------------------------------
 import {useAuth} from "../../Auth";
-import useUserDetails from "../../hooks/useUserDetails";
 import UserNotActive from "../../pages/UserNotActive";
-import NavBar from "./NavBar";
+import NavBar from "./NavBar/NavBar";
+import {useNavigate} from "react-router-dom";
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -34,6 +32,9 @@ const MainStyle = styled('div')(({theme}) => ({
 
 export default function DashboardLayout(props) {
 
+    const navigate = useNavigate();
+    const {currentUser} = useAuth();
+
     const Main = (props) => {
         return (<RootStyle>
             <NavBar/>
@@ -42,37 +43,10 @@ export default function DashboardLayout(props) {
             </MainStyle>
         </RootStyle>)
     }
-    if (props.auth === false) {
-        return (<Main>
-            {props.children}
-        </Main>)``
-    }
-    const {currentUser, setCurrentUser} = useAuth();
-    const [userDetails, setUserDetails] = useUserDetails();
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (userDetails !== null) {
-            let user = currentUser;
-            user.userDetails = userDetails;
-            setCurrentUser(user);
-        }
 
-    }, [userDetails]);
-
-    useEffect(() => {
-        setUserDetails();
-    }, []);
-    useEffect(() => {
-        setUserDetails();
-    }, [currentUser]);
-
-    if (currentUser && !currentUser.hasOwnProperty('userDetails')) {
-        return (<></>);
-    }
     return (
         <Main>
-            {props.admin === true && currentUser.userDetails.role !== "ADMIN" ? navigate('/404') : ""}
-
+            {props.admin === true && currentUser.userDetails.role !== "ROLE_ADMIN" ? navigate('/404') : ""}
             {currentUser.userDetails.status === true ? props.children : <UserNotActive
                 currentUser={currentUser}
             />}

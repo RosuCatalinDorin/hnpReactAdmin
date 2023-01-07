@@ -7,7 +7,6 @@ export default function useUserDetails() {
     const setProductDetails = async (id) => {
 
         const details = await getProductsDetails(id)
-        debugger
         setDetails(details.data);
     };
 
