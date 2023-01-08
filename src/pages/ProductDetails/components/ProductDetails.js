@@ -9,8 +9,6 @@ export default function ProductDetails(props) {
     const dataSheetLink = data._source.MIME_INFO.MIME.filter((item) => {
         return item.MIME_PURPOSE === 'data_sheet';
     })[0].MIME_SOURCE;
-    debugger;
-    console.log(JSON.stringify(data));
     return (
 
         <Grid container spacing={2} sx={{m: 2}}>
@@ -35,7 +33,7 @@ export default function ProductDetails(props) {
                     Cod GTIN / Cod de bare: <b>{data._source.ARTICLE_DETAILS.EAN}</b>
                 </Typography>
                 <Typography variant="inherit" gutterBottom>
-                    Data sheet: <a href={dataSheetLink} target="_blank" rel="noreferrer">Vezi mai multe detalii</a>
+                    <a href={dataSheetLink} target="_blank" rel="noreferrer"> Data sheet</a>
                 </Typography>
             </Grid>
 

@@ -21,6 +21,15 @@ export default function Blog() {
         setProductDetails(id);
     }, []);
 
+
+    function checkProductDetails() {
+        const gridRows = product._source.ARTICLE_FEATURES[2].FEATURE
+        if (Array.isArray(gridRows)) {
+            return gridRows;
+        }
+        return [gridRows];
+    }
+
     return (
         <Page title="Detalii produs">
             {product ?
@@ -51,11 +60,12 @@ export default function Blog() {
                             </Grid>
 
                             <Grid>
+
                                 <Typography variant="h4" gutterBottom>
                                     Detalii produse
                                 </Typography>
                                 <BasicTable
-                                    rows={product._source.ARTICLE_FEATURES[2].FEATURE}
+                                    rows={checkProductDetails()}
                                 />
                             </Grid>
 

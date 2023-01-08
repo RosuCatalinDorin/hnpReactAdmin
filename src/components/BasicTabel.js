@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 
 export default function BasicTable(props) {
     const {rows} = props;
-    debugger;
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
