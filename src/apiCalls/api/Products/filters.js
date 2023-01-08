@@ -1,8 +1,18 @@
-export const createElkFilters = (data) =>
-{
-    debugger;
+export const createElkFilters = (data, index, from, size, searchText) => {
+
+    /*   const a = {
+           "query": {
+               "bool": {
+                   "should": [
+                       {"match": {"USER_DEFINED_EXTENSIONS.UDX_APPAREA": {"query": "Boring", "_name": "first"}}},
+                       {"match": {"USER_DEFINED_EXTENSIONS.UDX_APPAREA": {"query": "Drilling", "_name": "first"}}}
+                   ]
+               }
+           }
+       };*/
+
     let body = {
-        "index": "hnp-shop",
+        "index": index,
         "body": {
             "query": {
                 "bool": {
@@ -10,10 +20,10 @@ export const createElkFilters = (data) =>
                 },
             },
         },
-        "from": 0,
-        "size": 100,
+        "from": from,
+        "size": size,
     };
-    if(data !== null) {
+    if (data !== null) {
         const query = {
             "query": {
                 "bool": {
@@ -22,14 +32,22 @@ export const createElkFilters = (data) =>
             },
         };
         data.UDX_APPAREA.forEach(value => {
-            query.query.bool.should.push({
-                "term": {
-                    "UDX_APPAREA": value
-                },
-            })
+            query.query.bool.should.push({"match": {"USER_DEFINED_EXTENSIONS.UDX_APPAREA": {"query": value}}})
         })
         body.body = query;
     }
-    console.log(body);
+
+    if (searchText) {
+        body.body.query.bool.must = [];
+        body.body.query.bool.must.push({
+            "match_phrase": {
+                "ARTICLE_DETAILS.DESCRIPTION_LONG": {
+                    "query": searchText
+                }
+            }
+        })
+    }
+
+
     return body;
 };

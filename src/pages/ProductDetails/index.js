@@ -1,24 +1,22 @@
 import {Link as RouterLink, useParams} from 'react-router-dom';
 // material
-import {Grid, Button, Container, Stack, Typography} from '@mui/material';
+import {Button, Container, Grid, Stack, Typography} from '@mui/material';
 // components
 import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
-import ProductDetails from './components/ProductDetails';
 import ImageList from './components/ImageList';
 //
 import useProductDetails from '../ProductDetails/hooks/useProductDetails';
 import {useEffect} from "react";
+import EcommerceProductDetails from "./components/EcommerceProductDetails";
 
-export default function Blog()
-{
+export default function Blog() {
     let {id} = useParams();
     id = id.split('param')[1];
 
-    const [product, setProductDetails] = useProductDetails();
+    const [product, setProductDetails] = useProductDetails(null);
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         setProductDetails(id);
     }, []);
 
@@ -28,7 +26,7 @@ export default function Blog()
                 <Container>
                     <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                         <Typography variant="h4" gutterBottom>
-                            {product.DESCRIPTION_SHORT}
+                            {product._source.ARTICLE_DETAILS.DESCRIPTION_SHORT}
                         </Typography>
                         <Button
                             variant="contained"
@@ -42,12 +40,13 @@ export default function Blog()
 
                     <Stack direction="row" spacing={1}>
                         <Grid container>
-                            <ImageList data ={product}/>
+                            <ImageList data={product._source.MIME_INFO.MIME}/>
                         </Grid>
                         <Grid container spacing={3}>
-                            <ProductDetails
+                            <EcommerceProductDetails/>
+                            {/*     <ProductDetails
                                 data={product}
-                            />
+                            />*/}
                         </Grid>
                     </Stack>
                 </Container> : <></>}

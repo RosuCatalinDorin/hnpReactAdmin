@@ -150,7 +150,6 @@ export const getProductsPagionation = async () => {
 export const getDocumentById = async (collection, id) => {
     const refDoc = await getRefDocumentById(collection, id);
     console.log({id: refDoc.id, ...refDoc.data()});
-    debugger
     return {id: refDoc.id, ...refDoc.data()}
 }
 

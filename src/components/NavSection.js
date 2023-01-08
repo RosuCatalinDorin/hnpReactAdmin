@@ -49,13 +49,13 @@ const ListItemStyle = styled((props) => (
   },
 }));
 
-const ListItemIconStyle = styled(ListItemIcon)({
-  width: 22,
-  height: 22,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
+// const ListItemIconStyle = styled(ListItemIcon)({
+//   width: 22,
+//   height: 22,
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+// });
 
 // ----------------------------------------------------------------------
 
@@ -98,7 +98,7 @@ function NavItem({ item, active }) {
           //   ...(isActiveRoot && activeRootStyle),
           // }}
         >
-          <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
+          {/*<ListItemIconStyle>{icon && icon}</ListItemIconStyle>*/}
           <ListItemText disableTypography primary={title} />
           {info && info}
           <Iconify
@@ -126,26 +126,26 @@ function NavItem({ item, active }) {
                   //   ...(isActiveSub && activeSubStyle),
                   // }}
                 >
-                  <ListItemIconStyle>
-                    <Box
-                      component='span'
-                      sx={{
-                        width: 4,
-                        height: 4,
-                        display: 'flex',
-                        borderRadius: '50%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: 'text.disabled',
-                        // transition: (theme) =>
-                        //   theme.transitions.create('transform'),
-                        // ...(isActiveSub && {
-                        //   transform: 'scale(2)',
-                        //   backgroundColor: 'primary.main',
-                        // }),
-                      }}
-                    />
-                  </ListItemIconStyle>
+                  {/*<ListItemIconStyle>*/}
+                  {/*  <Box*/}
+                  {/*    component='span'*/}
+                  {/*    sx={{*/}
+                  {/*      width: 4,*/}
+                  {/*      height: 4,*/}
+                  {/*      display: 'flex',*/}
+                  {/*      borderRadius: '50%',*/}
+                  {/*      alignItems: 'center',*/}
+                  {/*      justifyContent: 'center',*/}
+                  {/*      backgroundColor: 'text.disabled',*/}
+                  {/*      // transition: (theme) =>*/}
+                  {/*      //   theme.transitions.create('transform'),*/}
+                  {/*      // ...(isActiveSub && {*/}
+                  {/*      //   transform: 'scale(2)',*/}
+                  {/*      //   backgroundColor: 'primary.main',*/}
+                  {/*      // }),*/}
+                  {/*    }}*/}
+                  {/*  />*/}
+                  {/*</ListItemIconStyle>*/}
                   <ListItemText disableTypography primary={title} />
                 </ListItemStyle>
               );
@@ -164,7 +164,7 @@ function NavItem({ item, active }) {
       //   ...(isActiveRoot && activeRootStyle),
       // }}
     >
-      <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
+      {/*<ListItemIconStyle>{icon && icon}</ListItemIconStyle>*/}
       <ListItemText disableTypography primary={title} />
       {info && info}
     </ListItemStyle>

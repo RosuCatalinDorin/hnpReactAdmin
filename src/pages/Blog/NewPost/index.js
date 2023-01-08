@@ -15,7 +15,6 @@ export default function NewPost() {
     const {currentUser} = useAuth();
 
     function createData(data) {
-        debugger
         return {
             cover: data.cardImage,
             title: data.title,

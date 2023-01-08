@@ -1,6 +1,6 @@
 import {Navigate, useRoutes} from 'react-router-dom';
 // layouts
-import DashboardLayout from './layouts/dashboard';
+import DashboardLayout from './layouts/dashboard/DashboardAuth';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import Login from './pages/Login';
@@ -11,6 +11,7 @@ import Index from './pages/Blog';
 import User from './pages/User';
 import Company from './pages/Company';
 import NotFound from './pages/Page404';
+import Homepage from "./pages/Homepage";
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +21,7 @@ export default function Router() {
             path: '/dashboard',
             element: <DashboardLayout/>,
             children: [
+                {path: 'homepage', element: <Homepage/>},
                 {path: 'app', element: <DashboardApp/>},
                 {path: 'user', element: <User/>},
                 {path: 'adaugaNoutate', element: <User/>},
