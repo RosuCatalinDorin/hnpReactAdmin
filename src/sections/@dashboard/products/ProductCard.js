@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
 // material
 import {Box, Button, Card, Link, Stack, Typography} from '@mui/material';
 import {styled} from '@mui/material/styles';
@@ -32,6 +32,7 @@ function getCardImage(product) {
 export default function ShopProductCard({product, id}) {
     const DESCRIPTION_SHORT = product._source.ARTICLE_DETAILS.DESCRIPTION_SHORT;
     const imagePath = getCardImage(product);
+    const navigate = useNavigate();
     const status = 'sale'
     const priceSale = 22;
     return (
@@ -62,7 +63,8 @@ export default function ShopProductCard({product, id}) {
             </Box>
 
             <Stack spacing={2} sx={{p: 3}}>
-                <Link to="#" color="inherit" underline="hover" component={RouterLink}>
+                <Link to={'/detaliiProdus/' + DESCRIPTION_SHORT + 'param' + id} color="inherit" underline="hover"
+                      component={RouterLink}>
                     <Typography variant="subtitle2" noWrap>
                         {DESCRIPTION_SHORT}
                     </Typography>
@@ -86,7 +88,11 @@ export default function ShopProductCard({product, id}) {
                         {fCurrency(22)}
                     </Typography>
                 </Stack>*/}
-                <Button href={'/detaliiProdus/' + DESCRIPTION_SHORT + 'param' + id}>Vezi detalii</Button>
+                <Button
+                    onClick={() => {
+                        navigate('/detaliiProdus/' + DESCRIPTION_SHORT + 'param' + id);
+                    }}
+                >Vezi detalii</Button>
             </Stack>
 
         </Card>

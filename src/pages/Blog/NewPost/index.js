@@ -1,7 +1,6 @@
 import React from "react";
 import Page from '../../../components/Page';
-import {Card, Container, Grid, Stack, Typography} from "@mui/material";
-import Form from './form';
+import {Card, Container, Stack, Typography} from "@mui/material";
 import "./css/index.css";
 import {saveBlog} from "../../../FireBase/BlogAction";
 import Notiflix, {Confirm} from "notiflix";
@@ -62,7 +61,10 @@ export default function NewPost() {
     return (
         <Page title="HNP: Noutati | Adaugare">
             <Container>
-                <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+                <Stack direction="row"
+                       alignItems="center"
+                       justifyContent="space-between"
+                       mb={5}>
                     <Typography variant="h4" gutterBottom>
                         NEW POST
                     </Typography>

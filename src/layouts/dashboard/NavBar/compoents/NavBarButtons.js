@@ -20,6 +20,7 @@ export const NavBarButtons = (props) => {
         if (currentUser.login === true && currentUser.userDetails.role === 'ROLE_USER') {
             return button.filter((item) => item.roles.includes(currentUser.userDetails.role));
         }
+        return []
     }
 
     return (

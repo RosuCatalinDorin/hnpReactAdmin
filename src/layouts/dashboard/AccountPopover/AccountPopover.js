@@ -7,6 +7,7 @@ import {Avatar, IconButton} from '@mui/material';
 import account from '../../../_mocks_/account';
 import {useAuth} from "../../../Auth";
 import {MenuPopoverContent} from "./MenuPopoverContent";
+import {MenuPopoverLoginRegister} from "./MenuPopoverLoginRegister";
 
 // ----------------------------------------------------------------------
 
@@ -57,8 +58,12 @@ export default function AccountPopover() {
                     handleClose={handleClose}
                     open={open}
                 /> :
-
-                ""}
+                <MenuPopoverLoginRegister
+                    anchorRef={anchorRef}
+                    handleClose={handleClose}
+                    open={open}
+                />
+            }
         </>
     );
 
