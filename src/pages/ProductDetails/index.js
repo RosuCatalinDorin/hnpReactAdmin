@@ -1,14 +1,15 @@
-import {Link as RouterLink, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 // material
-import {Button, Container, Grid, Stack, Typography} from '@mui/material';
+import {Card, Container, Grid, Typography} from '@mui/material';
 // components
 import Page from '../../components/Page';
-import Iconify from '../../components/Iconify';
 import ImageList from './components/ImageList';
 //
 import useProductDetails from '../ProductDetails/hooks/useProductDetails';
+import * as React from "react";
 import {useEffect} from "react";
-import EcommerceProductDetails from "./components/EcommerceProductDetails";
+import ProductDetails from "./components/ProductDetails";
+import BasicTable from "../../components/BasicTabel";
 
 export default function Blog() {
     let {id} = useParams();
@@ -24,31 +25,43 @@ export default function Blog() {
         <Page title="Detalii produs">
             {product ?
                 <Container>
-                    <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-                        <Typography variant="h4" gutterBottom>
-                            {product._source.ARTICLE_DETAILS.DESCRIPTION_SHORT}
-                        </Typography>
-                        <Button
-                            variant="contained"
-                            component={RouterLink}
-                            to="#"
-                            startIcon={<Iconify icon="eva:plus-fill"/>}
-                        >
-                            Adauga in cos
-                        </Button>
-                    </Stack>
+                    <Card>
 
-                    <Stack direction="row" spacing={1}>
-                        <Grid container>
-                            <ImageList data={product._source.MIME_INFO.MIME}/>
+                        <Grid sx={{flexGrow: 1, m: 4}} container>
+                            <Grid xs={12} md={6}>
+                                <ImageList data={product._source.MIME_INFO.MIME}/>
+                            </Grid>
+                            <Grid xs={12} md={6}>
+                                <ProductDetails
+                                    data={product}/>
+                            </Grid>
                         </Grid>
-                        <Grid container spacing={3}>
-                            <EcommerceProductDetails/>
-                            {/*     <ProductDetails
-                                data={product}
-                            />*/}
+
+                        <Grid sx={{m: 2}}>
+                            <Grid>
+                                <Typography variant="h4" gutterBottom>
+                                    Descriere
+                                </Typography>
+                                <Typography variant="inherit" gutterBottom>
+                                    {product._source.USER_DEFINED_EXTENSIONS.UDX_BULLETTEXT_1}
+                                </Typography>
+                                <Typography variant="inherit" gutterBottom>
+                                    {product._source.ARTICLE_DETAILS.DESCRIPTION_LONG}
+                                </Typography>
+                            </Grid>
+
+                            <Grid>
+                                <Typography variant="h4" gutterBottom>
+                                    Detalii produse
+                                </Typography>
+                                <BasicTable
+                                    rows={product._source.ARTICLE_FEATURES[2].FEATURE}
+                                />
+                            </Grid>
+
                         </Grid>
-                    </Stack>
+
+                    </Card>
                 </Container> : <></>}
         </Page>
     );
