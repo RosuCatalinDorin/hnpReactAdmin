@@ -53,7 +53,7 @@ export default function RegisterForm() {
                     department: formData.department,
                     phone: formData.phone,
                     position: formData.position,
-                    role: "CUSTOMER",
+                    role: "ROLE_USER",
                     companyId: null,
                     dateCreate: new Date(),
                     companyName: "",

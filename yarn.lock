@@ -8462,7 +8462,7 @@
     "strip-ansi" "^6.0.1"
     "text-table" "^0.2.0"
 
-"react-dom@^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0", "react-dom@^16 || ^17 || ^18", "react-dom@^16.6.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^17.0.2", "react-dom@>=0.14.0", "react-dom@>=16.0.0", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", "react-dom@>=16.9.0", "react-dom@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x":
+"react-dom@^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0", "react-dom@^16 || ^17 || ^18", "react-dom@^16.6.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^17.0.2", "react-dom@^17.0.2 || ^18.0.0", "react-dom@>=0.14.0", "react-dom@>=16.0.0", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", "react-dom@>=16.9.0", "react-dom@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -8545,10 +8545,10 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   "version" "18.2.0"
 
-"react-material-ui-carousel@^3.3.3":
-  "integrity" "sha512-pIojUKfu6s2r5icE5cQYUfEUTa9BT2dc/gw+gdBp32rJVfKlrOglb7Wdrho+hsdKDba2KQxnmYWixGKRbbMVaA=="
-  "resolved" "https://registry.npmjs.org/react-material-ui-carousel/-/react-material-ui-carousel-3.3.3.tgz"
-  "version" "3.3.3"
+"react-material-ui-carousel@^3.4.2":
+  "integrity" "sha512-jUbC5aBWqbbbUOOdUe3zTVf4kMiZFwKJqwhxzHgBfklaXQbSopis4iWAHvEOLcZtSIJk4JAGxKE0CmxDoxvUuw=="
+  "resolved" "https://registry.npmjs.org/react-material-ui-carousel/-/react-material-ui-carousel-3.4.2.tgz"
+  "version" "3.4.2"
   dependencies:
     "@emotion/react" "^11.7.1"
     "@emotion/styled" "^11.6.0"
@@ -8556,8 +8556,6 @@
     "@mui/material" "^5.4.1"
     "@mui/system" "^5.4.1"
     "framer-motion" "^4.1.17"
-    "react" "^17.0.2"
-    "react-dom" "^17.0.2"
 
 "react-quill@^2.0.0":
   "integrity" "sha512-4qQtv1FtCfLgoD3PXAur5RyxuUbPXQGOHgTlFie3jtxp43mXDtzCKaOgQ3mLyZfi1PUlyjycfivKelFhy13QUg=="
@@ -8665,7 +8663,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0", "react@^16 || ^17 || ^18", "react@^16.6.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0-rc", "react@^17.0.0 || ^18.0.0", "react@^17.0.2", "react@>= 16", "react@>=0.13", "react@>=0.14.0", "react@>=16.0.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@>=16.9.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react@17.0.2":
+"react@^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0", "react@^16 || ^17 || ^18", "react@^16.6.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0-rc", "react@^17.0.0 || ^18.0.0", "react@^17.0.1 || ^18.0.0", "react@^17.0.2", "react@>= 16", "react@>=0.13", "react@>=0.14.0", "react@>=16.0.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@>=16.9.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
