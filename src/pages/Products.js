@@ -83,7 +83,7 @@ export default function EcommerceShop() {
 
     return (
         <Page title="HNP: Products">
-            <Container>
+            <Container maxWidth="xl">
                 <Stack
                     display='flex'
                     direction='row'

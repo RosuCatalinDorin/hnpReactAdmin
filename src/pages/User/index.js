@@ -157,7 +157,7 @@ export default function User() {
     }, [loadData]);
     return (
         <Page title="User | HNP">
-            <Container>
+            <Container maxWidth="xl">
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>
                         User
