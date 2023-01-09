@@ -20,17 +20,20 @@ export default function StandardImageList(props) {
 
     const createImage = (item, key) => {
         return (
-            <Grid item xs={1} sm={2} md={2} key={"grid" + key}>
-                <img
-                    key={key}
-                    src={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
-                    srcSet={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
-                    alt={item.title}
-                    loading="lazy"
-                    onClick={() => {
-                        setMainImage(key);
-                    }}
-                />
+            <Grid item sx={{mt: 2}} xs={1} sm={2} md={2} key={"grid" + key}
+            >
+                <a href="#">
+                    <img
+                        key={key}
+                        src={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
+                        srcSet={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
+                        alt={item.title}
+                        loading="lazy"
+                        onClick={() => {
+                            setMainImage(key);
+                        }}
+                    />
+                </a>
             </Grid>
         );
     };
@@ -40,6 +43,11 @@ export default function StandardImageList(props) {
         <Grid container>
             <Grid item sm={12} md={12}>
                 <img
+                    style={{
+                        width: '100%',
+                        aspectRatio: '3/2',
+                        objectFit: 'contain',
+                    }}
                     src={process.env.PUBLIC_URL + '/static/hnp-catalog' + images[mainImage].MIME_SOURCE}
                     srcSet={process.env.PUBLIC_URL + '/static/hnp-catalog' + images[mainImage].MIME_SOURCE}
                     alt={images[mainImage].title}

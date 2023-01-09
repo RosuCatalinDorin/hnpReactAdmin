@@ -13,8 +13,8 @@ import {BASE_URL_IMAGES} from "../../../utils/utils";
 const ProductImgStyle = styled('img')({
     top: 0,
     width: '100%',
-    height: '100%',
-    objectFit: 'cover',
+    aspectRatio: '3/2',
+    objectFit: 'contain',
     position: 'relative'
 });
 
@@ -53,17 +53,14 @@ export default function ShopProductCard({product, id}) {
                         {status}
                     </Label>
                 )}
-                <ProductImgStyle style={{
-                    width: '100%',
-                    aspectRatio: '3/2',
-                    objectFit: 'contain',
-                }} alt={DESCRIPTION_SHORT}
+                <ProductImgStyle alt={DESCRIPTION_SHORT}
                                  src={BASE_URL_IMAGES + imagePath}/>
                 {/*//  src={process.env.PUBLIC_URL + "/static/hnp-catalog" + imagePath}/>*/}
             </Box>
 
             <Stack spacing={2} sx={{p: 3}}>
-                <Link to={'/detaliiProdus/' + DESCRIPTION_SHORT + 'param' + id} color="inherit" underline="hover"
+                <Link to={'/detaliiProdus/' + DESCRIPTION_SHORT.replace('/', '-') + '/' + id} color="inherit"
+                      underline="hover"
                       component={RouterLink}>
                     <Typography variant="subtitle2" noWrap>
                         {DESCRIPTION_SHORT}
@@ -90,7 +87,7 @@ export default function ShopProductCard({product, id}) {
                 </Stack>*/}
                 <Button
                     onClick={() => {
-                        navigate('/detaliiProdus/' + DESCRIPTION_SHORT + 'param' + id);
+                        navigate('/detaliiProdus/' + DESCRIPTION_SHORT.replace('/', '-') + '/' + id);
                     }}
                 >Vezi detalii</Button>
             </Stack>

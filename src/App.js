@@ -62,7 +62,7 @@ export default function App() {
                                element={<DashboardLayoutFree admin={false}><Index/></DashboardLayoutFree>}/>
                         <Route path="dashboard/blog/item/:id"
                                element={<DashboardLayoutFree admin={false}><BlogDetails/> </DashboardLayoutFree>}/>
-                        <Route path="detaliiProdus/:id"
+                        <Route path="detaliiProdus/:name/:id"
                                element={<DashboardLayoutFree admin={false}>
                                    <ProductDetails/>
                                </DashboardLayoutFree>}/>
