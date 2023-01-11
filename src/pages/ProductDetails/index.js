@@ -11,20 +11,32 @@ import {useEffect} from "react";
 import ProductDetails from "./components/ProductDetails";
 import BasicTable from "../../components/BasicTabel";
 import {ProductButtons} from "./components/ProductButtons";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCartRedux} from "../../store/cart/cartAction";
+
 
 export default function Blog() {
     let {id} = useParams();
 
     const [product, setProductDetails] = useProductDetails(null);
-
+    const cart = useSelector(state => state.cart);
+    const dispetch = useDispatch();
+    const firstRender = React.useRef(true);
     useEffect(() => {
         setProductDetails(id);
     }, []);
 
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+        setProductDetails(id);
+
+    }, [id])
 
     const addToCart = () => {
-        console.log('addToCart');
-        console.log(product);
+        dispetch(addToCartRedux(product, cart));
     }
 
     const addToWishlist = () => {
@@ -44,7 +56,7 @@ export default function Blog() {
     return (
         <Page title="Detalii produs">
             {product ?
-                <Container>
+                <Container maxWidth="xl">
                     <Card>
 
                         <Grid sx={{flexGrow: 1, m: 4}} container>
