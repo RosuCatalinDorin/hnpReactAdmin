@@ -23,8 +23,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useDispatch} from "react-redux";
 import {addToCartRedux, removeFromCart, removeQuantity} from "../../../store/cart/cartAction";
-import {CURRANCY} from "../../../utils/utils";
 import * as React from "react";
+import {fCurrency} from "../../../utils/formatNumber";
 
 export default function CartContent(props) {
 
@@ -92,7 +92,7 @@ export default function CartContent(props) {
                                 </TableCell>
                                 <TableCell align="right">
                                     <Typography variant="subtitle2" sx={{color: 'text.secondary',}}>
-                                        {CURRANCY + 40.99}
+                                        {fCurrency(40.99)}
                                     </Typography>
 
                                 </TableCell>
@@ -113,7 +113,7 @@ export default function CartContent(props) {
                                 </TableCell>
                                 <TableCell align="right">
                                     <Typography variant="subtitle2" sx={{color: 'text.secondary'}}>
-                                        {CURRANCY + (40.99 * row.quantity).toFixed(2)}
+                                        {fCurrency(40.99 * row.quantity)}
                                     </Typography>
                                 </TableCell>
                                 <TableCell align="right">

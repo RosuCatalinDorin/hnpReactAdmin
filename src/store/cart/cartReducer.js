@@ -1,14 +1,20 @@
 import * as actions from "./actionTypes";
 import {handleActions} from 'redux-actions';
 
-const initialState = [];
+
+const getInitialStateFromLocalStorage = () => {
+    const cart = localStorage.getItem('cart');
+    if (cart) {
+        return JSON.parse(cart);
+    }
+    return [];
+}
+const initialState = getInitialStateFromLocalStorage();
 
 
 export const addToCart = function addToCart(state = initialState, {payload}) {
     
-    if (payload.length === 0) {
-        return initialState;
-    }
+    localStorage.setItem('cart', JSON.stringify(payload));
     return payload;
 }
 

@@ -1,7 +1,8 @@
 import {Box, Card, Divider, Grid, Typography} from "@mui/material";
-import {CURRANCY, getClientFinalPrice, getTotal} from "../../../utils/utils";
+import {getClientFinalPrice, getTotal} from "../../../utils/utils";
 import * as React from "react";
 import {useRef} from "react";
+import {fCurrency} from "../../../utils/formatNumber";
 
 export default function ShipingCard(props) {
     const {cart} = props;
@@ -25,7 +26,7 @@ export default function ShipingCard(props) {
                         justifyContent: 'space-between',
                     }}>
                         <Typography variant="inherit">Sub Total</Typography>
-                        <Typography variant="inherit"> {CURRANCY + subTotal} </Typography>
+                        <Typography variant="inherit"> {fCurrency(subTotal)} </Typography>
 
                     </Box>
                 </Grid>
@@ -49,7 +50,7 @@ export default function ShipingCard(props) {
                         mb: 2
                     }}>
                         <Typography variant="inherit">Cost livrare</Typography>
-                        <Typography variant="inherit"> {CURRANCY + shippingCost} </Typography>
+                        <Typography variant="inherit"> {fCurrency(shippingCost)} </Typography>
 
                     </Box>
                     <Divider/>
@@ -62,12 +63,12 @@ export default function ShipingCard(props) {
                     }}>
                         <Typography variant="h5"><b>Total</b></Typography>
                         <Typography sx={{color: 'red'}}
-                                    variant="h5"><b> {CURRANCY + totalCost}</b></Typography>
+                                    variant="h5"><b> {fCurrency(totalCost)}</b></Typography>
                     </Box>
 
                     <Typography
                         variant="caption">Ti sa aplicat o reducere personalizata de
-                        <b> {CURRANCY + totalDiscount} </b></Typography>
+                        <b> {fCurrency(totalDiscount)} </b></Typography>
                 </Grid>
             </Grid>
         </Card>

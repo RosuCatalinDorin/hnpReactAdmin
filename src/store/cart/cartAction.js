@@ -51,6 +51,7 @@ export const removeQuantity = (product, cart) => {
 }
 
 export const removeFromCart = (product, cart) => {
+
     const newCart = cart.filter((item) => {
         return item['_id'] !== product['_id']
     });

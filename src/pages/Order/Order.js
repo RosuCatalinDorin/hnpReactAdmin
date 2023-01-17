@@ -4,6 +4,7 @@ import * as React from "react";
 import {useSelector} from "react-redux";
 import CartContent from "./components/CartContent";
 import ShipingCard from "./components/ShipingCard";
+import ButtonsOrder from "./components/DoneOrder";
 
 
 export default function Order() {
@@ -17,6 +18,7 @@ export default function Order() {
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <ShipingCard cart={cart}/>
+                        <ButtonsOrder cart={cart}/>
                     </Grid>
                 </Grid>
             </Container>
