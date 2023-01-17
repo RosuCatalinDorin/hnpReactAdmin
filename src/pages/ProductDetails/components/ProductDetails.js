@@ -14,7 +14,7 @@ export default function ProductDetails(props) {
         <Grid container spacing={2} sx={{m: 2}}>
             <Grid item xs={12} sm={12} md={12}>
                 <Typography variant="h4" gutterBottom>
-                    {data._source.ARTICLE_DETAILS.MANUFACTURER_AID}
+                    {data._source.ARTICLE_DETAILS.DESCRIPTION_LONG}
                 </Typography>
                 <Typography variant="inherit" gutterBottom>
                     {data._source.ARTICLE_DETAILS.MANUFACTURER_TYPE_DESCR}

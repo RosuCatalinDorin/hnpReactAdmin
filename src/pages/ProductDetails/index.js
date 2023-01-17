@@ -10,16 +10,39 @@ import * as React from "react";
 import {useEffect} from "react";
 import ProductDetails from "./components/ProductDetails";
 import BasicTable from "../../components/BasicTabel";
+import {ProductButtons} from "./components/ProductButtons";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCartRedux} from "../../store/cart/cartAction";
+
 
 export default function Blog() {
     let {id} = useParams();
-    id = id.split('param')[1];
 
     const [product, setProductDetails] = useProductDetails(null);
-
+    const cart = useSelector(state => state.cart);
+    const dispetch = useDispatch();
+    const firstRender = React.useRef(true);
     useEffect(() => {
         setProductDetails(id);
     }, []);
+
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+            return;
+        }
+        setProductDetails(id);
+
+    }, [id])
+
+    const addToCart = () => {
+        dispetch(addToCartRedux(product, cart));
+    }
+
+    const addToWishlist = () => {
+        console.log('addToCart');
+        console.log(product);
+    }
 
 
     function checkProductDetails() {
@@ -33,16 +56,22 @@ export default function Blog() {
     return (
         <Page title="Detalii produs">
             {product ?
-                <Container>
+                <Container maxWidth="xl">
                     <Card>
 
                         <Grid sx={{flexGrow: 1, m: 4}} container>
-                            <Grid xs={12} md={6}>
+                            <Grid item xs={12} md={6}>
                                 <ImageList data={product._source.MIME_INFO.MIME}/>
                             </Grid>
-                            <Grid xs={12} md={6}>
+                            <Grid item xs={12} md={6}>
                                 <ProductDetails
                                     data={product}/>
+                                <Grid sx={{ml: 4}}>
+                                    <ProductButtons
+                                        onAddToCart={addToCart}
+                                        onAddToWishlist={addToWishlist}
+                                    />
+                                </Grid>
                             </Grid>
                         </Grid>
 
@@ -60,7 +89,6 @@ export default function Blog() {
                             </Grid>
 
                             <Grid>
-
                                 <Typography variant="h4" gutterBottom>
                                     Detalii produse
                                 </Typography>
