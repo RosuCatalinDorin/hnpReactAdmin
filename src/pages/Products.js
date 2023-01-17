@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {Container, Stack} from '@mui/material';
 // components
 import Page from '../components/Page';
-import {ProductCartWidget, ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
+import {ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
 // firebaseActions
 import {getHnpElkProducts} from "../apiCalls/api/Products"
 import Pagination from "../components/Pagination";
@@ -108,7 +108,6 @@ export default function EcommerceShop() {
 
                 </Stack>
                 <ProductList products={products}/>
-                <ProductCartWidget/>
                 <Pagination
                     totalRows={totalRows}
                     page={page}

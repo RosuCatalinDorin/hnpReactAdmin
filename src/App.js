@@ -28,6 +28,7 @@ import ProductDetails from './pages/ProductDetails';
 import BlogDetails from './pages/Blog/BlogDetails'
 import DashboardLayoutFree from "./layouts/dashboard/DashboardFree";
 import Homepage from "./pages/Homepage";
+import Order from './pages/Order/Order';
 
 export default function App() {
 
@@ -40,7 +41,6 @@ export default function App() {
                     <BaseOptionChartStyle/>
                     <Routes>
                         <Route element={<ProtectedRoute/>}>
-
                             <Route path="dashboard/user"
                                    element={<DashboardLayoutAuth admin={true}><User/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/Company"
@@ -62,6 +62,8 @@ export default function App() {
                                element={<DashboardLayoutFree admin={false}><Index/></DashboardLayoutFree>}/>
                         <Route path="dashboard/blog/item/:id"
                                element={<DashboardLayoutFree admin={false}><BlogDetails/> </DashboardLayoutFree>}/>
+                        <Route path="dashboard/cartDetails"
+                               element={<DashboardLayoutFree admin={false}><Order/></DashboardLayoutFree>}/>
                         <Route path="detaliiProdus/:name/:id"
                                element={<DashboardLayoutFree admin={false}>
                                    <ProductDetails/>
