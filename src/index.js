@@ -2,8 +2,8 @@
 import 'simplebar/src/simplebar.css';
 
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import {BrowserRouter} from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
 
 //
 import App from './App';
@@ -13,12 +13,12 @@ import reportWebVitals from './reportWebVitals';
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
-  <HelmetProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </HelmetProvider>,
-  document.getElementById('root')
+    <HelmetProvider>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+    </HelmetProvider>,
+    document.getElementById('root')
 );
 
 // If you want to enable client cache, register instead.

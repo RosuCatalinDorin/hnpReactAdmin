@@ -21,27 +21,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {useDispatch} from "react-redux";
-import {addToCartRedux, removeFromCart, removeQuantity} from "../../../store/cart/cartAction";
 import * as React from "react";
 import {fCurrency} from "../../../utils/formatNumber";
 
 export default function CartContent(props) {
 
-    const {cart} = props
-
-    const dispatch = useDispatch();
-
-    const handleAddToCart = (product) => {
-        dispatch(addToCartRedux(product, cart));
-    }
-    const handleRemoveQuantity = (product) => {
-        dispatch(removeQuantity(product, cart));
-    }
-
-    const handleRemoveProduct = (product) => {
-        dispatch(removeFromCart(product, cart));
-    }
+    const {cart, handleAddToCart, handleRemoveQuantity, handleRemoveProduct} = props
 
     return (
         <Card>

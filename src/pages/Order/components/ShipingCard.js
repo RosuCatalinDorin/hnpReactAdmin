@@ -3,12 +3,12 @@ import {getClientFinalPrice, getTotal} from "../../../utils/utils";
 import * as React from "react";
 import {useRef} from "react";
 import {fCurrency} from "../../../utils/formatNumber";
+import {SHIPING_COST} from "../constants";
 
 export default function ShipingCard(props) {
     const {cart} = props;
     const discount = useRef(5)
     const subTotal = getTotal(cart)
-    const shippingCost = 2;
     const totalCost = getClientFinalPrice(subTotal, discount.current, 0)
     const totalDiscount = (subTotal - totalCost).toFixed(2);
     return (
@@ -50,7 +50,7 @@ export default function ShipingCard(props) {
                         mb: 2
                     }}>
                         <Typography variant="inherit">Cost livrare</Typography>
-                        <Typography variant="inherit"> {fCurrency(shippingCost)} </Typography>
+                        <Typography variant="inherit"> {fCurrency(SHIPING_COST)} </Typography>
 
                     </Box>
                     <Divider/>

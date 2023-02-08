@@ -29,9 +29,9 @@ import BlogDetails from './pages/Blog/BlogDetails'
 import DashboardLayoutFree from "./layouts/dashboard/DashboardFree";
 import Homepage from "./pages/Homepage";
 import Order from './pages/Order/Order';
+import OrderDetails from "./pages/Order/OrderDetails";
 
 export default function App() {
-
     return (
         <ThemeConfig>
             <Provider store={configureStore}>
@@ -49,6 +49,8 @@ export default function App() {
                                    element={<DashboardLayoutAuth admin={true}><UploadFile/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/addNews"
                                    element={<DashboardLayoutAuth admin={true}><NewPost/></DashboardLayoutAuth>}/>
+                            <Route path="dashboard/orderDetails/:orderId"
+                                   element={<DashboardLayoutAuth admin={true}><OrderDetails/></DashboardLayoutAuth>}/>
                         </Route>
                         <Route index element={<DashboardLayoutFree><Homepage/></DashboardLayoutFree>}/>
                         <Route path="dashboard/homepage"

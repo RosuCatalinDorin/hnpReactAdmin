@@ -1,18 +1,6 @@
 import {auth, db} from './base';
 import {createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword} from "firebase/auth";
-import {
-    addDoc,
-    collection,
-    doc,
-    getDoc,
-    getDocs,
-    limit,
-    orderBy,
-    query,
-    startAfter,
-    where,
-    writeBatch,
-} from "firebase/firestore";
+import {addDoc, collection, doc, getDoc, getDocs, query, where, writeBatch,} from "firebase/firestore";
 
 export const registerUser = async (email, password) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -50,7 +38,6 @@ export const getCollection = async (collectionName) => {
     });
     return documents;
 };
-
 export const savePartner = async (partner) => {
     const partnersCollection = 'partners';
     try {
@@ -60,7 +47,6 @@ export const savePartner = async (partner) => {
         console.error("Error adding document: ", e);
     }
 };
-
 export const saveUserDetails = async (id, userDetails) => {
     const userCollection = "users";
     userDetails.userId = id;
@@ -71,7 +57,6 @@ export const saveUserDetails = async (id, userDetails) => {
         console.error("Error adding document: ", e);
     }
 };
-
 export const getDocumentProperty = async (entity, property, value) => {
     const q = query(collection(db, entity), where(property, "==", value));
     const querySnapshot = await getDocs(q);
@@ -93,86 +78,21 @@ export const saveUserCompany = async (data) => {
     await batch.commit();
 
 };
-export const saveProducts = async (prodact) => {
-    const products = 'products';
-    const docRef = await addDoc(collection(db, products), prodact);
-    return docRef.id;
-};
-
-
-export const getTopProducts = async () => {
-
-    const citiesRef = collection(db, "products");
-    const q = query(citiesRef, limit(10));
-    const querySnapshot = await getDocs(q);
-    let result = [];
-    querySnapshot.forEach((doc) => {
-        result.push(doc.data());
-    });
-    return result;
-}
-
-export const getProducts = async (fiters = null) => {
-    const citiesRef = collection(db, "products");
-    const q = query(citiesRef, where("UDX.APPAREA", "in", fiters.UDX_APPAREA), limit(10));
-    const querySnapshot = await getDocs(q);
-    let result = [];
-    querySnapshot.forEach((doc) => {
-        result.push(doc.data());
-    });
-    console.log(result);
-    return result;
-};
-export const getProductsPagionation = async () => {
-
-    const first = query(
-        collection(db, "products"),
-        orderBy("UDX.APPAREA"),
-        limit(10));
-    const documentSnapshots = await getDocs(first)
-    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-
-    const next = query(collection(db, "products"),
-        orderBy("UDX.APPAREA"),
-        startAfter(lastVisible),
-        limit(10));
-    const querySnapshot = await getDocs(next);
-    let result = [];
-    querySnapshot.forEach((doc) => {
-        let row = doc.data()
-        row.id = doc.id;
-        result.push(row);
-    });
-    return result
-
-}
-
 export const getDocumentById = async (collection, id) => {
     const refDoc = await getRefDocumentById(collection, id);
     console.log({id: refDoc.id, ...refDoc.data()});
     return {id: refDoc.id, ...refDoc.data()}
 }
-
 const getRefDocumentById = async (collection, id) => {
     const docRef = doc(db, collection, id);
     const lastDocRef = await getDoc(docRef)
     return lastDocRef;
 }
-
-export const fetchMore = async (lastDoc) => {
-    const lastDocRef = await getRefDocumentById('products', lastDoc.id);
-
-    const next = query(
-        collection(db, "products"),
-        orderBy("UDX.APPAREA"),
-        startAfter(lastDocRef),
-        limit(10));
-    const querySnapshot = await getDocs(next);
-    let result = [];
-    querySnapshot.forEach((doc) => {
-        let row = doc.data()
-        row.id = doc.id;
-        result.push(row);
-    });
-    return result;
+export const saveOrder = async (order) => {
+    try {
+        const collectionName = 'orders';
+        return await addDoc(collection(db, collectionName), order);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
 }
