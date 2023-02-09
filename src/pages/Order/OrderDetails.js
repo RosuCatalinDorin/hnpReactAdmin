@@ -15,7 +15,6 @@ export default function OrderDetails() {
     const [order, setOrder] = useState();
     const [company, setCompany] = useState();
     useEffect(async () => {
-        orderId = 'QBOKrAVTDvckeOmIoNoI';
         const dbOrder = await getDocumentById('orders', orderId);
         const company = await getDocumentById('partners', dbOrder.user.companyId);
         setCompany(company)
