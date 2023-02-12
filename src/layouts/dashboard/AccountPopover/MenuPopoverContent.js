@@ -10,7 +10,11 @@ const MENU_OPTIONS = [
         icon: 'eva:home-fill',
         linkTo: '/'
     },
-    
+    {
+        label: 'Contul meu',
+        icon: 'ic:outline-account-circle',
+        linkTo: '/dashboard/contulMeu'
+    },
 ];
 export const MenuPopoverContent = (props) => {
     const {handleClose, anchorRef, open} = props;

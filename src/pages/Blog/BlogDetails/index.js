@@ -3,6 +3,7 @@ import Page from '../../../components/Page';
 import {Card, Container, Grid, Stack, Typography} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {getDocumentById} from "../../../FireBase/actions";
+import NotificationInfo from "../../../components/NotificationInfo";
 
 export default function PostDetails() {
 
@@ -24,6 +25,7 @@ export default function PostDetails() {
     return (
         <Page title="HNP: Noutati | Adaugare">
             <Container>
+                <NotificationInfo/>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>
                         {product.title}

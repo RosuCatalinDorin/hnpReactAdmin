@@ -1,12 +1,13 @@
 import React from "react";
 import Page from '../../../components/Page';
-import {Card, Container, Stack, Typography} from "@mui/material";
+import {Card, Container, Grid, Stack, Typography} from "@mui/material";
 import "./css/index.css";
 import {saveBlog} from "../../../FireBase/BlogAction";
 import Notiflix, {Confirm} from "notiflix";
 import {useNavigate} from "react-router-dom";
 import {faker} from "@faker-js/faker";
 import {useAuth} from "../../../Auth";
+import Form from "./form";
 
 export default function NewPost() {
 

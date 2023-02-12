@@ -9,7 +9,7 @@ export const parseDate = (value) => {
         value.seconds * 1000 + value.nanoseconds / 1000000,
     );
     const date = fireBaseTime.toDateString();
-    const atTime = fireBaseTime.toLocaleTimeString();
+    const atTime = fireBaseTime.toLocaleTimeString('ro-RO');
     return date + " " + atTime
 }
 

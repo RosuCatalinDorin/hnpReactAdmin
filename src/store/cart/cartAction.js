@@ -7,6 +7,10 @@ const addToCart = (product) => {
     };
 };
 
+export const clearCart = () => {
+    return addToCart([]);
+}
+
 export const addToCartRedux = (product, cart) => {
 
     let newCart = JSON.parse(JSON.stringify(cart));

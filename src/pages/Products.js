@@ -9,6 +9,7 @@ import {ProductFilterSidebar, ProductList,} from '../sections/@dashboard/product
 import {getHnpElkProducts} from "../apiCalls/api/Products"
 import Pagination from "../components/Pagination";
 import SearchInput from "../components/SearchInput";
+import NotificationInfo from "../components/NotificationInfo";
 
 const INDEX_PRODUCTS = 'hnp-store-article';
 const ROWS_PER_PAGE = 12;
@@ -84,6 +85,8 @@ export default function EcommerceShop() {
     return (
         <Page title="HNP: Products">
             <Container maxWidth="xl">
+                <NotificationInfo/>
+
                 <Stack
                     display='flex'
                     direction='row'
