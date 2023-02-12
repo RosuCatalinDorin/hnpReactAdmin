@@ -4,10 +4,12 @@ import {Button, Container, Grid, Stack, Typography} from '@mui/material';
 // components
 import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
-import {BlogPostCard, BlogPostsSearch, BlogPostsSort} from '../../sections/@dashboard/blog';
+import {BlogPostCard} from '../../sections/@dashboard/blog';
 //
 import {useEffect, useState} from "react";
 import {getBlogs} from "../../FireBase/BlogAction";
+import {useAuth} from "../../Auth";
+import NotificationInfo from "../../components/NotificationInfo";
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +23,7 @@ const SORT_OPTIONS = [
 export default function Index() {
     const [POSTS, setPosts] = useState([]);
     const [order, setOrder] = useState('desc')
+    const {currentUser} = useAuth();
     const navigate = useNavigate();
 
     useEffect(async () => {
@@ -39,27 +42,33 @@ export default function Index() {
 
     return (
         <Page title="Noutati | HNP">
-            <Container>
+            <Container maxWidth="xl">
+                <NotificationInfo/>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>
                         Noutati HNP
                     </Typography>
-                    <Button
-                        variant="contained"
-                        onClick={() => {
-                            navigate('/dashboard/addNews')
-                        }}
-                        startIcon={<Iconify icon="eva:plus-fill"/>}
-                    >
-                        New Post
-                    </Button>
+
+                    {currentUser.userDetails && currentUser.userDetails.role === 'ROLE_ADMIN'
+                        ? < Button
+                            variant="contained"
+                            onClick={() => {
+                                navigate('/dashboard/addNews')
+                            }}
+                            startIcon={<Iconify icon="eva:plus-fill"/>}
+                        >
+                            New Post
+                        </Button>
+                        : ""
+                    }
+
                 </Stack>
 
                 <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-                    <BlogPostsSearch posts={POSTS}/>
-                    <BlogPostsSort options={SORT_OPTIONS} value={order} onSort={(newSort) => {
+                    {/*   <BlogPostsSearch posts={POSTS}/>*/}
+                    {/*          <BlogPostsSort options={SORT_OPTIONS} value={order} onSort={(newSort) => {
                         setOrder(newSort.target.value)
-                    }}/>
+                    }}/>*/}
                 </Stack>
 
                 <Grid container spacing={3}>

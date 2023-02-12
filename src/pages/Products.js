@@ -4,11 +4,12 @@ import {useEffect, useState} from 'react';
 import {Container, Stack} from '@mui/material';
 // components
 import Page from '../components/Page';
-import {ProductCartWidget, ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
+import {ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
 // firebaseActions
 import {getHnpElkProducts} from "../apiCalls/api/Products"
 import Pagination from "../components/Pagination";
 import SearchInput from "../components/SearchInput";
+import NotificationInfo from "../components/NotificationInfo";
 
 const INDEX_PRODUCTS = 'hnp-store-article';
 const ROWS_PER_PAGE = 12;
@@ -84,6 +85,8 @@ export default function EcommerceShop() {
     return (
         <Page title="HNP: Products">
             <Container maxWidth="xl">
+                <NotificationInfo/>
+
                 <Stack
                     display='flex'
                     direction='row'
@@ -108,7 +111,6 @@ export default function EcommerceShop() {
 
                 </Stack>
                 <ProductList products={products}/>
-                <ProductCartWidget/>
                 <Pagination
                     totalRows={totalRows}
                     page={page}

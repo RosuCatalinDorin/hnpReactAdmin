@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 import {Link as RouterLink, useNavigate} from 'react-router-dom';
 // material
-import {Box, Button, Card, Link, Stack, Typography} from '@mui/material';
+import {Box, Button, Card, IconButton, Link, Stack, Typography} from '@mui/material';
 import {styled} from '@mui/material/styles';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 // utils
 //
 import Label from '../../../components/Label';
 import {BASE_URL_IMAGES} from "../../../utils/utils";
+import {fCurrency} from "../../../utils/formatNumber";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCartRedux} from "../../../store/cart/cartAction";
 
 // ----------------------------------------------------------------------
 
@@ -29,14 +34,22 @@ function getCardImage(product) {
     return imagePath[imagePath.length - 1];
 }
 
+
 export default function ShopProductCard({product, id}) {
     const DESCRIPTION_SHORT = product._source.ARTICLE_DETAILS.DESCRIPTION_SHORT;
+    const cart = useSelector((state) => state.cart);
     const imagePath = getCardImage(product);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const status = 'sale'
     const priceSale = 22;
     return (
-        <Card>
+        <Card
+            sx={{
+                ':hover': {
+                    boxShadow: 20,
+                },
+            }}>
             <Box sx={{height: 'auto', position: 'relative'}}>
                 {status && (
                     <Label
@@ -55,7 +68,6 @@ export default function ShopProductCard({product, id}) {
                 )}
                 <ProductImgStyle alt={DESCRIPTION_SHORT}
                                  src={BASE_URL_IMAGES + imagePath}/>
-                {/*//  src={process.env.PUBLIC_URL + "/static/hnp-catalog" + imagePath}/>*/}
             </Box>
 
             <Stack spacing={2} sx={{p: 3}}>
@@ -67,9 +79,8 @@ export default function ShopProductCard({product, id}) {
                     </Typography>
                 </Link>
 
-                {/*
-                 //todo pretul este comentat pentru ca nu exista pret pe prduse in catalogul hnp
-                   <Stack direction="row" alignItems="center" justifyContent="space-between">
+
+                <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Typography variant="subtitle1">
                         <Typography
                             component="span"
@@ -84,7 +95,11 @@ export default function ShopProductCard({product, id}) {
                         &nbsp;
                         {fCurrency(22)}
                     </Typography>
-                </Stack>*/}
+                    <IconButton color="inherit" aria-label="add to shopping cart"
+                                onClick={() => dispatch(addToCartRedux(product, cart))}>
+                        <AddShoppingCartIcon/>
+                    </IconButton>
+                </Stack>
                 <Button
                     onClick={() => {
                         navigate('/detaliiProdus/' + DESCRIPTION_SHORT.replace('/', '-') + '/' + id);

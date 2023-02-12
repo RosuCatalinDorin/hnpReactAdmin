@@ -1,17 +1,9 @@
 import * as Yup from 'yup';
 import {useState} from 'react';
 import {Link as RouterLink, useNavigate} from 'react-router-dom';
-import {useFormik, Form, FormikProvider} from 'formik';
+import {Form, FormikProvider, useFormik} from 'formik';
 // material
-import {
-    Link,
-    Stack,
-    Checkbox,
-    TextField,
-    IconButton,
-    InputAdornment,
-    FormControlLabel,
-} from '@mui/material';
+import {Checkbox, FormControlLabel, IconButton, InputAdornment, Link, Stack, TextField,} from '@mui/material';
 import {LoadingButton} from '@mui/lab';
 // component
 import Iconify from '../../../components/Iconify';
@@ -23,8 +15,7 @@ import {useAuth} from "../../../Auth";
 
 // ----------------------------------------------------------------------
 
-export default function LoginForm()
-{
+export default function LoginForm() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
@@ -41,27 +32,22 @@ export default function LoginForm()
             remember: true,
         },
         validationSchema: LoginSchema,
-        onSubmit: (data) =>
-        {
+        onSubmit: (data) => {
             loginUser(data);
         },
     });
 
     const {errors, touched, values, handleSubmit, getFieldProps} = formik;
 
-    const handleShowPassword = () =>
-    {
+    const handleShowPassword = () => {
         setShowPassword((show) => !show);
     };
 
-    const loginUser = (formData) =>
-    {
-        login(formData.email, formData.password).then((data) =>
-        {
+    const loginUser = (formData) => {
+        login(formData.email, formData.password).then((data) => {
             dispatch(setUser(data.user));
             navigate('/');
-        }).catch((error) =>
-        {
+        }).catch((error) => {
 
             printErrorMessage(error);
         });

@@ -2,6 +2,7 @@ import {useAuth} from "../../../../Auth";
 import Button from "@mui/material/Button";
 import {NavLink as RouterLink} from "react-router-dom";
 import * as React from "react";
+import {useEffect, useState} from "react";
 
 
 export const NavBarButtons = (props) => {
@@ -9,8 +10,9 @@ export const NavBarButtons = (props) => {
 
     const {button, handleCloseNavMenu} = props;
     const {currentUser} = useAuth();
-
+    const [menuButtons, setMenuButtons] = useState([]);
     const getUserNavButtons = () => {
+        debugger;
         if (currentUser.login === false) {
             return button.filter((item) => item.login === false);
         }
@@ -23,9 +25,12 @@ export const NavBarButtons = (props) => {
         return []
     }
 
+    useEffect(() => {
+        setMenuButtons(getUserNavButtons())
+    }, [currentUser])
     return (
         <>
-            {getUserNavButtons().map((item) => (
+            {menuButtons.map((item) => (
                 <Button
                     component={RouterLink}
                     to={item.path}

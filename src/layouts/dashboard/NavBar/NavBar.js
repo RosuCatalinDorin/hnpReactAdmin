@@ -10,6 +10,7 @@ import AccountPopover from "./../AccountPopover/AccountPopover";
 import Logo from "./../../../components/Logo";
 import {NavBarButtons} from "./compoents/NavBarButtons";
 import {BUTTONS} from "./utils/constants"
+import CartPopover from "../CartPopover";
 
 
 export default function ResponsiveAppBar() {
@@ -73,9 +74,10 @@ export default function ResponsiveAppBar() {
                             handleCloseNavMenu={handleCloseNavMenu}
                         />
                     </Box>
+                    <Box sx={{mr: 3}}>
+                        <CartPopover/>
+                    </Box>
                     <Box>
-                        {/*<LanguagePopover/>*/}
-                        {/*<NotificationsPopover/>*/}
                         <AccountPopover/>
                     </Box>
                 </Toolbar>

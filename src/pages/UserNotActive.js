@@ -1,15 +1,15 @@
-import { motion } from 'framer-motion';
-import { Link as RouterLink } from 'react-router-dom';
+import {motion} from 'framer-motion';
 // material
-import { styled } from '@mui/material/styles';
-import { Box, Button, Typography, Container } from '@mui/material';
+import {styled} from '@mui/material/styles';
+import {Box, Checkbox, Container, Typography} from '@mui/material';
 // components
-import { MotionContainer, varBounceIn } from '../components/animate';
+import {MotionContainer, varBounceIn} from '../components/animate';
 import Page from '../components/Page';
+import {useAuth} from "../Auth";
 
 // ----------------------------------------------------------------------
 
-const RootStyle = styled(Page)(({ theme }) => ({
+const RootStyle = styled(Page)(({theme}) => ({
     display: 'flex',
     minHeight: '100%',
     alignItems: 'center',
@@ -19,33 +19,42 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function UserNotActive(currentUser) {
-
+export default function UserNotActive() {
+    const {currentUser} = useAuth();
     return (
-        <RootStyle title="404 Page Not Found | Minimal-UI">
+        <RootStyle title="Cont Inactiv">
             <Container>
                 <MotionContainer initial="initial" open>
-                    <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
+                    <Box sx={{maxWidth: 550, margin: 'auto', textAlign: 'center'}}>
                         <motion.div variants={varBounceIn}>
-                            <Typography variant="h3" paragraph>
-                                Utilizatorul dumneavoastra  este inactiv! :(
+                            <Typography variant="h4" paragraph>
+                                Utilizatorul inactiv.
                             </Typography>
                         </motion.div>
-                        <Typography sx={{ color: 'text.secondary' }}>
-                            Pentru a activa contul va rugam confirmati adresa de email si concatati un reprezentant HNP pentru identificare.
-                        </Typography>
+
+                        <Box sx={{textAlign: 'left', mt: 2, margin: 'auto',}}>
+                            <Typography sx={{color: 'text.secondary'}}>
+                                Pentru a activa contul va rugam parcurgeti pasii de mai jos.
+                            </Typography>
+                            <Typography sx={{color: 'text.secondary', mt: 3}}>
+                                <Checkbox disabled checked={currentUser.emailVerified}/>
+                                <b>Pasul 1</b> : Acesati link-ul trimis pe
+                                email pentru confirmarea adresei de mail.
+                            </Typography>
+
+                            <Typography sx={{color: 'text.secondary'}}>
+                                <Checkbox disabled checked={currentUser.userDetails.status}/>
+                                <b>Pasul 2
+                                </b> : Contacati un reprezentant HNP pentru identificare. </Typography>
+                        </Box>
 
                         <motion.div variants={varBounceIn}>
                             <Box
                                 component="img"
                                 src="/static/illustrations/user-svgrepo-com.svg"
-                                sx={{ height: 260, mx: 'auto', my: { xs: 5, sm: 10 } }}
+                                sx={{height: 260, mx: 'auto', my: {xs: 5, sm: 10}}}
                             />
                         </motion.div>
-
-{/*                        <Button to="/" size="large" variant="contained" component={RouterLink}>
-                            Go to Home
-                        </Button>*/}
                     </Box>
                 </MotionContainer>
             </Container>

@@ -14,7 +14,7 @@ import {Provider} from "react-redux";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
-import DashboardApp from "./pages/DashboardApp";
+import DashboardApp from "./pages/DashboardApp/DashboardApp";
 import Products from './pages/Products';
 import Index from './pages/Blog';
 import User from './pages/User';
@@ -28,9 +28,12 @@ import ProductDetails from './pages/ProductDetails';
 import BlogDetails from './pages/Blog/BlogDetails'
 import DashboardLayoutFree from "./layouts/dashboard/DashboardFree";
 import Homepage from "./pages/Homepage";
+import Order from './pages/Order/Order';
+import OrderDetails from "./pages/Order/OrderDetails";
+import CustomerDashboard from "./pages/CustomerDashboard/CustomerDashboard";
+import ConfirmEmail from "./pages/ConfirmEmail";
 
 export default function App() {
-
     return (
         <ThemeConfig>
             <Provider store={configureStore}>
@@ -40,7 +43,6 @@ export default function App() {
                     <BaseOptionChartStyle/>
                     <Routes>
                         <Route element={<ProtectedRoute/>}>
-
                             <Route path="dashboard/user"
                                    element={<DashboardLayoutAuth admin={true}><User/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/Company"
@@ -49,12 +51,18 @@ export default function App() {
                                    element={<DashboardLayoutAuth admin={true}><UploadFile/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/addNews"
                                    element={<DashboardLayoutAuth admin={true}><NewPost/></DashboardLayoutAuth>}/>
+                            <Route path="dashboard/orderDetails/:orderId"
+                                   element={<DashboardLayoutAuth admin={false}><OrderDetails/></DashboardLayoutAuth>}/>
+                            <Route path="dashboard/contulMeu"
+                                   element={<DashboardLayoutAuth
+                                       admin={false}><CustomerDashboard/></DashboardLayoutAuth>}/>
+                            <Route path="dashboard/app"
+                                   element={<DashboardLayoutAuth><DashboardApp/></DashboardLayoutAuth>}/>
                         </Route>
                         <Route index element={<DashboardLayoutFree><Homepage/></DashboardLayoutFree>}/>
                         <Route path="dashboard/homepage"
                                element={<DashboardLayoutFree admin={false}><Homepage/> </DashboardLayoutFree>}/>
-                        <Route path="dashboard/app"
-                               element={<DashboardLayoutFree><DashboardApp/></DashboardLayoutFree>}/>
+
                         <Route path="dashboard/products"
                                element={<DashboardLayoutFree admin={true}><Products/></DashboardLayoutFree>}/>
 
@@ -62,13 +70,16 @@ export default function App() {
                                element={<DashboardLayoutFree admin={false}><Index/></DashboardLayoutFree>}/>
                         <Route path="dashboard/blog/item/:id"
                                element={<DashboardLayoutFree admin={false}><BlogDetails/> </DashboardLayoutFree>}/>
-                        <Route path="detaliiProdus/:name/:id"
-                               element={<DashboardLayoutFree admin={false}>
-                                   <ProductDetails/>
-                               </DashboardLayoutFree>}/>
+                        <Route path="dashboard/cartDetails"
+                               element={<DashboardLayoutFree admin={false}><Order/></DashboardLayoutFree>}/>
+                        <Route path="detaliiProdus/:name/:id" element={<DashboardLayoutFree admin={false}>
+                            <ProductDetails/>
+                        </DashboardLayoutFree>}/>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                         <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>
                         <Route path="404" element={<LogoOnlyLayout><NotFound/></LogoOnlyLayout>}/>
+                        <Route path="confirm/email/address/hnp/:id"
+                               element={<LogoOnlyLayout><ConfirmEmail/></LogoOnlyLayout>}/>
                     </Routes>
                 </AuthProvider>
             </Provider>

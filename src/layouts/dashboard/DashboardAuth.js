@@ -47,7 +47,7 @@ export default function DashboardLayout(props) {
     return (
         <Main>
             {props.admin === true && currentUser.userDetails.role !== "ROLE_ADMIN" ? navigate('/404') : ""}
-            {currentUser.userDetails.status === true ? props.children : <UserNotActive
+            {currentUser.emailVerified === true ? props.children : <UserNotActive
                 currentUser={currentUser}
             />}
         </Main>)

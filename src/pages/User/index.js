@@ -28,6 +28,7 @@ import Modal from '../../components/Modal';
 //Module components
 import AddCompany from './form/AddCompany';
 import {getCollection} from "../../FireBase/actions";
+import {parseDate} from "../../utils/utils";
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +36,7 @@ const TABLE_HEAD = [
     {id: 'name', label: 'Name', alignRight: false},
     {id: 'company', label: 'Comapnie', alignRight: false},
     {id: 'position', label: 'Functie', alignRight: false},
-    {id: 'isVerified', label: 'Mail verificat', alignRight: false},
+    {id: 'dateCreate', label: 'Data creare cont', alignRight: false},
     {id: 'status', label: 'Stare', alignRight: false},
     {id: 'role', label: 'Rol', alignRight: false},
     {id: ''},
@@ -214,7 +215,7 @@ export default function User() {
                                                 displayName,
                                                 status,
                                                 companyName,
-                                                isVerified,
+                                                dateCreate,
                                                 position,
                                                 role,
                                             } = row;
@@ -245,7 +246,7 @@ export default function User() {
                                                     </TableCell>
                                                     <TableCell align="left">{companyName}</TableCell>
                                                     <TableCell align="left">{position}</TableCell>
-                                                    <TableCell align="center">{isVerified ? 'Da' : 'Nu'}</TableCell>
+                                                    <TableCell align="center">{parseDate(dateCreate)}</TableCell>
                                                     <TableCell align="left">
                                                         <Label
                                                             variant="ghost"
