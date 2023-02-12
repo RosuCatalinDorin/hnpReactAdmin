@@ -1,10 +1,11 @@
 import {motion} from 'framer-motion';
 // material
 import {styled} from '@mui/material/styles';
-import {Box, Container, Typography} from '@mui/material';
+import {Box, Checkbox, Container, Typography} from '@mui/material';
 // components
 import {MotionContainer, varBounceIn} from '../components/animate';
 import Page from '../components/Page';
+import {useAuth} from "../Auth";
 
 // ----------------------------------------------------------------------
 
@@ -18,8 +19,8 @@ const RootStyle = styled(Page)(({theme}) => ({
 
 // ----------------------------------------------------------------------
 
-export default function UserNotActive(currentUser) {
-
+export default function UserNotActive() {
+    const {currentUser} = useAuth();
     return (
         <RootStyle title="Cont Inactiv">
             <Container>
@@ -36,11 +37,15 @@ export default function UserNotActive(currentUser) {
                                 Pentru a activa contul va rugam parcurgeti pasii de mai jos.
                             </Typography>
                             <Typography sx={{color: 'text.secondary', mt: 3}}>
-                                <b>Pasul 1 </b> : Acesati link-ul trimis pe email pentru confirmarea adresei de mail.
+                                <Checkbox disabled checked={currentUser.emailVerified}/>
+                                <b>Pasul 1</b> : Acesati link-ul trimis pe
+                                email pentru confirmarea adresei de mail.
                             </Typography>
 
                             <Typography sx={{color: 'text.secondary'}}>
-                                <b>Pasul 2 </b> : Contacati un reprezentant HNP pentru identificare. </Typography>
+                                <Checkbox disabled checked={currentUser.userDetails.status}/>
+                                <b>Pasul 2
+                                </b> : Contacati un reprezentant HNP pentru identificare. </Typography>
                         </Box>
 
                         <motion.div variants={varBounceIn}>
@@ -50,10 +55,6 @@ export default function UserNotActive(currentUser) {
                                 sx={{height: 260, mx: 'auto', my: {xs: 5, sm: 10}}}
                             />
                         </motion.div>
-
-                        {/*                        <Button to="/" size="large" variant="contained" component={RouterLink}>
-                            Go to Home
-                        </Button>*/}
                     </Box>
                 </MotionContainer>
             </Container>
