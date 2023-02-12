@@ -13,6 +13,7 @@ import BasicTable from "../../components/BasicTabel";
 import {ProductButtons} from "./components/ProductButtons";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCartRedux} from "../../store/cart/cartAction";
+import NotificationInfo from "../../components/NotificationInfo";
 
 
 export default function Blog() {
@@ -57,6 +58,7 @@ export default function Blog() {
         <Page title="Detalii produs">
             {product ?
                 <Container maxWidth="xl">
+                    <NotificationInfo/>
                     <Card>
 
                         <Grid sx={{flexGrow: 1, m: 4}} container>

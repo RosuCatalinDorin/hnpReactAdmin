@@ -1,24 +1,30 @@
 import {Button, Checkbox, Grid, Typography} from "@mui/material";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useAuth} from "../../../Auth";
 import Iconify from "../../../components/Iconify";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {saveOrderAction} from "../action";
 import {useDispatch} from "react-redux";
 import {clearCart} from "../../../store/cart/cartAction";
+import OrderButtons from "./OrderButtons";
 
 
-export default function ButtonsOrder(props) {
+export default function DoneOrder(props) {
 
-    const {cart} = props;
+    const {cart, address, addressError, setAddressError} = props;
     const {currentUser} = useAuth();
     const [acceptCondition, setAcceptCondition] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-
     const [error, setError] = useState(false);
+
+
+    useEffect(() => {
+        if (cart.length === 0) {
+            navigate('/dashboard/products');
+        }
+    }, [cart])
 
     const clearCardOrderAddInDatabase = () => {
         dispatch(clearCart());
@@ -26,11 +32,19 @@ export default function ButtonsOrder(props) {
     }
 
     const confirmOrder = () => {
-        if (!acceptCondition) {
-            setError(true);
+        if (!acceptCondition || addressError) {
+            if (addressError) {
+                setAddressError(true)
+            }
+            if (!acceptCondition) {
+                setError(true);
+
+            }
             return false
         }
-        saveOrderAction(cart, currentUser, clearCardOrderAddInDatabase);
+
+
+        saveOrderAction(cart, address, currentUser, clearCardOrderAddInDatabase);
     }
 
     return (
@@ -53,18 +67,10 @@ export default function ButtonsOrder(props) {
                         </Grid>
                     </Grid>
 
-
-                    <Button
-                        sx={{
-                            width: '100%',
-                            height: 50,
-                            mt: 2,
-                        }}
-                        variant="contained"
-                        onClick={confirmOrder}
-                        startIcon={<Iconify icon="material-symbols:done"/>}
-                    >
-                        Finalizeaza comanda</Button>
+                    <OrderButtons
+                        error={error}
+                        confirmOrder={confirmOrder}
+                    />
                 </> :
 
                 <Button

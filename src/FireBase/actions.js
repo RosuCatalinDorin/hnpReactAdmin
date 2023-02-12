@@ -1,6 +1,6 @@
 import {auth, db} from './base';
 import {createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword} from "firebase/auth";
-import {addDoc, collection, doc, getDoc, getDocs, query, where, writeBatch,} from "firebase/firestore";
+import {addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where, writeBatch} from "firebase/firestore";
 
 export const registerUser = async (email, password) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -16,6 +16,32 @@ export const loginUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
 
 };
+
+export const activateEmailAddress = async (uid) => {
+    try {
+        const washingtonRef = doc(db, "users", uid);
+        await updateDoc(washingtonRef, {
+            isVerified: true
+        });
+        return true
+    } catch {
+        return false
+    }
+}
+
+export const getCollectionByUser = async (document, userId) => {
+    const q = query(collection(db, document), where("user.uid", "==", userId));
+    let documents = [];
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+        documents.push({
+            ...{id: doc.id},
+            ...doc.data(),
+        });
+    });
+    return documents;
+}
 
 export const getCollection = async (collectionName) => {
     const querySnapshot = await getDocs(collection(db, collectionName));
@@ -73,6 +99,7 @@ export const saveUserCompany = async (data) => {
     batch.update(user, {
         companyId: data.company.id,
         companyName: data.company.name,
+        status: true
     });
 
     await batch.commit();

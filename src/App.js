@@ -30,6 +30,8 @@ import DashboardLayoutFree from "./layouts/dashboard/DashboardFree";
 import Homepage from "./pages/Homepage";
 import Order from './pages/Order/Order';
 import OrderDetails from "./pages/Order/OrderDetails";
+import CustomerDashboard from "./pages/CustomerDashboard/CustomerDashboard";
+import ConfirmEmail from "./pages/ConfirmEmail";
 
 export default function App() {
     return (
@@ -50,13 +52,17 @@ export default function App() {
                             <Route path="dashboard/addNews"
                                    element={<DashboardLayoutAuth admin={true}><NewPost/></DashboardLayoutAuth>}/>
                             <Route path="dashboard/orderDetails/:orderId"
-                                   element={<DashboardLayoutAuth admin={true}><OrderDetails/></DashboardLayoutAuth>}/>
+                                   element={<DashboardLayoutAuth admin={false}><OrderDetails/></DashboardLayoutAuth>}/>
+                            <Route path="dashboard/contulMeu"
+                                   element={<DashboardLayoutAuth
+                                       admin={false}><CustomerDashboard/></DashboardLayoutAuth>}/>
+                            <Route path="dashboard/app"
+                                   element={<DashboardLayoutAuth><DashboardApp/></DashboardLayoutAuth>}/>
                         </Route>
                         <Route index element={<DashboardLayoutFree><Homepage/></DashboardLayoutFree>}/>
                         <Route path="dashboard/homepage"
                                element={<DashboardLayoutFree admin={false}><Homepage/> </DashboardLayoutFree>}/>
-                        <Route path="dashboard/app"
-                               element={<DashboardLayoutFree><DashboardApp/></DashboardLayoutFree>}/>
+
                         <Route path="dashboard/products"
                                element={<DashboardLayoutFree admin={true}><Products/></DashboardLayoutFree>}/>
 
@@ -66,13 +72,14 @@ export default function App() {
                                element={<DashboardLayoutFree admin={false}><BlogDetails/> </DashboardLayoutFree>}/>
                         <Route path="dashboard/cartDetails"
                                element={<DashboardLayoutFree admin={false}><Order/></DashboardLayoutFree>}/>
-                        <Route path="detaliiProdus/:name/:id"
-                               element={<DashboardLayoutFree admin={false}>
-                                   <ProductDetails/>
-                               </DashboardLayoutFree>}/>
+                        <Route path="detaliiProdus/:name/:id" element={<DashboardLayoutFree admin={false}>
+                            <ProductDetails/>
+                        </DashboardLayoutFree>}/>
                         <Route path="login" element={<LogoOnlyLayout><Login/></LogoOnlyLayout>}/>
                         <Route path="register" element={<LogoOnlyLayout><Register/></LogoOnlyLayout>}/>
                         <Route path="404" element={<LogoOnlyLayout><NotFound/></LogoOnlyLayout>}/>
+                        <Route path="confirm/email/address/hnp/:id"
+                               element={<LogoOnlyLayout><ConfirmEmail/></LogoOnlyLayout>}/>
                     </Routes>
                 </AuthProvider>
             </Provider>

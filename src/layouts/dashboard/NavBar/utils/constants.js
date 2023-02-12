@@ -1,40 +1,47 @@
 export const BUTTONS = [
     {
-        title: 'Acasa',
+        title: 'ACASA',
         path: '/dashboard/homepage',
         login: false,
         roles: ['ROLE_ADMIN', 'ROLE_USER']
     },
     {
-        title: 'Dashboard',
+        title: 'DASHBOARD',
         path: '/dashboard/app',
         login: true,
         roles: ['ROLE_ADMIN']
     },
     {
-        title: 'Useri',
+        title: 'USERI',
         path: '/dashboard/user',
         login: true,
         roles: ['ROLE_ADMIN']
     },
     {
-        title: 'Partenerii',
+        title: 'PARTENERII',
         path: '/dashboard/company',
         login: true,
         roles: ['ROLE_ADMIN']
     },
     {
-        title: 'Produse',
+        title: 'PRODUSE',
         path: '/dashboard/Products',
         login: false,
         roles: ['ROLE_USER']
     },
     {
-        title: 'Noutatii',
+        title: 'NOUTATII',
         path: '/dashboard/blog',
         login: false,
         roles: ['ROLE_USER']
     },
+    {
+        title: 'CONTUL MEU',
+        path: '/dashboard/contulMeu',
+        login: true,
+        roles: ['ROLE_USER']
+    },
+
     /*  {
         title: 'login',
         path: '/login',
