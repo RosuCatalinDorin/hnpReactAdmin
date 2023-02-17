@@ -27,7 +27,7 @@ export default function BasicModal(props) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Box>
+                    <Box sx={{mb: 2}}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             {title}
                         </Typography>

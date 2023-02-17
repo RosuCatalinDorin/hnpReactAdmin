@@ -1,20 +1,17 @@
 import * as Yup from 'yup';
-import {useFormik, Form, FormikProvider} from 'formik';
-import {useNavigate} from 'react-router-dom';
+import {Form, FormikProvider, useFormik} from 'formik';
 // material
 import {Stack, TextField} from '@mui/material';
 import {LoadingButton} from '@mui/lab';
 //functions
-import { savePartner} from "../../../FireBase/actions";
+import {savePartner} from "../../../FireBase/actions";
 import {printErrorMessage, printSuccessMessage} from "../../../apiCalls/apiMessage";
 
 import {useAuth} from "../../../Auth";
 // ----------------------------------------------------------------------
 
-export default function RegisterForm(props)
-{
-    const {setLoadData,loadData,isOpen,setOpenModal} = props;
-    const navigate = useNavigate();
+export default function RegisterForm(props) {
+    const {setLoadData, loadData, isOpen, setOpenModal} = props;
     const RegisterSchema = Yup.object().shape({
         name: Yup.string()
             .min(2, 'Too Short!')
@@ -26,7 +23,7 @@ export default function RegisterForm(props)
         email: Yup.string().email('Email must be a valid email address').required('Email este obligatoiru'),
         phone: Yup.string().required('Telefonul este obligatoiru').min(10, 'Trebuie sa fie de minim 10 caracatere.'),
         discount: Yup.number().required('Discount-ul este obligatorie').min(1, 'Trebuie sa fie de minim 6 caracatere.'),
-     });
+    });
     const {currentUser} = useAuth();
 
     const formik = useFormik({
@@ -37,33 +34,31 @@ export default function RegisterForm(props)
             discount: '',
             phone: '',
             consultantEmail: '',
-            consultantName:'',
+            consultantName: '',
         },
         validationSchema: RegisterSchema,
-        onSubmit: (formData) =>
-        {
+        onSubmit: (formData) => {
             save(formData)
         },
     });
 
-    const save = (formData) =>{
+    const save = (formData) => {
         const partner = {
             ...formData,
             ...{
-                status:true,
-                addBy:currentUser.email,
-                dateAdd:new Date()
+                status: true,
+                addBy: currentUser.email,
+                dateAdd: new Date()
             }
         }
         // todo: check if exist
-       savePartner(partner).then(()=>{
-           printSuccessMessage("Partnerul a fost adaugat cu succes")
-           setOpenModal(!isOpen);
-           setLoadData(loadData+1);
-       }).catch((error) =>
-       {
-           printErrorMessage(error);
-       });
+        savePartner(partner).then(() => {
+            printSuccessMessage("Partnerul a fost adaugat cu succes")
+            setOpenModal(!isOpen);
+            setLoadData(loadData + 1);
+        }).catch((error) => {
+            printErrorMessage(error);
+        });
     }
     const {errors, touched, handleSubmit, getFieldProps} = formik;
 
@@ -71,21 +66,21 @@ export default function RegisterForm(props)
         <FormikProvider value={formik}>
             <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <Stack spacing={3}>
-                        <TextField
-                            fullWidth
-                            label="Nume partner"
-                            {...getFieldProps('name')}
-                            error={Boolean(touched.name && errors.name)}
-                            helperText={touched.name && errors.name}
-                        />
+                    <TextField
+                        fullWidth
+                        label="Nume partner"
+                        {...getFieldProps('name')}
+                        error={Boolean(touched.name && errors.name)}
+                        helperText={touched.name && errors.name}
+                    />
 
-                        <TextField
-                            fullWidth
-                            label="Reprezentant legal"
-                            {...getFieldProps('reprezentantLegal')}
-                            error={Boolean(touched.reprezentantLegal && errors.reprezentantLegal)}
-                            helperText={touched.reprezentantLegal && errors.reprezentantLegal}
-                        />
+                    <TextField
+                        fullWidth
+                        label="Reprezentant legal"
+                        {...getFieldProps('reprezentantLegal')}
+                        error={Boolean(touched.reprezentantLegal && errors.reprezentantLegal)}
+                        helperText={touched.reprezentantLegal && errors.reprezentantLegal}
+                    />
                     <TextField
                         fullWidth
                         autoComplete="username"

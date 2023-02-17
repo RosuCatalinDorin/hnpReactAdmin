@@ -92,6 +92,16 @@ export const getDocumentProperty = async (entity, property, value) => {
     });
     return result;
 };
+
+export const getDocumentsActiveProperty = async (entity, property, value) => {
+    const q = query(collection(db, entity), where(property, "==", value), where("active", "==", true));
+    const querySnapshot = await getDocs(q);
+    let result = [];
+    querySnapshot.forEach((doc) => {
+        result.push({...doc.data(), ...{uid: doc.id}});
+    });
+    return result;
+};
 export const saveUserCompany = async (data) => {
     const batch = writeBatch(db);
 
@@ -115,6 +125,10 @@ const getRefDocumentById = async (collection, id) => {
     const lastDocRef = await getDoc(docRef)
     return lastDocRef;
 }
+export const saveFirebaseDocument = (collectionName, data) => {
+    return addDoc(collection(db, collectionName), data);
+}
+
 export const saveOrder = async (order) => {
     try {
         const collectionName = 'orders';
