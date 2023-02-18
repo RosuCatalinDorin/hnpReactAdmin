@@ -27,6 +27,6 @@ export const getClientFinalPrice = (subTotal, disc, shippingCost) => {
     total = subTotal - (subTotal * disc / 100) + shippingCost
     return total.toFixed(2);
 }
-export const BASE_URL_IMAGES = 'https://dev.hnp.ro:8080/images/'
+export const BASE_URL_IMAGES = 'https://dev.hnp.ro/images/'
 
 export const CURRANCY = "$";

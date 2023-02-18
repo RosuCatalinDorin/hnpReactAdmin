@@ -37,12 +37,13 @@ function getCardImage(product) {
 
 export default function ShopProductCard({product, id}) {
     const DESCRIPTION_SHORT = product._source.ARTICLE_DETAILS.DESCRIPTION_SHORT;
+
+    const priceSale = product._source.ARTICLE_DETAILS.PRICE;
     const cart = useSelector((state) => state.cart);
     const imagePath = getCardImage(product);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const status = 'sale'
-    const priceSale = 22;
     return (
         <Card
             sx={{
@@ -90,10 +91,10 @@ export default function ShopProductCard({product, id}) {
                                 textDecoration: 'line-through'
                             }}
                         >
-                            {priceSale && fCurrency(priceSale)}
+                            {fCurrency(priceSale)}
                         </Typography>
                         &nbsp;
-                        {fCurrency(22)}
+                        {fCurrency(priceSale)}
                     </Typography>
                     <IconButton color="inherit" aria-label="add to shopping cart"
                                 onClick={() => dispatch(addToCartRedux(product, cart))}>

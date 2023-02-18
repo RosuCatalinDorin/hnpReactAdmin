@@ -20,7 +20,7 @@ export function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = useState(INITIAL_STATE);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    
+
     useEffect(async () => {
         await auth.onAuthStateChanged(async (user) => {
             if (user !== null) {
@@ -28,6 +28,7 @@ export function AuthProvider({children}) {
                 user.login = true;
                 user.userDetails = userDetails;
                 setCurrentUser(user);
+                //  analytics.logEvent('login')
             }
             setLoading(false);
         });

@@ -1,7 +1,8 @@
 import {useFormik} from 'formik';
+import * as React from 'react';
 import {useEffect, useState} from 'react';
 // material
-import {Container, Stack} from '@mui/material';
+import {Container, Grid} from '@mui/material';
 // components
 import Page from '../components/Page';
 import {ProductFilterSidebar, ProductList,} from '../sections/@dashboard/products';
@@ -10,9 +11,11 @@ import {getHnpElkProducts} from "../apiCalls/api/Products"
 import Pagination from "../components/Pagination";
 import SearchInput from "../components/SearchInput";
 import NotificationInfo from "../components/NotificationInfo";
+import {getProductsPrice} from "../FireBase/actions";
+import {useAuth} from "../Auth";
 
 const INDEX_PRODUCTS = 'hnp-store-article';
-const ROWS_PER_PAGE = 12;
+const ROWS_PER_PAGE = 10;
 // ----------------------------------------------------------------------
 
 export default function EcommerceShop() {
@@ -37,6 +40,7 @@ export default function EcommerceShop() {
     const [from, setFromProduct] = useState(0);
     const [totalRows, setTotalRows] = useState(0);
     const [searchText, setSearchText] = useState(null);
+    const {currentUser} = useAuth();
     // and page state
 
     useEffect(async () => {
@@ -64,9 +68,53 @@ export default function EcommerceShop() {
         handleSubmit();
         resetForm();
     };
+    const addProductPrice = async (data) => {
+
+        let products = data.data.hits.hits;
+        let productIds = []
+
+        if (currentUser.login === false) {
+            return products;
+        }
+        if (products.length === 0) {
+            return []
+        }
+
+        products.map((row) => {
+            productIds.push(row._source.ARTICLE_DETAILS.SUPPLIER_ALT_AID)
+        })
+
+        const productsPrice = await getProductsPrice(productIds);
+        products.map((product) => {
+            const price = productsPrice.filter(proce => proce.SUPPLIER_ALT_AID_2 === product._source.ARTICLE_DETAILS.SUPPLIER_ALT_AID)[0].PRICE
+            product._source.ARTICLE_DETAILS.PRICE = price;
+
+        })
+
+        return products
+
+    }
     const getProducts = async (query, index, fromTo, search) => {
         const data = await getHnpElkProducts(query, index, fromTo, ROWS_PER_PAGE, search);
-        setProducts(data.data.hits.hits);
+
+        const products = await addProductPrice(data)
+        /*        if (currentUser.login) {
+
+                }
+                data.data.hits.hits.map((row) => {
+                    productIds.push(row._source.ARTICLE_DETAILS.SUPPLIER_ALT_AID)
+                })
+
+                if (productIds.length > 0) {
+                    const productsPrice = await getProductsPrice(productIds);
+                    products.map((porduct) => {
+
+                        const price = productsPrice.filter(proce => proce.SUPPLIER_ALT_AID_2 === porduct._source.ARTICLE_DETAILS.SUPPLIER_ALT_AID)[0].PRICE
+                        porduct._source.ARTICLE_DETAILS.PRICE = price;
+
+                    })
+                }*/
+        setProducts(products);
         setTotalRows(data.data.hits.total.value);
 
     }
@@ -87,12 +135,8 @@ export default function EcommerceShop() {
             <Container maxWidth="xl">
                 <NotificationInfo/>
 
-                <Stack
-                    display='flex'
-                    direction='row'
-                    width={'100%'}
-                >
-                    <Stack direction="row" spacing={1} flexShrink={0} sx={{my: 2}}>
+                <Grid sx={{flexGrow: 1}} spacing={2} container>
+                    <Grid item xs={12} md={2}>
                         <SearchInput
                             onSearch={(value) => {
                                 setSearchText(value)
@@ -107,10 +151,13 @@ export default function EcommerceShop() {
                             onCloseFilter={handleCloseFilter}
                             setFilters={setAllFilters}
                         />
-                    </Stack>
 
-                </Stack>
-                <ProductList products={products}/>
+                    </Grid>
+                    <Grid item xs={12} md={10}>
+                        <ProductList products={products}/>
+                    </Grid>
+                </Grid>
+
                 <Pagination
                     totalRows={totalRows}
                     page={page}

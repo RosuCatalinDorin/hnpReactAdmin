@@ -1,6 +1,7 @@
-import {auth, db} from './base';
+import {analytics, auth, db} from './base';
 import {createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword} from "firebase/auth";
 import {addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where, writeBatch} from "firebase/firestore";
+import {logEvent} from "firebase/analytics";
 
 export const registerUser = async (email, password) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -27,6 +28,21 @@ export const activateEmailAddress = async (uid) => {
     } catch {
         return false
     }
+}
+
+export const getProductsPrice = async (ids) => {
+    debugger
+    const q = query(collection(db, 'productsPrice'), where("SUPPLIER_ALT_AID_2", "in", ids));
+    let documents = [];
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+        documents.push({
+            ...{id: doc.id},
+            ...doc.data(),
+        });
+    });
+    return documents;
 }
 
 export const getCollectionByUser = async (document, userId) => {
@@ -131,9 +147,40 @@ export const saveFirebaseDocument = (collectionName, data) => {
 
 export const saveOrder = async (order) => {
     try {
+        logEvent(analytics, 'add_to_cart');
         const collectionName = 'orders';
         return await addDoc(collection(db, collectionName), order);
     } catch (e) {
         console.error("Error adding document: ", e);
     }
 }
+export const saveProductPRice = async (products) => {
+    let i = 0;
+    let batch = writeBatch(db)
+    let counter = 0;
+    let totalCounter = 0;
+    const promises = [];
+
+    products.map(async (row) => {
+        counter++;
+        const product = {
+            SUPPLIER_ALT_AID: row[9],
+            SUPPLIER_ALT_AID_2: row[2],
+            PRICE: row[10]
+        }
+        const nycRef = doc(db, "productsPrice", product.SUPPLIER_ALT_AID);
+        batch.set(nycRef, product);
+        if (counter >= 400) {
+            console.log(`Committing batch of ${counter}`);
+            promises.push(batch.commit());
+            totalCounter += counter;
+            counter = 0;
+            batch = writeBatch(db)
+        }
+
+        await Promise.all(promises);
+
+    })
+    return "Done"
+
+};
