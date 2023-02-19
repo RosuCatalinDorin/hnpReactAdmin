@@ -48,7 +48,6 @@ export default function Order() {
                                 error={addressError}
                                 setAddressError={setAddressError}
                                 setAddress={setAddress}
-                                totalCartItems={cart.length}
                             />
                         </Box>
                         <ButtonsOrder cart={cart}

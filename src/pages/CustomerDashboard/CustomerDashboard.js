@@ -3,7 +3,7 @@ import {Container, Grid} from "@mui/material";
 import * as React from "react";
 import OrderListView from "../Order/OrderListView";
 import NotificationInfo from "../../components/NotificationInfo";
-import UserLocation from "./components/UserLocation";
+import UserLocation from "./components/UserLocation/UserLocation";
 
 
 export default function CustomerDashboard() {
