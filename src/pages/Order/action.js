@@ -9,7 +9,6 @@ export const saveOrderAction = (cart, address, user, clearCart) => {
     user.userDiscount = 5
     const subTotal = getTotal(cart)
     const totalCost = getClientFinalPrice(subTotal, user.userDiscount, 0)
-    debugger;
     const totalDiscount = (subTotal - totalCost).toFixed(2);
     const order = {
         subTotal: parseFloat(subTotal),

@@ -31,7 +31,6 @@ export const activateEmailAddress = async (uid) => {
 }
 
 export const getProductsPrice = async (ids) => {
-    debugger
     const q = query(collection(db, 'productsPrice'), where("SUPPLIER_ALT_AID_2", "in", ids));
     let documents = [];
     const querySnapshot = await getDocs(q);
