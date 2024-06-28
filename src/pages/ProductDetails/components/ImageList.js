@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Grid} from "@mui/material";
+import {BASE_URL_IMAGES} from "../../../utils/utils";
 
 function getCardImage(fullImgPath) {
     let imagePath = fullImgPath.split('/')
@@ -14,20 +15,24 @@ function removeLinkFromList(data) {
 
 export default function StandardImageList(props) {
     const {data} = props;
-    const images = removeLinkFromList(data);
+    //const images = removeLinkFromList(data);
+    const images = [data.MIMESOURCENORMALFILE, data.MIMESOURCEDETAILFILE, data.MIMESOURCEAPPLICATIONICON1, data.MIMESOURCEAPPLICATIONICON2, data.MIMESOURCEAPPLICATIONICON3, data.MIMESOURCEPROPERTYICON1, data.MIMESOURCEPROPERTYICON2, data.MIMESOURCEPROPERTYICON3, data.MIMESOURCEPROPERTYICON4];
+
+
     const [mainImage, setMainImage] = React.useState(0);
 
 
     const createImage = (item, key) => {
+        item = '/static/hnp-catalog' + item;
         return (
             <Grid item sx={{mt: 2}} xs={1} sm={2} md={2} key={"grid" + key}
             >
                 <a href="#">
                     <img
                         key={key}
-                        src={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
-                        srcSet={process.env.PUBLIC_URL + '/static/hnp-catalog' + item.MIME_SOURCE}
-                        alt={item.title}
+                        src={BASE_URL_IMAGES + item}
+                        srcSet={BASE_URL_IMAGES + item}
+                        alt={data.DESCRIPTION_LONG}
                         loading="lazy"
                         onClick={() => {
                             setMainImage(key);
@@ -48,9 +53,9 @@ export default function StandardImageList(props) {
                         aspectRatio: '3/2',
                         objectFit: 'contain',
                     }}
-                    src={process.env.PUBLIC_URL + '/static/hnp-catalog' + images[mainImage].MIME_SOURCE}
-                    srcSet={process.env.PUBLIC_URL + '/static/hnp-catalog' + images[mainImage].MIME_SOURCE}
-                    alt={images[mainImage].title}
+                    src={BASE_URL_IMAGES + '/static/hnp-catalog' + images[mainImage]}
+                    srcSet={BASE_URL_IMAGES + '/static/hnp-catalog' + images[mainImage]}
+                    alt={data.DESCRIPTION_LONG}
                     loading="lazy"
                 />
             </Grid>

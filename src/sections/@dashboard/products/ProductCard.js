@@ -30,13 +30,14 @@ ShopProductCard.propTypes = {
 };
 
 function getCardImage(product) {
-    let imagePath = product._source.MIME_INFO.MIME[0].MIME_SOURCE.split('/')
-    return imagePath[imagePath.length - 1];
+   // let imagePath = product._source.MIME_INFO.MIME[0].MIME_SOURCE.split('/')
+   // let imagePath = product._source.MIME_INFO.MIME[0].MIME_SOURCE.split('/')
+    return product._source.MIMESOURCEDETAILFILE;
 }
 
 
 export default function ShopProductCard({product, id}) {
-    const DESCRIPTION_SHORT = product._source.ARTICLE_DETAILS.DESCRIPTION_SHORT;
+    const DESCRIPTION_SHORT = product._source.DESCRIPTION_SHORT;
     const cart = useSelector((state) => state.cart);
     const imagePath = getCardImage(product);
     const navigate = useNavigate();

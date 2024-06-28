@@ -11,7 +11,7 @@ import Pagination from "../components/Pagination";
 import SearchInput from "../components/SearchInput";
 import NotificationInfo from "../components/NotificationInfo";
 
-const INDEX_PRODUCTS = 'hnp-store-article';
+const INDEX_PRODUCTS = 'elk-excel-index';
 const ROWS_PER_PAGE = 12;
 // ----------------------------------------------------------------------
 

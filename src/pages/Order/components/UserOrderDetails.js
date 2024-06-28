@@ -5,7 +5,7 @@ import {parseDate} from "../../../utils/utils";
 export default function UserOrderDetails(props) {
 
     const {company, order} = props;
-    debugger;
+
     return (
         <Card>
             <Grid container spacing={1} sx={{p: 4}} xs={12} md={12}>

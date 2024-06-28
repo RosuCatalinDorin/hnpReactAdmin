@@ -12,7 +12,6 @@ export const NavBarButtons = (props) => {
     const {currentUser} = useAuth();
     const [menuButtons, setMenuButtons] = useState([]);
     const getUserNavButtons = () => {
-        debugger;
         if (currentUser.login === false) {
             return button.filter((item) => item.login === false);
         }

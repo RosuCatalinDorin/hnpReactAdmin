@@ -47,7 +47,7 @@ export default function Blog() {
 
 
     function checkProductDetails() {
-        const gridRows = product._source.ARTICLE_FEATURES[2].FEATURE
+        const gridRows = product._source
         if (Array.isArray(gridRows)) {
             return gridRows;
         }
@@ -63,7 +63,7 @@ export default function Blog() {
 
                         <Grid sx={{flexGrow: 1, m: 4}} container>
                             <Grid item xs={12} md={6}>
-                                <ImageList data={product._source.MIME_INFO.MIME}/>
+                                <ImageList data={product._source}/>
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <ProductDetails
@@ -83,10 +83,10 @@ export default function Blog() {
                                     Descriere
                                 </Typography>
                                 <Typography variant="inherit" gutterBottom>
-                                    {product._source.USER_DEFINED_EXTENSIONS.UDX_BULLETTEXT_1}
+                                    {product._source.UDX_BULLETTEXT_1}
                                 </Typography>
                                 <Typography variant="inherit" gutterBottom>
-                                    {product._source.ARTICLE_DETAILS.DESCRIPTION_LONG}
+                                    {product._source.DESCRIPTION_LONG}
                                 </Typography>
                             </Grid>
 
