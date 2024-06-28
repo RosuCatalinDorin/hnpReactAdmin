@@ -12,6 +12,7 @@ import {BASE_URL_IMAGES} from "../../../utils/utils";
 import {fCurrency} from "../../../utils/formatNumber";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCartRedux} from "../../../store/cart/cartAction";
+import {useAuth} from "../../../Auth";
 
 // ----------------------------------------------------------------------
 
@@ -38,12 +39,14 @@ function getCardImage(product) {
 
 export default function ShopProductCard({product, id}) {
     const DESCRIPTION_SHORT = product._source.DESCRIPTION_SHORT;
+
+    const {currentUser} = useAuth()
+    const priceSale = product._source.PRICE;
     const cart = useSelector((state) => state.cart);
     const imagePath = getCardImage(product);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const status = 'sale'
-    const priceSale = 22;
+    const status = ''
     return (
         <Card
             sx={{
@@ -51,7 +54,9 @@ export default function ShopProductCard({product, id}) {
                     boxShadow: 20,
                 },
             }}>
-            <Box sx={{height: 'auto', position: 'relative'}}>
+            <Box sx={{
+                height: 'auto', position: 'relative', m: 1
+            }}>
                 {status && (
                     <Label
                         variant="filled"
@@ -81,9 +86,9 @@ export default function ShopProductCard({product, id}) {
                 </Link>
 
 
-                <Stack direction="row" alignItems="center" justifyContent="space-between">
+                {currentUser.login && <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Typography variant="subtitle1">
-                        <Typography
+                        {/*             <Typography
                             component="span"
                             variant="body1"
                             sx={{
@@ -91,16 +96,16 @@ export default function ShopProductCard({product, id}) {
                                 textDecoration: 'line-through'
                             }}
                         >
-                            {priceSale && fCurrency(priceSale)}
-                        </Typography>
+                            {fCurrency(priceSale)}
+                        </Typography>*/}
                         &nbsp;
-                        {fCurrency(22)}
+                        {fCurrency(priceSale)}
                     </Typography>
                     <IconButton color="inherit" aria-label="add to shopping cart"
                                 onClick={() => dispatch(addToCartRedux(product, cart))}>
                         <AddShoppingCartIcon/>
                     </IconButton>
-                </Stack>
+                </Stack>}
                 <Button
                     onClick={() => {
                         navigate('/detaliiProdus/' + DESCRIPTION_SHORT.replace('/', '-') + '/' + id);

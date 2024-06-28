@@ -77,7 +77,7 @@ export default function CartContent(props) {
                                 </TableCell>
                                 <TableCell align="right">
                                     <Typography variant="subtitle2" sx={{color: 'text.secondary',}}>
-                                        {fCurrency(40.99)}
+                                        {fCurrency(row._source.ARTICLE_DETAILS.PRICE)}
                                     </Typography>
 
                                 </TableCell>
@@ -98,7 +98,7 @@ export default function CartContent(props) {
                                 </TableCell>
                                 <TableCell align="right">
                                     <Typography variant="subtitle2" sx={{color: 'text.secondary'}}>
-                                        {fCurrency(40.99 * row.quantity)}
+                                        {fCurrency(row._source.ARTICLE_DETAILS.PRICE * row.quantity)}
                                     </Typography>
                                 </TableCell>
                                 <TableCell align="right">

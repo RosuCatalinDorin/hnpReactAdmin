@@ -3,7 +3,7 @@ import {Grid} from "@mui/material";
 
 export default function MyPagination(props) {
     const {totalRows, page, handleChange, totalRowsPerPage} = props;
-    const totalPages = Math.ceil(totalRows / totalRowsPerPage);
+    const totalPages = Math.ceil(totalRows / totalRowsPerPage) - 1;
     return (
         <Grid container sx={{mt: 4}} alignItems='center' direction="column" justifyContent='center'>
             <Grid item>

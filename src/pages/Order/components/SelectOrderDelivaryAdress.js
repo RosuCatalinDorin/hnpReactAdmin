@@ -1,45 +1,29 @@
 import {Box, Card, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getDocumentsActiveProperty} from "../../../FireBase/actions";
+import {useAuth} from "../../../Auth";
 
-const addressList = [
-    {
-        "uid": "1",
-        "oras": "Cluj Napoca",
-        "adress": "Sub Cetate nr 12F ap1",
-        "judet": "Cluj",
-        "userName": "Catalin Rosu",
-        "telefon": "0758956708"
-    },
-    {
-        "uid": "2",
-        "oras": "Cluj Napoca",
-        "adress": "Sub Cetate nr 12F ap1",
-        "judet": "Cluj",
-        "userName": "Catalin Rosu",
-        "telefon": "0758956708"
-    },
-    {
-        "uid": "3",
-        "oras": "Cluj Napoca",
-        "adress": "Sub Cetate nr 12F ap1",
-        "judet": "Cluj",
-        "userName": "Catalin Rosu",
-        "telefon": "0758956708"
-    }
-]
+
 export default function SelectOrderDelivaryAdress(props) {
-    const {setAddress, totalCartItems, error, setAddressError} = props
+    const {setAddress, error, setAddressError} = props
     const [addressId, setAddressId] = useState(null);
+    const [addressList, setAddressList] = useState([]);
+    const {currentUser} = useAuth();
+
+
+    useEffect(async () => {
+        const data = await getDocumentsActiveProperty('customerDeliveryAddress', 'userId', currentUser.uid);
+        setAddressList(data);
+    }, [])
 
     return (
         <Card>
             <Box sx={{ml: 4, mt: 4, mb: 2}}>
                 <Box sx={{mb: 2}}>
                     <Typography variant="h6" sx={{display: 'flex'}} color={error === true ? "error" : "default"}>
-                        Alege adresa de livrare<Typography
-                        sx={{mt: 0.3, ml: 1}}> ( {totalCartItems} produse ) </Typography>
+                        Alege adresa de livrare
                     </Typography>
                 </Box>
 

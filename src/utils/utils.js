@@ -17,7 +17,7 @@ export const parseDate = (value) => {
 export const getTotal = (cart) => {
     let total = 0;
     cart.forEach(item => {
-        total += item.quantity * 44.99
+        total += item.quantity * item._source.PRICE;
     })
     return total.toFixed(2);
 }

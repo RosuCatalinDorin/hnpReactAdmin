@@ -24,7 +24,6 @@ export default function ConfirmEmail() {
 
     let {id} = useParams();
     const {currentUser} = useAuth();
-    debugger;
     const [message, setMessage] = useState();
     const [desc, setDesc] = useState();
     const [svg, setSvg] = useState();
